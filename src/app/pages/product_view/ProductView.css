@@ -1,0 +1,11 @@
+.product-image {
+  width: 50%;
+  height: 400px;
+  background-color: blueviolet;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
