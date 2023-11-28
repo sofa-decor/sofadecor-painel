@@ -12,7 +12,8 @@
 
 .product-card {
   width: 24%;
-  background-color: #ffffff;
+  background-color: #ffffff !important;
+  color: #000000 !important;
   margin-bottom: 15px;
   padding-bottom: 15px;
   cursor: pointer;

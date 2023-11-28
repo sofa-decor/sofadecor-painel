@@ -1,3 +1,4 @@
+import { SendRounded } from "@mui/icons-material";
 import { Box, Button, Pagination, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../../../css/App.css";
@@ -56,17 +57,12 @@ function ProductCard() {
     <Paper onClick={redirect} className='product-card'>
       <Box className='product-card-image' />
       <Box className='product-card-content'>
-        <Typography variant='h6' fontWeight='medium'>
+        <Typography variant='h6' fontWeight={700} fontSize={18}>
           Poltrona Tangara
         </Typography>
       </Box>
       <Box className='app-row-center'>
-        <Button
-          endIcon={<></>}
-          size='small'
-          variant='contained'
-          color='success'
-        >
+        <Button endIcon={<SendRounded />} size='small' variant='contained'>
           Comprar
         </Button>
       </Box>

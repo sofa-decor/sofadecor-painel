@@ -1,23 +1,30 @@
 import { Box, Paper, Tab, Tabs, Typography } from "@mui/material";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
+import Logo from "../../../assets/logo.png";
 import "./header.css";
 
 export default function HeaderComponent() {
-  const handleChangeTab = (e: SyntheticEvent) => {
-    console.log("data:", e);
-    console.log("type data:", typeof e);
+  const [tabValue, setTabValue] = useState("sobre");
+  const handleChangeTab = (e: SyntheticEvent, value: string) => {
+    e.preventDefault();
+    setTabValue(value);
   };
 
   return (
     <Paper className='header-content'>
-      <Typography>SOFA DECOR</Typography>
+      <Box className='app-row'>
+        <Typography fontSize={18} fontWeight={900}>
+          SOFÁ DECOR
+        </Typography>
+        <img width={30} height={30} src={Logo} alt='logo' />
+      </Box>
 
-      <Box sx={{ borderColor: "#ffffff" }}>
-        <Tabs value={0} onChange={handleChangeTab}>
-          <Tab label='Sobre' />
-          <Tab label='Sala' />
-          <Tab label='Quarto' />
-          <Tab label='Cozinha' />
+      <Box>
+        <Tabs value={tabValue} onChange={handleChangeTab}>
+          <Tab label='Sobre' value='sobre' color='blue' />
+          <Tab label='Sala' value='sala' />
+          <Tab label='Quarto' value='Quarto' />
+          <Tab label='Cozinha' value='Cozinha' />
         </Tabs>
       </Box>
 
