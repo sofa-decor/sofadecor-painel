@@ -2,10 +2,16 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import HeaderComponent from "./app/components/header/HeaderComponent";
+import AboutPageComponent from "./app/pages/about/AboutPageComponent";
 import ProductViewPageComponent from "./app/pages/product_view/ProductViewPageComponent";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import appColors from "./colors/appColors";
 import "./css/App.css";
+
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 const appTheme = createTheme({
   palette: {
@@ -47,6 +53,7 @@ function App() {
           <Route index={true} path='/' Component={Redirect} />
           <Route path='/products' Component={ProductsPageComponent} />
           <Route path='/products/:id' Component={ProductViewPageComponent} />
+          <Route path='/about' Component={AboutPageComponent} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

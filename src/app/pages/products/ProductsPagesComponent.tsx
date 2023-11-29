@@ -1,71 +1,34 @@
-import { SendRounded } from "@mui/icons-material";
-import { Box, Button, Pagination, Paper, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Pagination, Typography } from "@mui/material";
 import "../../../css/App.css";
+import { products } from "../../../data/Products";
+import ProductCardComponent from "../../components/product-card/ProductCardComponent";
 import "./Products.css";
+import { ProductsList } from "./ProductsPageStyles";
 
 export default function ProductsPageComponent() {
-  return (
-    <Box className='app-page-container'>
-      <Box className='app-row-between'>
-        <Typography variant='caption'>120 resultados</Typography>
-      </Box>
+    return (
+        <Box className="app-page-container">
+            <Box className="app-row-between">
+                <Typography variant="caption">
+                    120 resultados
+                </Typography>
+            </Box>
 
-      <Box className='products-container'>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </Box>
+            <ProductsList>
+                {products.map(product => (
+                    <ProductCardComponent product={product} />
+                ))}
+            </ProductsList>
 
-      <Pagination
-        showFirstButton
-        showLastButton
-        count={10}
-        variant='outlined'
-        size='small'
-        sx={{ alignSelf: "center" }}
-      />
-    </Box>
-  );
-}
-
-function ProductCard() {
-  const navigate = useNavigate();
-
-  const redirect = () => navigate("/products/produto");
-
-  return (
-    <Paper onClick={redirect} className='product-card'>
-      <Box className='product-card-image' />
-      <Box className='product-card-content'>
-        <Typography variant='h6' fontWeight={700} fontSize={18}>
-          Poltrona Tangara
-        </Typography>
-      </Box>
-      <Box className='app-row-center'>
-        <Button endIcon={<SendRounded />} size='small' variant='contained'>
-          Comprar
-        </Button>
-      </Box>
-    </Paper>
-  );
+            <Pagination
+                showFirstButton
+                showLastButton
+                count={10}
+                variant="outlined"
+                size="small"
+                color="primary"
+                sx={{ alignSelf: "center" }}
+            />
+        </Box>
+    );
 }

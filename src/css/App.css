@@ -1,27 +1,7 @@
 .app-page-container {
-  max-width: 100%;
-  padding: 20px 10%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.app-row-between {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.app-row-center {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  justify-content: center;
-}
-
-.app-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 20px;
+    max-width: 100%;
+    padding: 20px 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

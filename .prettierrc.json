@@ -1,0 +1,14 @@
+{
+    "printWidth": 70,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "useTabs": false,
+    "arrowParens": "avoid",
+    "semi": true,
+    "bracketSpacing": true,
+    "quoteProps": "as-needed",
+    "endOfLine": "auto",
+    "proseWrap": "always",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+}
