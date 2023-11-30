@@ -1,52 +1,102 @@
+import { Check, WhatsApp } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Product } from "../../../models/product";
+import ProductsService from "../../../services/ProductsService";
 import { ProductDetails, ProductImage } from "./ProductViewStyles";
 
 export default function ProductViewPageComponent() {
+    const { product: productUrlString } = useParams();
+    const [product, setProduct] = useState<Product | null>(null);
+    const [image, setImage] = useState<string | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            if (!productUrlString) return;
+            const name = productUrlString.replace("-", " ");
+            const found = await ProductsService.fetchByName(name);
+            if (found) {
+                setProduct(found);
+                setImage(found.images[0]);
+            }
+        })();
+    }, [productUrlString]);
+
+    if (!product) return;
+
     return (
         <Box className="app-page-container">
             <Stack direction="row" gap={0.5}>
                 <Typography fontWeight={500} variant="caption">
                     Categorias:{" "}
                 </Typography>
-                <Typography
-                    fontWeight={500}
-                    fontStyle={"italic"}
-                    variant="caption"
-                >
-                    poltronas
-                </Typography>
+                {product.keys.map(key => (
+                    <Typography
+                        fontWeight={500}
+                        fontStyle={"italic"}
+                        variant="caption"
+                        key={key}
+                    >
+                        {key.toLowerCase()}
+                    </Typography>
+                ))}
             </Stack>
             <Stack direction="row" gap={5}>
-                <ProductImage />
+                <ProductImage url={image as string} />
                 <ProductDetails>
                     <Box>
                         <Typography
                             fontSize={18}
                             variant="overline"
                             color="primary"
+                            fontWeight={500}
                         >
-                            POLTRONAS | Poltrona Tangara
+                            {product.name}
                         </Typography>
                         <Typography variant="body1">
-                            A poltrona tangara tem revestimento em
-                            couro-veludo com os pes e pegador para
-                            maos em madeira de carvalho.
+                            A poltrona tangara tem revestimento em couro-veludo
+                            com os pes e pegador para maos em madeira de
+                            carvalho.
                         </Typography>
                     </Box>
                     <Box>
-                        <Typography variant="subtitle1">
-                            Compre com seguranca
-                        </Typography>
-                        <Typography variant="subtitle1">
-                            Qualidade garantida
-                        </Typography>
-                        <Typography variant="subtitle1">
-                            Em ate 12X s/ juros
-                        </Typography>
+                        <Stack direction="row" gap={1}>
+                            <Check />
+                            <Typography variant="subtitle1">
+                                Compre com seguranca
+                            </Typography>
+                        </Stack>
+                        <Stack direction="row" gap={1}>
+                            <Check />
+                            <Typography variant="subtitle1">
+                                Qualidade garantida
+                            </Typography>
+                        </Stack>
+                        <Stack direction="row" gap={1}>
+                            <Check />
+                            <Typography variant="subtitle1">
+                                Em ate 12X s/ juros
+                            </Typography>
+                        </Stack>
                         <br />
-                        <Button variant="contained" color="primary">
-                            Comprar
-                        </Button>
+                        <Stack direction="row" gap={1}>
+                            <Button
+                                startIcon={<WhatsApp />}
+                                variant="contained"
+                                color="primary"
+                            >
+                                Comprar
+                            </Button>
+                            <Button
+                                startIcon={<WhatsApp />}
+                                variant="contained"
+                                color="secondary"
+                                sx={{ color: "#ffffff" }}
+                            >
+                                Comprar
+                            </Button>
+                        </Stack>
                         <br />
                         <Typography variant="caption">
                             Finalize seu pedido no WhatsApp

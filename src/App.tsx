@@ -1,11 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
-import {
-    BrowserRouter,
-    Route,
-    Routes,
-    useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import appColors from "./app/colors/appColors";
 import HeaderComponent from "./app/components/header/HeaderComponent";
 import AboutPageComponent from "./app/pages/about/AboutPageComponent";
@@ -19,33 +14,18 @@ import "@fontsource/roboto/700.css";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import "./css/App.css";
 
-const appTheme = createTheme({
-    palette: {
-        common: {
-            black: appColors.dark,
-        },
-        primary: {
-            main: appColors.red,
-        },
-        secondary: {
-            main: appColors.red,
-        },
+const paletteMUI = {
+    primary: {
+        main: appColors.red,
     },
-});
+    secondary: {
+        main: appColors.green,
+    },
+};
 
+const appTheme = createTheme({ palette: paletteMUI });
 const headerTheme = createTheme({
-    palette: {
-        mode: "dark",
-        common: {
-            black: appColors.dark,
-        },
-        primary: {
-            main: appColors.red,
-        },
-        secondary: {
-            main: appColors.red,
-        },
-    },
+    palette: { ...paletteMUI, mode: "dark" },
 });
 
 function App() {
@@ -58,10 +38,7 @@ function App() {
 
                 <ThemeProvider theme={appTheme}>
                     <Routes>
-                        <Route
-                            path="/sobre"
-                            Component={AboutPageComponent}
-                        />
+                        <Route path="/sobre" Component={AboutPageComponent} />
                         <Route path="/" Component={Redirect} />
                         <Route
                             path={"/produtos"}

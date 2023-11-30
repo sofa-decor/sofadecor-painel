@@ -15,16 +15,13 @@ export default function ProductCardComponent({ product }: params) {
     return (
         <Container onClick={click}>
             <Image imgURL={product.images[0]} />
-            <Typography
-                variant="h1"
-                fontWeight={700}
-                fontSize={20}
-                margin={1}
-            >
+            <Typography variant="h1" fontWeight={700} fontSize={20} margin={1}>
                 {product.name}
             </Typography>
             <Button
-                endIcon={<SendRounded />}
+                endIcon={
+                    product.name.startsWith("P") ? <SendRounded /> : undefined
+                }
                 size="small"
                 variant="contained"
             >
