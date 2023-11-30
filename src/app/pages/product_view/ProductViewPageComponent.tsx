@@ -1,15 +1,19 @@
 import { Check, WhatsApp } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../../../models/product";
 import ProductsService from "../../../services/ProductsService";
-import { ProductDetails, ProductImage } from "./ProductViewStyles";
+import {
+    CurrentImage,
+    ImagesContainer,
+    ProductDetails,
+} from "./ProductViewStyles";
 
 export default function ProductViewPageComponent() {
     const { product: productUrlString } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
-    const [image, setImage] = useState<string | null>(null);
+    const [zoom, setZoom] = useState<object>({});
 
     useEffect(() => {
         (async () => {
@@ -18,10 +22,23 @@ export default function ProductViewPageComponent() {
             const found = await ProductsService.fetchByName(name);
             if (found) {
                 setProduct(found);
-                setImage(found.images[0]);
+                setZoom({ backgroundImage: `url(${found.images[0]})` });
             }
         })();
     }, [productUrlString]);
+
+    const handleMouseMove = (e: BaseSyntheticEvent) => {
+        const { offsetX, offsetY, target } = e.nativeEvent as MouseEvent;
+        const { offsetWidth, offsetHeight } = target as HTMLElement;
+
+        const percentageX = (offsetX / offsetWidth) * 100;
+        const percentageY = (offsetY / offsetHeight) * 100;
+
+        setZoom({
+            ...zoom,
+            backgroundPosition: `${percentageX}% ${percentageY}%`,
+        });
+    };
 
     if (!product) return;
 
@@ -43,7 +60,9 @@ export default function ProductViewPageComponent() {
                 ))}
             </Stack>
             <Stack direction="row" gap={5}>
-                <ProductImage url={image as string} />
+                <ImagesContainer>
+                    <CurrentImage onMouseMove={handleMouseMove} style={zoom} />
+                </ImagesContainer>
                 <ProductDetails>
                     <Box>
                         <Typography
