@@ -1,19 +1,19 @@
 import { SendRounded } from "@mui/icons-material";
 import { Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import { Product } from "../../../models/product";
-import { Container, Image } from "./productCardStyles";
+import { Container, Image } from "./ProductCardStyles";
 
 type params = {
     product: Product;
 };
 
 export default function ProductCardComponent({ product }: params) {
-    const navigate = useNavigate();
-    const redirect = () => navigate("/products/produto");
+    const { router } = useAppRouterHook();
+    const click = () => router.product_view.go(product.name);
 
     return (
-        <Container onClick={redirect}>
+        <Container onClick={click}>
             <Image imgURL={product.images[0]} />
             <Typography
                 variant="h1"

@@ -1,17 +1,17 @@
 import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
+import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import { HeaderContainer } from "./HeaderStyles";
 
 export default function HeaderComponent() {
-    const navigate = useNavigate();
+    const { router } = useAppRouterHook();
     const [tabValue, setTabValue] = useState("sala");
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        if (value == "sobre") navigate("/about");
-        else navigate("/products");
+        if (value == "sobre") router.about.go();
+        else router.products.go();
         setTabValue(value);
     };
 
