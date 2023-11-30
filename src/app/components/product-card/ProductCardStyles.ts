@@ -9,9 +9,9 @@ export const Container = styled(Paper)`
     width: 23%;
     background-color: #ffffff !important;
     margin-bottom: 15px;
-    padding-bottom: 15px;
     text-align: center;
     align-items: center;
+    position: relative;
     &:hover {
         opacity: 0.85;
     }
