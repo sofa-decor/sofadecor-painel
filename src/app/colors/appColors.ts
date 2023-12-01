@@ -1,5 +1,5 @@
 const appColors = {
-    dark: "#020202",
+    dark: "#1E1E1E",
     red: "#E40108",
     green: "#21bc3b",
     white: "#ffffff",

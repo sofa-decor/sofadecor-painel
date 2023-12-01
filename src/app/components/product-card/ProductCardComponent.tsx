@@ -10,14 +10,15 @@ type params = {
 
 export default function ProductCardComponent({ product }: params) {
     const { router } = useAppRouterHook();
-    const [displayButton, setDisplayButton] = useState("none");
+    const [cardHover, setCardHover] = useState<boolean>(false);
     const click = () => router.product_view.go(product.name);
 
     return (
         <Container
+            elevation={2}
             onClick={click}
-            onMouseEnter={() => setDisplayButton("block")}
-            onMouseLeave={() => setDisplayButton("none")}
+            onMouseEnter={() => setCardHover(true)}
+            onMouseLeave={() => setCardHover(false)}
         >
             <Typography variant="h1" fontWeight={700} fontSize={20} margin={1}>
                 {product.name}
@@ -32,7 +33,7 @@ export default function ProductCardComponent({ product }: params) {
                     position: "absolute",
                     bottom: "10px",
                     right: "10px",
-                    display: displayButton,
+                    display: cardHover ? "block" : "none",
                 }}
             >
                 Comprar

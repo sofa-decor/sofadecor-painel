@@ -18,7 +18,7 @@ export const Container = styled(Paper)`
 `;
 
 export const Image = styled.div<ImageParams>`
-    height: 230px;
+    height: 20dvw;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
