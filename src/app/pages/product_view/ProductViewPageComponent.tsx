@@ -40,7 +40,7 @@ export default function ProductViewPageComponent() {
         });
     };
 
-    if (!product) return;
+    if (!product) return <></>;
 
     return (
         <Box className="app-page-container">
