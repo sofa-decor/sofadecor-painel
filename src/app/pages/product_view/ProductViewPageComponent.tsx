@@ -3,6 +3,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../../../models/product";
+import OrderService from "../../../services/OrderService";
 import ProductsService from "../../../services/ProductsService";
 import {
     CurrentImage,
@@ -14,6 +15,8 @@ export default function ProductViewPageComponent() {
     const { product: productUrlString } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const [zoom, setZoom] = useState<object>({});
+    const [currentUrlPage] = useState<string>(window.location.href);
+    const [targetWppUrl, setTargetWppUrl] = useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
@@ -26,6 +29,16 @@ export default function ProductViewPageComponent() {
             }
         })();
     }, [productUrlString]);
+
+    useEffect(() => {
+        if (product && currentUrlPage) {
+            const wppUrl = OrderService.getSenderWppLink(
+                product,
+                currentUrlPage
+            );
+            setTargetWppUrl(wppUrl);
+        }
+    }, [currentUrlPage, product]);
 
     const handleMouseMove = (e: BaseSyntheticEvent) => {
         const { offsetX, offsetY, target } = e.nativeEvent as MouseEvent;
@@ -100,21 +113,18 @@ export default function ProductViewPageComponent() {
                         </Stack>
                         <br />
                         <Stack direction="row" gap={1}>
-                            <Button
-                                startIcon={<WhatsApp />}
-                                variant="contained"
-                                color="primary"
-                            >
-                                Comprar
-                            </Button>
-                            <Button
-                                startIcon={<WhatsApp />}
-                                variant="contained"
-                                color="secondary"
-                                sx={{ color: "#ffffff" }}
-                            >
-                                Comprar
-                            </Button>
+                            {targetWppUrl && (
+                                <Button
+                                    startIcon={<WhatsApp />}
+                                    variant="contained"
+                                    color="primary"
+                                    sx={{ color: "#ffffff" }}
+                                    target="_blank"
+                                    href={targetWppUrl}
+                                >
+                                    Comprar
+                                </Button>
+                            )}
                         </Stack>
                         <br />
                         <Typography variant="caption">

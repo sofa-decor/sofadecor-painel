@@ -1,7 +1,9 @@
+import { WhatsApp } from "@mui/icons-material";
 import { Button, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
 import Logo from "../../../assets/logo.png";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
+import OrderService from "../../../services/OrderService";
 import { HeaderContainer } from "./HeaderStyles";
 
 export default function HeaderComponent() {
@@ -34,8 +36,15 @@ export default function HeaderComponent() {
             </Stack>
 
             <Stack direction="row" flex={1} justifyContent="flex-end">
-                <Button size="small" variant="outlined">
-                    (51) 99590 - 9864
+                <Button
+                    color="secondary"
+                    size="small"
+                    variant="text"
+                    startIcon={<WhatsApp />}
+                    target="_blank"
+                    href={OrderService.getSenderWppLink()}
+                >
+                    Compre pelo WhatsApp
                 </Button>
             </Stack>
         </HeaderContainer>
