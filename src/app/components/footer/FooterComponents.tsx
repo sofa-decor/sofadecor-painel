@@ -4,13 +4,13 @@ import appColors from "../../colors/appColors";
 
 export default function FooterComponent() {
     return (
-        <Box bgcolor={appColors.dark} color={appColors.white}>
-            <Stack direction="row" justifyContent="space-around" padding={4}>
+        <Box bgcolor={appColors.dark} color={appColors.white} padding={4}>
+            <Stack direction="row" gap={12} padding={2}>
                 <Stack direction="column" alignItems="center">
                     <img
                         src={LOGO}
                         alt="logo"
-                        style={{ width: "100px", height: "100px" }}
+                        style={{ width: "120px", height: "120px" }}
                     />
                     <Typography fontSize={24} fontWeight={700}>
                         SOFÁDECOR
@@ -22,13 +22,13 @@ export default function FooterComponent() {
                         color={appColors.red}
                         fontWeight={500}
                         variant="subtitle1"
+                        paddingBottom={1}
                     >
                         PRODUTOS
                     </Typography>
                     <Typography variant="body1">Poltronas</Typography>
                     <Typography variant="body1">Mesas</Typography>
                     <Typography variant="body1">Sofas</Typography>
-                    <Typography variant="body1">Puff</Typography>
                     <Typography variant="body1">Mesas</Typography>
                 </Stack>
 
@@ -37,6 +37,7 @@ export default function FooterComponent() {
                         color={appColors.red}
                         fontWeight={500}
                         variant="subtitle1"
+                        paddingBottom={1}
                     >
                         CONTATE-NOS
                     </Typography>
@@ -44,16 +45,16 @@ export default function FooterComponent() {
                     <Typography variant="body1">
                         comercial@kunzereis.com.br
                     </Typography>
+                    <Typography variant="body1">@sofadecorhouse</Typography>
                     <Typography variant="body1">
                         Av. João Klauk, 951, Primavera Dois Irmãos/RS
                     </Typography>
-                    <Typography variant="body1">@sofadecorhouse</Typography>
                 </Stack>
             </Stack>
 
             <Divider sx={{ backgroundColor: appColors.white }} />
 
-            <Stack direction="row" justifyContent="space-between" padding={4}>
+            <Stack direction="row" justifyContent="space-between" padding={2}>
                 <Typography variant="caption">
                     Reis Home Decor © 2023 Todos os direitos reservados
                 </Typography>
