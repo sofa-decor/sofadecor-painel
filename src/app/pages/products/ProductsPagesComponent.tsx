@@ -1,13 +1,5 @@
 import { FilterAlt } from "@mui/icons-material";
-import {
-    Box,
-    Button,
-    Divider,
-    Fab,
-    Pagination,
-    Stack,
-    Typography,
-} from "@mui/material";
+import { Box, Button, Fab, Pagination, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import "../../../css/App.css";
 import { products } from "../../../data/Products";
@@ -57,27 +49,10 @@ export default function ProductsPageComponent() {
             </Stack>
 
             <ProductsList>
-                {products.map(product => (
-                    <ProductCardComponent product={product} />
-                ))}
-                <Divider
-                    sx={{ width: "100%", height: "2px", margin: "10px" }}
-                />
-                {products.map(product => (
-                    <ProductCardComponentOP2 product={product} />
-                ))}
-                <Divider
-                    sx={{ width: "100%", height: "2px", margin: "10px" }}
-                />
-                {products.map(product => (
-                    <ProductCardComponentOP3 product={product} />
-                ))}
-                <Divider
-                    sx={{ width: "100%", height: "2px", margin: "10px" }}
-                />
-                {products.map(product => (
-                    <ProductCardComponentOP4 product={product} />
-                ))}
+                <ProductCardComponent product={products[0]} />
+                <ProductCardComponentOP2 product={products[0]} />
+                <ProductCardComponentOP3 product={products[0]} />
+                <ProductCardComponentOP4 product={products[0]} />
             </ProductsList>
 
             <Pagination

@@ -7,6 +7,7 @@ export type ImageParams = {
 
 export const Container = styled(Paper)`
     width: 23%;
+    height: fit-content;
     background-color: #ffffff !important;
     margin-bottom: 15px;
     text-align: center;

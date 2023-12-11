@@ -11,6 +11,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import FooterComponent from "./app/components/footer/FooterComponents";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import "./css/App.css";
 
@@ -50,6 +51,8 @@ function App() {
                         />
                     </Routes>
                 </ThemeProvider>
+
+                <FooterComponent />
             </GlobalContextProvider>
         </BrowserRouter>
     );
