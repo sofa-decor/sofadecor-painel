@@ -1,6 +1,8 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AboutPageComponent from "../app/pages/about/AboutPageComponent";
+import AdminCreateProductsPageComponent from "../app/pages/admin-painel/children/admin-add-products/AdminCreateProductsPageComnponent";
+import AdminCreateUsersPageComponent from "../app/pages/admin-painel/children/admin-add-users/AdminCreateUsersPageComnponent";
 import AdminLoginPageComponent from "../app/pages/admin-painel/children/admin-login/AdminLoginPageComponent";
 import AdminProductsPageComponent from "../app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
 import AdminUsersPageComponent from "../app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
@@ -43,21 +45,16 @@ interface RouterContextData {
             component: () => JSX.Element;
             go: () => void;
         };
-        // admin_painel_users_add: {
-        //     path: string;
-        //     component: () => JSX.Element;
-        //     go: () => void;
-        // };
-        // admin_painel_products: {
-        //     path: string;
-        //     component: () => JSX.Element;
-        //     go: () => void;
-        // };
-        // admin_painel_products_add: {
-        //     path: string;
-        //     component: () => JSX.Element;
-        //     go: () => void;
-        // };
+        admin_painel_users_add: {
+            path: string;
+            component: () => JSX.Element;
+            go: () => void;
+        };
+        admin_painel_products_add: {
+            path: string;
+            component: () => JSX.Element;
+            go: () => void;
+        };
     };
 }
 
@@ -86,9 +83,9 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             },
         },
         admin_painel_products: {
-            path: "/admin-painel/products",
+            path: "/admin-painel/produtos",
             component: AdminProductsPageComponent,
-            go: () => navigate("/admin-painel/products"),
+            go: () => navigate("/admin-painel/produtos"),
         },
         admin_painel_login: {
             path: "/admin-painel/login",
@@ -100,21 +97,16 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             component: AdminUsersPageComponent,
             go: () => navigate("/admin-painel/usuarios"),
         },
-        // admin_painel_users_add: {
-        //     path: "/admin-painel/users/add",
-        //     component: <></>,
-        //     go: () => navigate("/admin-painel/users/add"),
-        // },
-        // admin_painel_products: {
-        //     path: "/admin-painel/products",
-        //     component: <></>,
-        //     go: () => navigate("/admin-painel/products"),
-        // },
-        // admin_painel_products_add: {
-        //     path: "/admin-painel/products/add",
-        //     component: <></>,
-        //     go: () => navigate("/admin-painel/products/add"),
-        // },
+        admin_painel_users_add: {
+            path: "/admin-painel/usuarios/add",
+            component: AdminCreateUsersPageComponent,
+            go: () => navigate("/admin-painel/usuarios/add"),
+        },
+        admin_painel_products_add: {
+            path: "/admin-painel/produtos/add",
+            component: AdminCreateProductsPageComponent,
+            go: () => navigate("/admin-painel/produtos/add"),
+        },
     };
 
     return <RouterContext.Provider value={{ router }}>{children}</RouterContext.Provider>;

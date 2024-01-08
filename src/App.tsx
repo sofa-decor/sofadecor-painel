@@ -12,11 +12,13 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import FooterComponent from "./app/components/footer/FooterComponents";
 import AdminPainelPageComponent from "./app/pages/admin-painel/AdminPainelPageComponent";
+import AdminCreateUsersPageComponent from "./app/pages/admin-painel/children/admin-add-users/AdminCreateUsersPageComnponent";
 import AdminLoginPageComponent from "./app/pages/admin-painel/children/admin-login/AdminLoginPageComponent";
 import AdminProductsPageComponent from "./app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
 import AdminUsersPageComponent from "./app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import "./css/App.css";
+import AdminCreateProductsPageComponent from "./app/pages/admin-painel/children/admin-add-products/AdminCreateProductsPageComnponent";
 
 const paletteMUI = {
     primary: {
@@ -41,8 +43,13 @@ function App() {
                         <Route path="/produtos/:product" Component={ProductViewPageComponent} />
                         <Route path="/admin-painel" Component={AdminPainelPageComponent}>
                             <Route path="login" Component={AdminLoginPageComponent} />
-                            <Route path="products" Component={AdminProductsPageComponent} />
+                            <Route path="produtos" Component={AdminProductsPageComponent} />
                             <Route path="usuarios" Component={AdminUsersPageComponent} />
+                            <Route path="usuarios/add" Component={AdminCreateUsersPageComponent} />
+                            <Route
+                                path="produtos/add"
+                                Component={AdminCreateProductsPageComponent}
+                            />
                         </Route>
                     </Routes>
                 </ThemeProvider>
