@@ -4,7 +4,7 @@ import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 import appColors from "../../../../colors/appColors";
 
 export default function AdminLoginPageComponent() {
-    const [error, setError] = useState<string | null>(null);
+    const [error] = useState<string | null>(null);
     const { router } = useAppRouterHook();
 
     return (
@@ -19,7 +19,7 @@ export default function AdminLoginPageComponent() {
                     {error}
                 </Typography>
             )}
-            <Button onClick={undefined} variant="contained">
+            <Button onClick={router.admin_painel_products.go} variant="contained">
                 Entrar
             </Button>
         </Stack>

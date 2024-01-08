@@ -1,10 +1,25 @@
 import { WhatsApp } from "@mui/icons-material";
 import { Button, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SyntheticEvent, useState } from "react";
 import Logo from "../../../assets/logo.png";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import OrderService from "../../../services/OrderService";
+import appColors from "../../colors/appColors";
 import { HeaderContainer } from "./HeaderStyles";
+
+const paletteMUI = {
+    primary: {
+        main: appColors.red,
+    },
+    secondary: {
+        main: appColors.green,
+    },
+};
+
+const headerTheme = createTheme({
+    palette: { ...paletteMUI, mode: "dark" },
+});
 
 export default function HeaderComponent() {
     const { router } = useAppRouterHook();
@@ -18,35 +33,37 @@ export default function HeaderComponent() {
     };
 
     return (
-        <HeaderContainer>
-            <Stack direction="row" alignItems="center" flex={1}>
-                <Typography fontSize={20} fontWeight={700}>
-                    SOFÁ DECOR
-                </Typography>
-                <img width={35} height={35} src={Logo} alt="logo" />
-            </Stack>
+        <ThemeProvider theme={headerTheme}>
+            <HeaderContainer>
+                <Stack direction="row" alignItems="center" flex={1}>
+                    <Typography fontSize={20} fontWeight={700}>
+                        SOFÁ DECOR
+                    </Typography>
+                    <img width={35} height={35} src={Logo} alt="logo" />
+                </Stack>
 
-            <Stack direction="row" flex={1} justifyContent="center">
-                <Tabs value={tabValue} onChange={handleChangeTab}>
-                    <Tab label="Sobre" value="sobre" />
-                    <Tab label="Sala" value="sala" />
-                    <Tab label="Quarto" value="Quarto" />
-                    <Tab label="Cozinha" value="Cozinha" />
-                </Tabs>
-            </Stack>
+                <Stack direction="row" flex={1} justifyContent="center">
+                    <Tabs value={tabValue} onChange={handleChangeTab}>
+                        <Tab label="Sobre" value="sobre" />
+                        <Tab label="Sala" value="sala" />
+                        <Tab label="Quarto" value="Quarto" />
+                        <Tab label="Cozinha" value="Cozinha" />
+                    </Tabs>
+                </Stack>
 
-            <Stack direction="row" flex={1} justifyContent="flex-end">
-                <Button
-                    color="secondary"
-                    size="small"
-                    variant="text"
-                    startIcon={<WhatsApp />}
-                    target="_blank"
-                    href={OrderService.getSenderWppLink()}
-                >
-                    Compre pelo WhatsApp
-                </Button>
-            </Stack>
-        </HeaderContainer>
+                <Stack direction="row" flex={1} justifyContent="flex-end">
+                    <Button
+                        color="secondary"
+                        size="small"
+                        variant="text"
+                        startIcon={<WhatsApp />}
+                        target="_blank"
+                        href={OrderService.getSenderWppLink()}
+                    >
+                        Compre pelo WhatsApp
+                    </Button>
+                </Stack>
+            </HeaderContainer>
+        </ThemeProvider>
     );
 }

@@ -5,11 +5,8 @@ import { useParams } from "react-router-dom";
 import { Product } from "../../../models/product";
 import OrderService from "../../../services/OrderService";
 import ProductsService from "../../../services/ProductsService";
-import {
-    CurrentImage,
-    ImagesContainer,
-    ProductDetails,
-} from "./ProductViewStyles";
+import HeaderComponent from "../../components/header/HeaderComponent";
+import { CurrentImage, ImagesContainer, ProductDetails } from "./ProductViewStyles";
 
 export default function ProductViewPageComponent() {
     const { product: productUrlString } = useParams();
@@ -32,10 +29,7 @@ export default function ProductViewPageComponent() {
 
     useEffect(() => {
         if (product && currentUrlPage) {
-            const wppUrl = OrderService.getSenderWppLink(
-                product,
-                currentUrlPage
-            );
+            const wppUrl = OrderService.getSenderWppLink(product, currentUrlPage);
             setTargetWppUrl(wppUrl);
         }
     }, [currentUrlPage, product]);
@@ -56,83 +50,79 @@ export default function ProductViewPageComponent() {
     if (!product) return <></>;
 
     return (
-        <Box className="app-page-container">
-            <Stack direction="row" gap={0.5}>
-                <Typography fontWeight={500} variant="caption">
-                    Categorias:{" "}
-                </Typography>
-                {product.keys.map(key => (
-                    <Typography
-                        fontWeight={500}
-                        fontStyle={"italic"}
-                        variant="caption"
-                        key={key}
-                    >
-                        {key.toLowerCase()}
+        <>
+            <HeaderComponent />
+            <Box className="app-page-container">
+                <Stack direction="row" gap={0.5}>
+                    <Typography fontWeight={500} variant="caption">
+                        Categorias:{" "}
                     </Typography>
-                ))}
-            </Stack>
-            <Stack direction="row" gap={5}>
-                <ImagesContainer>
-                    <CurrentImage onMouseMove={handleMouseMove} style={zoom} />
-                </ImagesContainer>
-                <ProductDetails>
-                    <Box>
+                    {product.keys.map(key => (
                         <Typography
-                            fontSize={18}
-                            variant="overline"
-                            color="primary"
                             fontWeight={500}
+                            fontStyle={"italic"}
+                            variant="caption"
+                            key={key}
                         >
-                            {product.name}
+                            {key.toLowerCase()}
                         </Typography>
-                        <Typography variant="body1">
-                            A poltrona tangara tem revestimento em couro-veludo
-                            com os pes e pegador para maos em madeira de
-                            carvalho.
-                        </Typography>
-                    </Box>
-                    <Box>
-                        <Stack direction="row" gap={1}>
-                            <Check />
-                            <Typography variant="subtitle1">
-                                Compre com seguranca
+                    ))}
+                </Stack>
+                <Stack direction="row" gap={5}>
+                    <ImagesContainer>
+                        <CurrentImage onMouseMove={handleMouseMove} style={zoom} />
+                    </ImagesContainer>
+                    <ProductDetails>
+                        <Box>
+                            <Typography
+                                fontSize={18}
+                                variant="overline"
+                                color="primary"
+                                fontWeight={500}
+                            >
+                                {product.name}
                             </Typography>
-                        </Stack>
-                        <Stack direction="row" gap={1}>
-                            <Check />
-                            <Typography variant="subtitle1">
-                                Qualidade garantida
+                            <Typography variant="body1">
+                                A poltrona tangara tem revestimento em couro-veludo com os pes e
+                                pegador para maos em madeira de carvalho.
                             </Typography>
-                        </Stack>
-                        <Stack direction="row" gap={1}>
-                            <Check />
-                            <Typography variant="subtitle1">
-                                Em ate 12X s/ juros
+                        </Box>
+                        <Box>
+                            <Stack direction="row" gap={1}>
+                                <Check />
+                                <Typography variant="subtitle1">Compre com seguranca</Typography>
+                            </Stack>
+                            <Stack direction="row" gap={1}>
+                                <Check />
+                                <Typography variant="subtitle1">Qualidade garantida</Typography>
+                            </Stack>
+                            <Stack direction="row" gap={1}>
+                                <Check />
+                                <Typography variant="subtitle1">Em ate 12X s/ juros</Typography>
+                            </Stack>
+                            <br />
+                            <Stack direction="row" gap={1}>
+                                {targetWppUrl && (
+                                    <Button
+                                        startIcon={<WhatsApp />}
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{ color: "#ffffff" }}
+                                        target="_blank"
+                                        href={targetWppUrl}
+                                    >
+                                        Falar com vendedor
+                                    </Button>
+                                )}
+                            </Stack>
+                            <br />
+                            <Typography variant="caption">
+                                Finalize seu pedido no WhatsApp
                             </Typography>
-                        </Stack>
-                        <br />
-                        <Stack direction="row" gap={1}>
-                            {targetWppUrl && (
-                                <Button
-                                    startIcon={<WhatsApp />}
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ color: "#ffffff" }}
-                                    target="_blank"
-                                    href={targetWppUrl}
-                                >
-                                    Falar com vendedor
-                                </Button>
-                            )}
-                        </Stack>
-                        <br />
-                        <Typography variant="caption">
-                            Finalize seu pedido no WhatsApp
-                        </Typography>
-                    </Box>
-                </ProductDetails>
-            </Stack>
-        </Box>
+                        </Box>
+                    </ProductDetails>
+                </Stack>
+            </Box>
+        </>
     );
 }
