@@ -12,6 +12,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import FooterComponent from "./app/components/footer/FooterComponents";
+import AdminPainelPageComponent from "./app/pages/admin-painel/AdminPainelPageComponent";
+import AdminLoginPageComponent from "./app/pages/admin-painel/children/admin-login/AdminLoginPageComponent";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import "./css/App.css";
 
@@ -41,14 +43,11 @@ function App() {
                     <Routes>
                         <Route path="/sobre" Component={AboutPageComponent} />
                         <Route path="/" Component={Redirect} />
-                        <Route
-                            path={"/produtos"}
-                            Component={ProductsPageComponent}
-                        />
-                        <Route
-                            path="/produtos/:product"
-                            Component={ProductViewPageComponent}
-                        />
+                        <Route path={"/produtos"} Component={ProductsPageComponent} />
+                        <Route path="/produtos/:product" Component={ProductViewPageComponent} />
+                        <Route path="/admin-painel" Component={AdminPainelPageComponent}>
+                            <Route index={true} path="login" Component={AdminLoginPageComponent} />
+                        </Route>
                     </Routes>
                 </ThemeProvider>
 

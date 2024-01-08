@@ -122,7 +122,7 @@ export default function ProductViewPageComponent() {
                                     target="_blank"
                                     href={targetWppUrl}
                                 >
-                                    Comprar
+                                    Falar com vendedor
                                 </Button>
                             )}
                         </Stack>
