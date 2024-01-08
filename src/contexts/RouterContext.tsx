@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AboutPageComponent from "../app/pages/about/AboutPageComponent";
 import AdminLoginPageComponent from "../app/pages/admin-painel/children/admin-login/AdminLoginPageComponent";
 import AdminProductsPageComponent from "../app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
+import AdminUsersPageComponent from "../app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductViewPageComponent from "../app/pages/product_view/ProductViewPageComponent";
 import ProductsPageComponent from "../app/pages/products/ProductsPagesComponent";
 
@@ -37,11 +38,11 @@ interface RouterContextData {
             component: () => JSX.Element;
             go: () => void;
         };
-        // admin_painel_users: {
-        //     path: string;
-        //     component: () => JSX.Element;
-        //     go: () => void;
-        // };
+        admin_painel_users: {
+            path: string;
+            component: () => JSX.Element;
+            go: () => void;
+        };
         // admin_painel_users_add: {
         //     path: string;
         //     component: () => JSX.Element;
@@ -94,11 +95,11 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             component: AdminLoginPageComponent,
             go: () => navigate("/admin-painel/login"),
         },
-        // admin_painel_users: {
-        //     path: "/admin-painel/users",
-        //     component: <></>,
-        //     go: () => navigate("/admin-painel/users"),
-        // },
+        admin_painel_users: {
+            path: "/admin-painel/users",
+            component: AdminUsersPageComponent,
+            go: () => navigate("/admin-painel/usuarios"),
+        },
         // admin_painel_users_add: {
         //     path: "/admin-painel/users/add",
         //     component: <></>,

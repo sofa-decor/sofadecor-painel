@@ -14,6 +14,7 @@ import FooterComponent from "./app/components/footer/FooterComponents";
 import AdminPainelPageComponent from "./app/pages/admin-painel/AdminPainelPageComponent";
 import AdminLoginPageComponent from "./app/pages/admin-painel/children/admin-login/AdminLoginPageComponent";
 import AdminProductsPageComponent from "./app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
+import AdminUsersPageComponent from "./app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import "./css/App.css";
 
@@ -41,6 +42,7 @@ function App() {
                         <Route path="/admin-painel" Component={AdminPainelPageComponent}>
                             <Route path="login" Component={AdminLoginPageComponent} />
                             <Route path="products" Component={AdminProductsPageComponent} />
+                            <Route path="usuarios" Component={AdminUsersPageComponent} />
                         </Route>
                     </Routes>
                 </ThemeProvider>

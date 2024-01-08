@@ -25,7 +25,8 @@ export default function AdminHeaderComponent() {
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        if (value == "sobre") router.about.go();
+        if (value == "produtos") router.admin_painel_products.go();
+        if (value == "usuários") router.admin_painel_users.go();
         setTabValue(value);
     };
 
@@ -42,6 +43,8 @@ export default function AdminHeaderComponent() {
                     <Tabs value={tabValue} onChange={handleChangeTab}>
                         <Tab label="Produtos" value="produtos" />
                         <Tab label="Usuários" value="usuários" />
+                        <Tab label="+ Usuários" value="+usuários" />
+                        <Tab label="+ produtos" value="+produtos" />
                     </Tabs>
                 </Stack>
             </HeaderContainer>
