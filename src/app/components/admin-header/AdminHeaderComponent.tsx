@@ -27,8 +27,8 @@ export default function AdminHeaderComponent() {
         e.preventDefault();
         if (value == "produtos") router.admin_painel_products.go();
         if (value == "usuários") router.admin_painel_users.go();
-        if (value == "+usuários") router.admin_painel_products_add.go();
-        if (value == "+produtos") router.admin_painel_users_add.go();
+        if (value == "+usuários") router.admin_painel_users_add.go();
+        if (value == "+produtos") router.admin_painel_products_add.go();
         setTabValue(value);
     };
 
