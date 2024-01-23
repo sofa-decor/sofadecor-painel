@@ -1,4 +1,6 @@
+import { axiosClient } from "../clients/axios.client";
 import * as productsData from "../data/Products";
+import { NewProductRequest } from "../types/new-product-request.type";
 
 class ProductsService {
     private products = productsData.products;
@@ -9,13 +11,8 @@ class ProductsService {
         return this.products;
     }
 
-    async fetchByName(name: string) {
-        const lowerName = name.toLowerCase();
-        const found = this.products.find(
-            ({ name }) => name.toLowerCase() === lowerName
-        );
-        if (found) return found;
-        else return null;
+    async post(data: NewProductRequest) {
+        return axiosClient.post("/products", data);
     }
 }
 
