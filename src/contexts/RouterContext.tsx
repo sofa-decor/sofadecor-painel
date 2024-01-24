@@ -83,29 +83,29 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             },
         },
         admin_painel_products: {
-            path: "/admin-painel/produtos",
+            path: "/painel/produtos",
             component: AdminProductsPageComponent,
-            go: () => navigate("/admin-painel/produtos"),
+            go: () => navigate("/painel/produtos"),
         },
         admin_painel_login: {
-            path: "/admin-painel/login",
+            path: "/painel/login",
             component: AdminLoginPageComponent,
-            go: () => navigate("/admin-painel/login"),
+            go: () => navigate("/painel/login"),
         },
         admin_painel_users: {
-            path: "/admin-painel/users",
+            path: "/painel/users",
             component: AdminUsersPageComponent,
-            go: () => navigate("/admin-painel/usuarios"),
+            go: () => navigate("/painel/usuarios"),
         },
         admin_painel_users_add: {
-            path: "/admin-painel/usuarios/add",
+            path: "/painel/usuarios/add",
             component: AdminCreateUsersPageComponent,
-            go: () => navigate("/admin-painel/usuarios/add"),
+            go: () => navigate("/painel/usuarios/add"),
         },
         admin_painel_products_add: {
-            path: "/admin-painel/produtos/add",
+            path: "/painel/produtos/add",
             component: AdminCreateProductsPageComponent,
-            go: () => navigate("/admin-painel/produtos/add"),
+            go: () => navigate("/painel/produtos/add"),
         },
     };
 

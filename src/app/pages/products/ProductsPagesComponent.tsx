@@ -1,18 +1,19 @@
 import { FilterAlt } from "@mui/icons-material";
 import { Box, Button, Fab, Pagination, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../../css/App.css";
-import { products } from "../../../data/Products";
+import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import HeaderComponent from "../../components/header/HeaderComponent";
-import ProductCardComponent, {
-    ProductCardComponentOP2,
-    ProductCardComponentOP3,
-    ProductCardComponentOP4,
-} from "../../components/product-card/ProductCardComponent";
+import { ProductCardComponentOP3 } from "../../components/product-card/ProductCardComponent";
 import { IconFilterCount, ProductsList } from "./ProductsPageStyles";
 
 export default function ProductsPageComponent() {
     const [isOpenFilters, setIsOpenFilters] = useState(false);
+    const { data, fetch } = useGetManyProductsHook();
+
+    useEffect(() => {
+        fetch();
+    }, [fetch]);
 
     return (
         <>
@@ -52,10 +53,13 @@ export default function ProductsPageComponent() {
                 </Stack>
 
                 <ProductsList>
-                    <ProductCardComponent product={products[0]} />
+                    {data &&
+                        data.products.map((product: Product) => (
+                            <ProductCardComponentOP3 key={product.id} product={product} />
+                        ))}
+                    {/* <ProductCardComponent product={products[0]} />
                     <ProductCardComponentOP2 product={products[0]} />
-                    <ProductCardComponentOP3 product={products[0]} />
-                    <ProductCardComponentOP4 product={products[0]} />
+                    <ProductCardComponentOP4 product={products[0]} /> */}
                 </ProductsList>
 
                 <Pagination

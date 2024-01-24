@@ -10,8 +10,9 @@ import {
 import { ReactElement, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { categories } from "../../../../../data/categories.data";
+import { convertBase64 } from "../../../../../helpers";
 import { usePostProductHook } from "../../../../../hooks/product-hooks/postProductHook";
-import { fileCovertBase64 } from "./helpers/file.helper";
+import { ProductImage } from "../../../../../types/new-product-request.type";
 
 type NewProductSubmited = {
     name: string;
@@ -42,11 +43,11 @@ export default function AdminCreateProductsPageComponent() {
     const onSubmitForm = async (data: NewProductSubmited) => {
         console.log(data);
 
-        const arrayImagesCovertedInBase64: Array<string> = [];
+        const arrayImagesCovertedInBase64: Array<ProductImage> = [];
         for (const image of data.images) {
-            arrayImagesCovertedInBase64.push(await fileCovertBase64(image));
+            arrayImagesCovertedInBase64.push({ url: await convertBase64(image), main: false });
         }
-        post({ ...data, images: arrayImagesCovertedInBase64 });
+        await post({ ...data, images: arrayImagesCovertedInBase64 });
     };
 
     return (

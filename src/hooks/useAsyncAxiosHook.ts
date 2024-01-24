@@ -22,6 +22,7 @@ export default function useAsyncAxiosHook({ request, immediate = true }: UseAsyn
         try {
             const response = await request(...args);
             setData(response.data);
+            setStatus(response.status);
         } catch (e: unknown) {
             const err: AxiosError = e as AxiosError;
             setError((err?.response?.data as APIError) || null);

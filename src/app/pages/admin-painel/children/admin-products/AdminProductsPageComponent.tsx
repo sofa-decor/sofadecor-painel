@@ -1,17 +1,27 @@
 import { Delete, Search } from "@mui/icons-material";
 import { Stack, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import {
+    Product,
+    useGetManyProductsHook,
+} from "../../../../../hooks/product-hooks/getManyProductsHook";
 
 export default function AdminProductsPageComponent() {
-    const [list, setList] = useState<Array<React.ReactElement>>([]);
+    const { data, fetch } = useGetManyProductsHook();
+    const [list, setList] = useState<Array<ReactElement>>([]);
 
     useEffect(() => {
-        const arr = [];
-        for (let i = 0; i < 20; i++) {
-            arr.push(<ProductItem />);
+        fetch();
+    }, []);
+
+    useEffect(() => {
+        if (data == null) return;
+        const items: Array<ReactElement> = [];
+        for (const product of data.products) {
+            items.push(<ProductItem product={product} />);
         }
-        setList(arr);
-    });
+        setList(items);
+    }, [data]);
 
     return (
         <Stack direction="column" alignItems="center" gap="10px">
@@ -26,7 +36,11 @@ export default function AdminProductsPageComponent() {
     );
 }
 
-function ProductItem() {
+type ProductItemParams = {
+    product: Product;
+};
+
+function ProductItem({ product }: ProductItemParams) {
     return (
         <Stack
             direction="row"
@@ -34,9 +48,9 @@ function ProductItem() {
             borderBottom="1px solid gray"
             width="100%"
         >
-            <Typography variant="body1">Nome do item</Typography>
-            <Typography variant="body1">categoria</Typography>
-            <Typography variant="body1">Qtd. imagens</Typography>
+            <Typography variant="body1">{product.name}</Typography>
+            <Typography variant="body1">{product.tags}</Typography>
+            <Typography variant="body1">{product.images.length}</Typography>
             <Delete fontSize="small" color="primary" />
         </Stack>
     );
