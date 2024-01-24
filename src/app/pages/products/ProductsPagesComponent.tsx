@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "../../../css/App.css";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import HeaderComponent from "../../components/header/HeaderComponent";
-import { ProductCardComponentOP3 } from "../../components/product-card/ProductCardComponent";
+import ProductCardComponent from "../../components/product-card/ProductCardComponent";
 import { IconFilterCount, ProductsList } from "./ProductsPageStyles";
 
 export default function ProductsPageComponent() {
@@ -55,11 +55,8 @@ export default function ProductsPageComponent() {
                 <ProductsList>
                     {data &&
                         data.products.map((product: Product) => (
-                            <ProductCardComponentOP3 key={product.id} product={product} />
+                            <ProductCardComponent key={product.id} product={product} />
                         ))}
-                    {/* <ProductCardComponent product={products[0]} />
-                    <ProductCardComponentOP2 product={products[0]} />
-                    <ProductCardComponentOP4 product={products[0]} /> */}
                 </ProductsList>
 
                 <Pagination

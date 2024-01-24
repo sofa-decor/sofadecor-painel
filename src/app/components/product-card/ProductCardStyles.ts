@@ -7,15 +7,13 @@ export type ImageParams = {
 
 export const Container = styled(Paper)`
     width: 23%;
-    height: fit-content;
+    height: 30dvw;
     background-color: #ffffff !important;
     margin-bottom: 15px;
     text-align: center;
     align-items: center;
     position: relative;
-    &:hover {
-        opacity: 0.85;
-    }
+    overflow: hidden;
 `;
 
 export const Image = styled.div<ImageParams>`
