@@ -1,4 +1,4 @@
-import { Alert, Button, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Button, LinearProgress, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { LoginUser, useLoginUserHook } from "../../../../../hooks/auth-hooks/loginUserHook";
@@ -6,26 +6,22 @@ import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 import appColors from "../../../../colors/appColors";
 
 export default function AdminLoginPageComponent() {
-    const [error, setError] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { router } = useAppRouterHook();
-    const { login, data, error: loginError } = useLoginUserHook();
+    const { login, data, error, loading } = useLoginUserHook();
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
-        // router.admin_painel_products.go()
-        console.log(data);
+        if (!data) return;
+        router.admin_painel_products.go();
     }, [data]);
 
     useEffect(() => {
-        console.log(loginError);
-    }, [loginError]);
+        if (!error) return;
+        setErrorMessage("Nome de usuario ou senha incorreto");
+    }, [error]);
 
-    useEffect(() => {});
-
-    const sendLoginUserRequest = (data: LoginUser) => {
-        console.log("data sended", data);
-        login(data);
-    };
+    const sendLoginUserRequest = (data: LoginUser) => login(data);
 
     return (
         <Stack direction="column" justifyContent="center" sx={{ height: "85vh" }}>
@@ -39,20 +35,26 @@ export default function AdminLoginPageComponent() {
                         size="small"
                         label="Usuário"
                         {...register("username")}
+                        required
                     />
-                    <TextField id="password" size="small" label="Senha" {...register("password")} />
-                    {error && (
-                        <Typography variant="caption" color={appColors.red}>
-                            {error}
-                        </Typography>
-                    )}
-                    <Button type="submit" variant="contained">
-                        Entrar
-                    </Button>
-                    {error && (
+                    <TextField
+                        id="password"
+                        size="small"
+                        label="Senha"
+                        {...register("password")}
+                        required
+                    />
+                    {errorMessage && (
                         <Alert severity="error" variant="filled">
-                            error
+                            {errorMessage}
                         </Alert>
+                    )}
+                    {loading ? (
+                        <LinearProgress color="primary" />
+                    ) : (
+                        <Button type="submit" variant="contained">
+                            Entrar
+                        </Button>
                     )}
                 </Stack>
             </form>
