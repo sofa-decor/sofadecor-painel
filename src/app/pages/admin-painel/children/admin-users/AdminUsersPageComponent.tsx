@@ -67,14 +67,11 @@ const UserItem: FC<UserItemParams> = ({ user, reloadUsers }) => {
                 borderBottom="1px solid gray"
                 width="100%"
             >
-                <Typography width="33%" variant="body1">
+                <Typography width="45%" variant="body1">
                     {user.username}
                 </Typography>
-                <Typography textAlign="center" width="33%" variant="body1">
+                <Typography textAlign="end" width="45%" variant="body1">
                     {user.role}
-                </Typography>
-                <Typography textAlign="center" width="33%" variant="body1">
-                    Ultimo acesso
                 </Typography>
                 {loading ? (
                     <CircularProgress size={18} />

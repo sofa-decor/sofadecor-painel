@@ -55,12 +55,12 @@ export default function AdminCreateUsersPageComponent() {
         <form onSubmit={handleSubmit(onSubmitForm as SubmitHandler<FieldValues>)}>
             <Stack direction="column" gap="10px" padding={10}>
                 <Typography color="primary" variant="h6">
-                    Adicione um novo item
+                    Adicione um novo usuário
                 </Typography>
                 <TextField
                     id="username"
                     fullWidth
-                    label="Nome de usuario"
+                    label="Nome de usuário"
                     placeholder="Ex: Poltrona Amarela"
                     required
                     {...register("username")}
@@ -69,7 +69,7 @@ export default function AdminCreateUsersPageComponent() {
                     select
                     id="role"
                     fullWidth
-                    label="Nivel de acesso"
+                    label="Nível de acesso"
                     defaultValue={"admin"}
                     required
                     {...register("role")}
