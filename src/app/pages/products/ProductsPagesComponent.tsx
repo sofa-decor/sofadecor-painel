@@ -60,7 +60,7 @@ export default function ProductsPageComponent() {
                     </Stack>
                 </Stack>
 
-                {data?.products.length > 0 && (
+                {data && data.products.length > 0 && (
                     <>
                         <ProductsList>
                             {data.products.map((product: Product) => (

@@ -11,6 +11,10 @@ class ProductsService {
     async post(data: NewProductRequest) {
         return axiosClient.post("/products", data);
     }
+
+    async delete(id: string) {
+        return axiosClient.delete(`/products/${id}`);
+    }
 }
 
 export default new ProductsService();

@@ -7,7 +7,7 @@ export default function AdminPainelPageComponent(): React.ReactElement {
     return (
         <>
             <AdminHeaderComponent />
-            <Box className="app-page-container" justifyContent="center">
+            <Box className="app-page-container">
                 <Outlet />
             </Box>
         </>
