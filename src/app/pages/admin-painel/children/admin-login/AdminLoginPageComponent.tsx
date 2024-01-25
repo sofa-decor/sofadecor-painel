@@ -2,6 +2,7 @@ import { Alert, Button, LinearProgress, Stack, TextField, Typography } from "@mu
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { LoginUser, useLoginUserHook } from "../../../../../hooks/auth-hooks/loginUserHook";
+import useAuthUserHook from "../../../../../hooks/auth-hooks/useAuthUserHook";
 import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 import appColors from "../../../../colors/appColors";
 
@@ -9,10 +10,13 @@ export default function AdminLoginPageComponent() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { router } = useAppRouterHook();
     const { login, data, error, loading } = useLoginUserHook();
+    const { fetch } = useAuthUserHook();
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
         if (!data) return;
+        fetch();
+        localStorage.setItem("token", data.token);
         router.admin_painel_products.go();
     }, [data]);
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { AuthUserContextProvider } from "../AuthUserContext";
 import { RouterContextProvider } from "../RouterContext";
 
 interface IGlobalContextProps {
@@ -6,7 +7,11 @@ interface IGlobalContextProps {
 }
 
 const GlobalContextProvider = ({ children }: IGlobalContextProps) => {
-    return <RouterContextProvider>{children}</RouterContextProvider>;
+    return (
+        <RouterContextProvider>
+            <AuthUserContextProvider>{children}</AuthUserContextProvider>
+        </RouterContextProvider>
+    );
 };
 
 export default GlobalContextProvider;

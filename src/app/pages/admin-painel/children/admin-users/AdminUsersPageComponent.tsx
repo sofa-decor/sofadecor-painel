@@ -1,17 +1,16 @@
 import { Delete, Search } from "@mui/icons-material";
 import { Stack, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { FC } from "react";
+import { useGetAllUsersHook } from "../../../../../hooks/user-hooks/useGetAllUsersHook";
+import { User } from "../../../../../hooks/user-hooks/useGetUserHook";
 
 export default function AdminUsersPageComponent() {
-    const [list, setList] = useState<Array<React.ReactElement>>([]);
+    const { data, loading } = useGetAllUsersHook();
 
-    useEffect(() => {
-        const arr = [];
-        for (let i = 0; i < 20; i++) {
-            arr.push(<UserItem />);
-        }
-        setList(arr);
-    });
+    const getUsersItems = () => {
+        if (!data) return [];
+        return data.map(item => <UserItem key={item.id} user={item} />);
+    };
 
     return (
         <Stack direction="column" alignItems="center" gap="10px">
@@ -19,14 +18,18 @@ export default function AdminUsersPageComponent() {
                 <TextField variant="standard" />
                 <Search fontSize="small" />
             </Stack>
-            <Typography variant="caption">{list.length || 0} resultados</Typography>
+            <Typography variant="caption">{data?.length || 0} resultados</Typography>
             <br />
-            {list}
+            {getUsersItems()}
         </Stack>
     );
 }
 
-function UserItem() {
+type UserItemParams = {
+    user: User;
+};
+
+const UserItem: FC<UserItemParams> = ({ user }) => {
     return (
         <Stack
             direction="row"
@@ -34,10 +37,16 @@ function UserItem() {
             borderBottom="1px solid gray"
             width="100%"
         >
-            <Typography variant="body1">Nome da pessoa</Typography>
-            <Typography variant="body1">acesso (admin / super-admin)</Typography>
-            <Typography variant="body1">Ultimo acesso</Typography>
+            <Typography width="33%" variant="body1">
+                {user.username}
+            </Typography>
+            <Typography textAlign="center" width="33%" variant="body1">
+                {user.role}
+            </Typography>
+            <Typography textAlign="center" width="33%" variant="body1">
+                Ultimo acesso
+            </Typography>
             <Delete fontSize="small" color="primary" />
         </Stack>
     );
-}
+};
