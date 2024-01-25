@@ -21,8 +21,16 @@ type NewProductSubmited = {
     images: Array<File>;
 };
 
-const successAlert = <Alert severity="success">Produto salvo com sucesso</Alert>;
-const errorAlert = <Alert severity="error">Erro ao tentar salvar o produto, tente novamente</Alert>;
+const successAlert = (
+    <Alert severity="success" variant="filled">
+        Produto salvo com sucesso
+    </Alert>
+);
+const errorAlert = (
+    <Alert severity="error" variant="filled">
+        Erro ao tentar salvar o produto, tente novamente
+    </Alert>
+);
 
 export default function AdminCreateProductsPageComponent() {
     const { post, error, loading, data } = usePostProductHook();
@@ -41,8 +49,6 @@ export default function AdminCreateProductsPageComponent() {
     }, [error]);
 
     const onSubmitForm = async (data: NewProductSubmited) => {
-        console.log(data);
-
         const arrayImagesCovertedInBase64: Array<ProductImage> = [];
         for (const image of data.images) {
             arrayImagesCovertedInBase64.push({ url: await convertBase64(image), main: false });
