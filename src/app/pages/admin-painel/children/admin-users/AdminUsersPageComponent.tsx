@@ -1,15 +1,19 @@
 import { Delete, Search } from "@mui/icons-material";
-import { Stack, TextField, Typography } from "@mui/material";
-import { FC } from "react";
+import { Alert, CircularProgress, Stack, TextField, Typography } from "@mui/material";
+import { FC, useEffect, useState } from "react";
+import { useDeleteUserHook } from "../../../../../hooks/user-hooks/useDeleteUserHook";
 import { useGetAllUsersHook } from "../../../../../hooks/user-hooks/useGetAllUsersHook";
 import { User } from "../../../../../hooks/user-hooks/useGetUserHook";
+import PageLoader from "../../../../components/Loaders/page-loader/PageLoader";
 
 export default function AdminUsersPageComponent() {
-    const { data, loading } = useGetAllUsersHook();
+    const { data, loading, fetch } = useGetAllUsersHook();
+
+    useEffect(() => undefined, [data]);
 
     const getUsersItems = () => {
         if (!data) return [];
-        return data.map(item => <UserItem key={item.id} user={item} />);
+        return data.map(item => <UserItem key={item.id} user={item} reloadUsers={fetch} />);
     };
 
     return (
@@ -21,32 +25,73 @@ export default function AdminUsersPageComponent() {
             <Typography variant="caption">{data?.length || 0} resultados</Typography>
             <br />
             {getUsersItems()}
+            {data && loading && <PageLoader />}
+            {data && data.length == 0 && (
+                <Alert severity="info" variant="filled">
+                    Nenhum usuario cadastrado
+                </Alert>
+            )}
         </Stack>
     );
 }
 
 type UserItemParams = {
     user: User;
+    reloadUsers: () => void;
 };
 
-const UserItem: FC<UserItemParams> = ({ user }) => {
+const UserItem: FC<UserItemParams> = ({ user, reloadUsers }) => {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const { data, remove, error, loading } = useDeleteUserHook();
+
+    const onDeleteUser = () => {
+        remove(user.id);
+    };
+
+    useEffect(() => {
+        if (!data) return;
+        reloadUsers();
+    }, [data]);
+
+    useEffect(() => {
+        if (!error) return;
+        setErrorMessage("Nao foi possivel excluir o usuario");
+        console.log(error);
+    }, [error]);
+
     return (
-        <Stack
-            direction="row"
-            justifyContent="space-between"
-            borderBottom="1px solid gray"
-            width="100%"
-        >
-            <Typography width="33%" variant="body1">
-                {user.username}
-            </Typography>
-            <Typography textAlign="center" width="33%" variant="body1">
-                {user.role}
-            </Typography>
-            <Typography textAlign="center" width="33%" variant="body1">
-                Ultimo acesso
-            </Typography>
-            <Delete fontSize="small" color="primary" />
-        </Stack>
+        <>
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                borderBottom="1px solid gray"
+                width="100%"
+            >
+                <Typography width="33%" variant="body1">
+                    {user.username}
+                </Typography>
+                <Typography textAlign="center" width="33%" variant="body1">
+                    {user.role}
+                </Typography>
+                <Typography textAlign="center" width="33%" variant="body1">
+                    Ultimo acesso
+                </Typography>
+                {loading ? (
+                    <CircularProgress size={18} />
+                ) : (
+                    <Delete
+                        fontSize="small"
+                        color="primary"
+                        sx={{ cursor: "pointer" }}
+                        onClick={onDeleteUser}
+                    />
+                )}
+            </Stack>
+            {errorMessage && (
+                <Alert severity="error" variant="filled">
+                    {errorMessage}
+                </Alert>
+            )}
+        </>
     );
 };

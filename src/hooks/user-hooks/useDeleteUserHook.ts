@@ -1,34 +1,33 @@
 import { APIError } from "../../clients/axios.client";
 import { UserService } from "../../services/UserService";
 import useAsyncAxiosHook from "../useAsyncAxiosHook";
-import { User } from "./useGetUserHook";
 
-interface GetAllUsersHook {
+interface DeleteUserHook {
     loading: boolean;
     error: APIError | null;
-    fetch: () => Promise<void>;
+    remove: (id: string) => Promise<void>;
     statusCode: number | null;
-    data: Array<User> | null;
+    data: { id: string } | null;
 }
 
 const service = new UserService();
 
-export const useGetAllUsersHook = (): GetAllUsersHook => {
+export const useDeleteUserHook = (): DeleteUserHook => {
     const {
         loading,
         error,
-        act: fetch,
+        act: remove,
         data,
         status: statusCode,
     } = useAsyncAxiosHook({
-        request: () => service.fetch(),
-        immediate: true,
+        request: id => service.delete(id),
+        immediate: false,
     });
 
     return {
         loading,
         error,
-        fetch,
+        remove,
         data,
         statusCode,
     };

@@ -17,6 +17,7 @@ export default function AdminLoginPageComponent() {
         if (!data) return;
         fetch();
         localStorage.setItem("token", data.token);
+        console.log(data.token);
         router.admin_painel_products.go();
     }, [data]);
 

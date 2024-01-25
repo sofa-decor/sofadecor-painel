@@ -1,10 +1,5 @@
 import axios from "axios";
 
-const configAuthorization = () => {
-    const token = localStorage.getItem("token");
-    return `Bearer ${token}`;
-};
-
 export type APIError = {
     message: string;
     statusCode: number;
@@ -17,6 +12,10 @@ export const axiosClient = axios.create({
     timeout: 10000,
     headers: {
         "Content-type": "application/json",
-        Authorization: configAuthorization(),
     },
 });
+
+export const configAuthorization = (): object => {
+    const token = localStorage.getItem("token");
+    return { headers: { authorization: `Bearer ${token}` } };
+};
