@@ -1,7 +1,7 @@
 import { SendRounded } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 // import { useState } from "react";
-import { Product } from "../../../hooks/product-hooks/getManyProductsHook";
+import { Image as ImageType, Product } from "../../../hooks/product-hooks/getManyProductsHook";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import { Container, Image } from "./ProductCardStyles";
 
@@ -14,6 +14,8 @@ export default function ProductCardComponent({ product }: params) {
     const click = () => router.product_view.go(product.name);
     // const [cardHover, setCardHover] = useState<boolean>(false);
 
+    const mainImage = product.images.find(image => image.main == true) as ImageType;
+
     return (
         <Container
             // onMouseEnter={() => setCardHover(true)}
@@ -22,7 +24,7 @@ export default function ProductCardComponent({ product }: params) {
             onClick={click}
             sx={{ alignItems: "center" }}
         >
-            <Image imgURL={product.images[0].url}></Image>
+            <Image imgurl={mainImage.url}></Image>
             <Stack sx={{ textAlign: "left" }}>
                 <Typography variant="h1" fontWeight={700} fontSize={20} margin={1}>
                     {product.name}
@@ -32,6 +34,7 @@ export default function ProductCardComponent({ product }: params) {
                 </Typography>
             </Stack>
             <Button
+                size="small"
                 endIcon={<SendRounded />}
                 variant="contained"
                 sx={{

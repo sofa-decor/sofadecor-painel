@@ -2,6 +2,7 @@ export type NewProductRequest = {
     name: string;
     description: string;
     tags: Array<string>;
+    rooms: Array<string>;
     images: Array<ProductImage>;
 };
 

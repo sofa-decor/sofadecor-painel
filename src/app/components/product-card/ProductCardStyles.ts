@@ -2,7 +2,7 @@ import { Paper } from "@mui/material";
 import styled from "styled-components";
 
 export type ImageParams = {
-    imgURL?: string;
+    imgurl?: string;
 };
 
 export const Container = styled(Paper)`
@@ -21,5 +21,5 @@ export const Image = styled.div<ImageParams>`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: ${props => `url(${props.imgURL})`};
+    background-image: ${props => `url(${props.imgurl})`};
 `;
