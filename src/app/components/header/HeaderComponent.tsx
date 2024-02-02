@@ -1,7 +1,7 @@
 import { WhatsApp } from "@mui/icons-material";
 import { Button, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import Logo from "../../../assets/logo.png";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import OrderService from "../../../services/OrderService";
@@ -23,11 +23,17 @@ const headerTheme = createTheme({
 
 export default function HeaderComponent() {
     const { router } = useAppRouterHook();
-    const [tabValue, setTabValue] = useState("sala");
+    const [tabValue, setTabValue] = useState<string>("store");
+
+    useEffect(() => {
+        const currentURL = window.location.href;
+        if (currentURL.includes("products")) setTabValue("store");
+        if (currentURL.includes("sobre")) setTabValue("about");
+    }, []);
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        if (value == "sobre") router.about.go();
+        if (value == "about") router.about.go();
         else router.products.go();
         setTabValue(value);
     };
@@ -44,10 +50,8 @@ export default function HeaderComponent() {
 
                 <Stack direction="row" flex={1} justifyContent="center">
                     <Tabs value={tabValue} onChange={handleChangeTab}>
-                        <Tab label="Sobre" value="sobre" />
-                        <Tab label="Sala" value="sala" />
-                        <Tab label="Quarto" value="Quarto" />
-                        <Tab label="Cozinha" value="Cozinha" />
+                        <Tab label="Sobre" value="about" />
+                        <Tab label="Loja" value="store" />
                     </Tabs>
                 </Stack>
 

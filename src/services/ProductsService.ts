@@ -1,11 +1,14 @@
 import { axiosClient } from "../clients/axios.client";
+import { ProductsFilters } from "../hooks/product-hooks/getManyProductsHook";
 import { NewProductRequest } from "../types/new-product-request.type";
 
 class ProductsService {
     constructor() {}
 
-    async fetch() {
-        return axiosClient.get("/products");
+    async fetch(filters?: ProductsFilters) {
+        let query = "?";
+        if (filters?.room) query += `room=${filters.room}`;
+        return axiosClient.get(`/products${query}`);
     }
 
     async post(data: NewProductRequest) {

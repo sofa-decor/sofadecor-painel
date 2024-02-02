@@ -1,25 +1,65 @@
 import { FilterAlt } from "@mui/icons-material";
-import { Alert, Box, Button, Fab, Pagination, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, Fab, Pagination, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { SyntheticEvent, useEffect, useState } from "react";
 import "../../../css/App.css";
+import { useGetCategoryByNameHook } from "../../../hooks/categories-hooks/getCategoryByNameHook";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
+import appColors from "../../colors/appColors";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
+import { AlertError, AlertInfo } from "../../components/alert";
 import HeaderComponent from "../../components/header/HeaderComponent";
 import ProductCardComponent from "../../components/product-card/ProductCardComponent";
 import { IconFilterCount, ProductsList } from "./ProductsPageStyles";
 
 export default function ProductsPageComponent() {
     const [isOpenFilters, setIsOpenFilters] = useState(false);
-    const { fetch, loading, data, error } = useGetManyProductsHook();
+    const [filters, setFilters] = useState<Array<string>>([]);
+    const [categories, setCategories] = useState<Array<string>>([]);
+    const [tab, setTab] = useState<string>("sala");
+    const { loading, data, error, fetch } = useGetManyProductsHook({ immediate: false });
+    const { fetch: fetchCategory, data: tagsCategories } = useGetCategoryByNameHook();
 
     useEffect(() => {
-        fetch();
-    }, []);
+        if (!tab) return;
+        fetchCategory(tab);
+        fetch({ room: tab });
+    }, [tab]);
+
+    useEffect(() => {
+        if (!tagsCategories) return;
+        setCategories(tagsCategories.tags);
+    }, [tagsCategories]);
+
+    const handleChangeTab = (e: SyntheticEvent, value: string) => {
+        e.preventDefault();
+        setTab(value);
+    };
+
+    const onClickFilter = (tag: string) => {
+        if (filters.includes(tag)) {
+            const newList = filters.filter(item => item != tag);
+            setFilters(newList);
+        } else setFilters([...filters, tag]);
+    };
 
     return (
         <>
             <HeaderComponent />
             <Box className="app-page-container">
+                <Stack
+                    borderBottom={1}
+                    borderColor={appColors.dark}
+                    width="fit-content"
+                    alignSelf="center"
+                    fontWeight={500}
+                >
+                    <Tabs value={tab} onChange={handleChangeTab}>
+                        <Tab label="sala" value="sala" />
+                        <Tab label="quarto" value="quarto" />
+                        <Tab label="cozinha" value="cozinha" />
+                        <Tab label="Escritorio" value="escritorio" />
+                    </Tabs>
+                </Stack>
                 <Stack
                     direction="row"
                     gap={1}
@@ -28,7 +68,7 @@ export default function ProductsPageComponent() {
                     marginBottom={2}
                 >
                     <Typography variant="caption">
-                        {data ? data?.products.length : 0} Resultados
+                        {data ? data.products.length : 0} Resultados
                     </Typography>
 
                     <Stack
@@ -39,13 +79,15 @@ export default function ProductsPageComponent() {
                     >
                         {isOpenFilters && (
                             <>
-                                <Button color="inherit" size="medium">
-                                    Sofa
-                                </Button>
-                                <Button size="medium">Poltronas</Button>
-                                <Button color="inherit" size="medium">
-                                    puffs
-                                </Button>
+                                {categories.map(category => (
+                                    <Button
+                                        onClick={() => onClickFilter(category)}
+                                        color={filters.includes(category) ? "primary" : "inherit"}
+                                        size="medium"
+                                    >
+                                        {category}
+                                    </Button>
+                                ))}
                             </>
                         )}
                         <Fab
@@ -54,7 +96,7 @@ export default function ProductsPageComponent() {
                             size="small"
                             onClick={() => setIsOpenFilters(!isOpenFilters)}
                         >
-                            <IconFilterCount>3</IconFilterCount>
+                            <IconFilterCount>{filters.length}</IconFilterCount>
                             <FilterAlt fontSize="small" />
                         </Fab>
                     </Stack>
@@ -82,15 +124,11 @@ export default function ProductsPageComponent() {
                 {loading && <PageLoader />}
 
                 {data?.products.length == 0 && !loading && (
-                    <Alert variant="filled" severity="info">
-                        Não encontramos produtos no momento, volte mais tarde
-                    </Alert>
+                    <AlertInfo>Não encontramos produtos no momento, volte mais tarde</AlertInfo>
                 )}
 
                 {error && (
-                    <Alert variant="filled" severity="error">
-                        Encontramos algum problema no momento, volte mais tarde
-                    </Alert>
+                    <AlertError>Encontramos algum problema no momento, volte mais tarde</AlertError>
                 )}
             </Box>
         </>

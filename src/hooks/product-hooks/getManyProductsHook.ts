@@ -17,17 +17,25 @@ export type Image = {
     main: boolean;
 };
 
+export type ProductsFilters = {
+    room?: string;
+};
+
 interface GetManyProductsHook {
     loading: boolean;
     error: APIError | null;
-    fetch: () => Promise<void>;
+    fetch: (filters?: ProductsFilters) => Promise<void>;
     statusCode: number | null;
     data: { products: Array<Product> } | null;
 }
 
+type HookParams = {
+    immediate?: boolean;
+};
+
 const service = ProductsService;
 
-export const useGetManyProductsHook = (): GetManyProductsHook => {
+export const useGetManyProductsHook = ({ immediate = true }: HookParams): GetManyProductsHook => {
     const {
         loading,
         error,
@@ -35,8 +43,8 @@ export const useGetManyProductsHook = (): GetManyProductsHook => {
         data,
         status: statusCode,
     } = useAsyncAxiosHook({
-        request: () => service.fetch(),
-        immediate: true,
+        request: data => service.fetch(data),
+        immediate: immediate,
     });
 
     return {
