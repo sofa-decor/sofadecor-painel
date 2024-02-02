@@ -136,7 +136,7 @@ export default function AdminCreateProductsPageComponent() {
                 </Typography>
                 <TextField id="image" fullWidth type="file" required {...register("image")} />
                 <Typography color="primary" variant="body2">
-                    Outras imagens *
+                    Outras imagens
                 </Typography>
                 <TextField
                     id="images"
@@ -145,7 +145,6 @@ export default function AdminCreateProductsPageComponent() {
                     inputProps={{
                         multiple: true,
                     }}
-                    required
                     {...register("images")}
                 />
                 {alert != null && alert}

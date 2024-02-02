@@ -1,24 +1,21 @@
-import { Alert, Button, LinearProgress, Stack, TextField, Typography } from "@mui/material";
+import { Button, LinearProgress, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { LoginUser, useLoginUserHook } from "../../../../../hooks/auth-hooks/loginUserHook";
 import useAuthUserHook from "../../../../../hooks/auth-hooks/useAuthUserHook";
-import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 import appColors from "../../../../colors/appColors";
+import { AlertError } from "../../../../components/alert";
 
 export default function AdminLoginPageComponent() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const { router } = useAppRouterHook();
-    const { login, data, error, loading } = useLoginUserHook();
-    const { fetch } = useAuthUserHook();
+    const { login, data, error, loading: loadingLogin } = useLoginUserHook();
+    const { fetch, loading: loadingUser } = useAuthUserHook();
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
         if (!data) return;
-        fetch();
         localStorage.setItem("token", data.token);
-        console.log(data.token);
-        router.admin_painel_products.go();
+        fetch();
     }, [data]);
 
     useEffect(() => {
@@ -46,15 +43,12 @@ export default function AdminLoginPageComponent() {
                         id="password"
                         size="small"
                         label="Senha"
+                        type="password"
                         {...register("password")}
                         required
                     />
-                    {errorMessage && (
-                        <Alert severity="error" variant="filled">
-                            {errorMessage}
-                        </Alert>
-                    )}
-                    {loading ? (
+                    {errorMessage && <AlertError>{errorMessage}</AlertError>}
+                    {loadingLogin || loadingUser ? (
                         <LinearProgress color="primary" />
                     ) : (
                         <Button type="submit" variant="contained">
