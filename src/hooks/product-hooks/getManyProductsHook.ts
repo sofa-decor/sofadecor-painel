@@ -36,7 +36,7 @@ export const useGetManyProductsHook = (): GetManyProductsHook => {
         status: statusCode,
     } = useAsyncAxiosHook({
         request: () => service.fetch(),
-        immediate: false,
+        immediate: true,
     });
 
     return {

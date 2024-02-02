@@ -1,6 +1,6 @@
 import { Delete, Search } from "@mui/icons-material";
-import { Alert, Stack, TextField, Typography } from "@mui/material";
-import { FC, useEffect } from "react";
+import { Alert, CircularProgress, Stack, TextField, Typography } from "@mui/material";
+import { FC, useEffect, useState } from "react";
 import { EmptyObject } from "react-hook-form";
 import {
     Product,
@@ -11,28 +11,24 @@ import appColors from "../../../../colors/appColors";
 import PageLoader from "../../../../components/Loaders/page-loader/PageLoader";
 
 export default function AdminProductsPageComponent() {
-    const { data, fetch, loading } = useGetManyProductsHook();
+    const { data, loading } = useGetManyProductsHook();
+    const [products, setProducts] = useState<Array<Product> | null>(null);
 
-    const { data: deletedResponse, remove } = useDeleteProductHook();
-
-    useEffect(() => {
-        fetch();
-    }, []);
-    useEffect(() => () => {}, [data]);
-
-    useEffect(() => {
-        if (!deletedResponse || !data) return;
-        data.products = data.products.filter(item => item.id != deletedResponse.id);
-    }, [deletedResponse]);
-
-    const onDeleteProduct = async (id: string) => {
-        await remove(id);
+    const deleteProductById = async (id: string) => {
+        if (!products) return;
+        const newList = products.filter(item => item.id != id);
+        setProducts(newList);
     };
 
+    useEffect(() => {
+        if (!data) return;
+        setProducts(data.products);
+    }, [data]);
+
     const getListItems = () => {
-        if (!data) return [];
-        return data.products.map(item => (
-            <ProductItem key={item.id} product={item} onDeleteProduct={onDeleteProduct} />
+        if (!products) return [];
+        return products.map(item => (
+            <ProductItem key={item.id} product={item} deleteProductById={deleteProductById} />
         ));
     };
 
@@ -42,29 +38,35 @@ export default function AdminProductsPageComponent() {
                 <TextField variant="standard" />
                 <Search fontSize="small" />
             </Stack>
-            <Typography variant="caption">{data?.products.length || 0} resultados</Typography>
+            <Typography variant="caption">{products?.length || 0} resultados</Typography>
             <br />
             <HeaderItem />
-            {data && getListItems()}
-            {!data && loading && <PageLoader />}
-            {data && data.products.length == 0 && (
+            {products && getListItems()}
+            {!products && loading && <PageLoader />}
+            {products && products.length == 0 && (
                 <Alert severity="info" variant="filled" sx={{ width: "100%" }}>
                     Nenhum produto encontrado
                 </Alert>
             )}
-            {}
         </Stack>
     );
 }
 
 type ProductItemParams = {
     product: Product;
-    onDeleteProduct: (id: string) => Promise<void>;
+    deleteProductById: (id: string) => Promise<void>;
 };
 
-const ProductItem: FC<ProductItemParams> = ({ product, onDeleteProduct }) => {
-    const sendDeleteProduct = () => {
-        onDeleteProduct(product.id);
+const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
+    const { data, remove, loading } = useDeleteProductHook();
+
+    useEffect(() => {
+        if (!data) return;
+        deleteProductById(product.id);
+    }, [data]);
+
+    const onDeleteProducts = () => {
+        remove(product.id);
     };
 
     return (
@@ -83,12 +85,16 @@ const ProductItem: FC<ProductItemParams> = ({ product, onDeleteProduct }) => {
             <Typography width="30%" textAlign="center" variant="body1">
                 {product.images.length}
             </Typography>
-            <Delete
-                fontSize="small"
-                color="primary"
-                sx={{ cursor: "pointer" }}
-                onClick={sendDeleteProduct}
-            />
+            {loading ? (
+                <CircularProgress size={18} />
+            ) : (
+                <Delete
+                    fontSize="small"
+                    color="primary"
+                    sx={{ cursor: "pointer" }}
+                    onClick={onDeleteProducts}
+                />
+            )}
         </Stack>
     );
 };
