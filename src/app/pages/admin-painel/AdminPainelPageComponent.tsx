@@ -11,7 +11,6 @@ export default function AdminPainelPageComponent(): React.ReactElement {
     const { router } = useAppRouterHook();
 
     useEffect(() => {
-        console.log(user);
         if (!user) return;
         router.admin_painel_products.go();
     }, [user]);

@@ -56,7 +56,6 @@ const UserItem: FC<UserItemParams> = ({ user, reloadUsers }) => {
     useEffect(() => {
         if (!error) return;
         setErrorMessage("Nao foi possivel excluir o usuario");
-        console.log(error);
     }, [error]);
 
     return (
