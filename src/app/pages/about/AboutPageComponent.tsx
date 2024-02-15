@@ -1,9 +1,12 @@
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Box, Typography } from "@mui/material";
 import BedRoom from "../../../assets/bed.png";
 import Kitchen from "../../../assets/kitchen.png";
 import LivingRoom from "../../../assets/living.png";
 import HomeOffice from "../../../assets/office.png";
 import "../../../css/App.css";
+import useAppRouterHook from "../../../hooks/useAppRouterHook";
+import { ProductCategories } from "../../../types/product-categories.type";
 import Carousel from "../../components/carousel/CarouselComponent";
 import HeaderComponent from "../../components/header/HeaderComponent";
 import {
@@ -15,6 +18,13 @@ import {
 } from "./AboutPageStyles";
 
 export default function AboutPageComponent() {
+    const { router } = useAppRouterHook();
+    const categories = [
+        { image: Kitchen, name: ProductCategories.kitchen },
+        { image: BedRoom, name: ProductCategories.bedroom },
+        { image: LivingRoom, name: ProductCategories.livingroom },
+        { image: HomeOffice, name: ProductCategories.office },
+    ];
     return (
         <>
             <HeaderComponent />
@@ -58,30 +68,18 @@ export default function AboutPageComponent() {
                     <Typography variant="h4" fontWeight={500} width="100%">
                         Qual ambiente deseja redecorar ?!
                     </Typography>
-                    <ButtomCategoriesCard elevation={5}>
-                        <img height={120} src={Kitchen} alt="logo" />
-                        <Typography fontWeight={500} variant="h4">
-                            Cozinha
-                        </Typography>
-                    </ButtomCategoriesCard>
-                    <ButtomCategoriesCard elevation={5}>
-                        <img height={120} src={BedRoom} alt="logo" />
-                        <Typography fontWeight={500} variant="h4">
-                            Quarto
-                        </Typography>
-                    </ButtomCategoriesCard>
-                    <ButtomCategoriesCard elevation={5}>
-                        <img height={120} src={LivingRoom} alt="logo" />
-                        <Typography fontWeight={500} variant="h4">
-                            Sala de Estar
-                        </Typography>
-                    </ButtomCategoriesCard>
-                    <ButtomCategoriesCard elevation={5}>
-                        <img height={120} src={HomeOffice} alt="logo" />
-                        <Typography fontWeight={500} variant="h4">
-                            Escritorio
-                        </Typography>
-                    </ButtomCategoriesCard>
+                    {categories.map(tag => (
+                        <ButtomCategoriesCard
+                            elevation={8}
+                            onClick={() => router.products.go({ category: tag.name })}
+                        >
+                            <img height={120} src={tag.image} alt="logo" />
+                            <Typography fontWeight={500} variant="h4">
+                                {tag.name}
+                                <ArrowOutwardIcon fontSize="small" />
+                            </Typography>
+                        </ButtomCategoriesCard>
+                    ))}
                 </ButtomsCategoriesContainer>
                 <LocationMapContent></LocationMapContent>
             </PageContent>

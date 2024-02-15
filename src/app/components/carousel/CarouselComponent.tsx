@@ -1,4 +1,4 @@
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Button, Typography } from "@mui/material";
 import CarouselMUI from "react-material-ui-carousel";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
@@ -38,13 +38,13 @@ export default function Carousel() {
                                     </Typography>
                                     <Button
                                         variant="contained"
-                                        endIcon={<ArrowForwardIosIcon fontSize="small" />}
                                         sx={{
                                             backgroundColor: "#ffffff",
                                             color: appColors.red,
                                         }}
                                     >
                                         Conhecer
+                                        <ArrowOutwardIcon fontSize="small" />
                                     </Button>
                                 </ItemInfosContent>
                             </ContainerSlider>

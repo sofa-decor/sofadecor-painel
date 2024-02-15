@@ -8,6 +8,7 @@ import AdminProductsPageComponent from "../app/pages/admin-painel/children/admin
 import AdminUsersPageComponent from "../app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductViewPageComponent from "../app/pages/product_view/ProductViewPageComponent";
 import ProductsPageComponent from "../app/pages/products/ProductsPagesComponent";
+import { ProductCategories } from "../types/product-categories.type";
 
 interface RouterContextParams {
     children: React.ReactNode;
@@ -23,7 +24,7 @@ interface RouterContextData {
         products: {
             path: string;
             component: () => JSX.Element;
-            go: VoidFunction;
+            go: (data: ProductStates) => void;
         };
         product_view: {
             path: string;
@@ -58,6 +59,10 @@ interface RouterContextData {
     };
 }
 
+type ProductStates = {
+    category: ProductCategories;
+};
+
 const RouterContext = createContext<RouterContextData>({} as RouterContextData);
 
 const RouterContextProvider = ({ children }: RouterContextParams) => {
@@ -67,12 +72,12 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
         about: {
             path: "/sobre",
             component: AboutPageComponent,
-            go: () => navigate("/sobre"),
+            go: () => navigate("/sobre", {}),
         },
         products: {
             path: "/produtos",
             component: ProductsPageComponent,
-            go: () => navigate("/produtos"),
+            go: (states?: ProductStates) => navigate("/produtos", { state: states }),
         },
         product_view: {
             path: "/produtos/:product",
