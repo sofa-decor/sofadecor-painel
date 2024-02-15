@@ -1,7 +1,8 @@
+import { Card } from "@mui/material";
 import styled from "styled-components";
 import appColors from "../../colors/appColors";
 
-export const paddingComponents = "50px 15dvw";
+export const paddingComponents = "60px 15dvw";
 
 export const PageContent = styled.div`
     max-width: 100dvw;
@@ -15,14 +16,14 @@ export const ButtomsCategoriesContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    /* background-color: ${appColors.red}; */
     background-color: #1e1e1e;
     padding: ${paddingComponents};
+    color: ${appColors.background} !important;
     gap: 20px;
 `;
 
-export const ButtomCategoriesCard = styled.div`
-    width: 40%;
+export const ButtomCategoriesCard = styled(Card)`
+    width: 45%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -30,14 +31,19 @@ export const ButtomCategoriesCard = styled.div`
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-color: ${appColors.background};
-    color: ${appColors.red};
-    border-radius: 15px;
+    background-color: ${appColors.red} !important;
+    color: ${appColors.background} !important;
+    border-radius: 15px !important;
     padding: 20px;
 
     &:hover {
         cursor: pointer;
-        opacity: 0.95;
+        opacity: 0.9;
     }
-    /* border: 1px solid ${appColors.red}; */
+    /* border: 3.5px solid ${appColors.red}; */
+`;
+
+export const LocationMapContent = styled.div`
+    width: 100%;
+    height: 400px;
 `;

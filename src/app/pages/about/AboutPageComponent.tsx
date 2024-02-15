@@ -9,6 +9,7 @@ import HeaderComponent from "../../components/header/HeaderComponent";
 import {
     ButtomCategoriesCard,
     ButtomsCategoriesContainer,
+    LocationMapContent,
     PageContent,
     paddingComponents,
 } from "./AboutPageStyles";
@@ -54,31 +55,35 @@ export default function AboutPageComponent() {
                     </Typography>
                 </Box>
                 <ButtomsCategoriesContainer>
-                    <ButtomCategoriesCard>
-                        <img height={100} src={Kitchen} alt="logo" />
-                        <Typography fontWeight={500} variant="h5">
+                    <Typography variant="h4" fontWeight={500} width="100%">
+                        Qual ambiente deseja redecorar ?!
+                    </Typography>
+                    <ButtomCategoriesCard elevation={5}>
+                        <img height={120} src={Kitchen} alt="logo" />
+                        <Typography fontWeight={500} variant="h4">
                             Cozinha
                         </Typography>
                     </ButtomCategoriesCard>
-                    <ButtomCategoriesCard>
-                        <img height={100} src={BedRoom} alt="logo" />
-                        <Typography fontWeight={500} variant="h5">
+                    <ButtomCategoriesCard elevation={5}>
+                        <img height={120} src={BedRoom} alt="logo" />
+                        <Typography fontWeight={500} variant="h4">
                             Quarto
                         </Typography>
                     </ButtomCategoriesCard>
-                    <ButtomCategoriesCard>
-                        <img height={100} src={LivingRoom} alt="logo" />
-                        <Typography fontWeight={500} variant="h5">
+                    <ButtomCategoriesCard elevation={5}>
+                        <img height={120} src={LivingRoom} alt="logo" />
+                        <Typography fontWeight={500} variant="h4">
                             Sala de Estar
                         </Typography>
                     </ButtomCategoriesCard>
-                    <ButtomCategoriesCard>
-                        <img height={100} src={HomeOffice} alt="logo" />
-                        <Typography fontWeight={500} variant="h5">
+                    <ButtomCategoriesCard elevation={5}>
+                        <img height={120} src={HomeOffice} alt="logo" />
+                        <Typography fontWeight={500} variant="h4">
                             Escritorio
                         </Typography>
                     </ButtomCategoriesCard>
                 </ButtomsCategoriesContainer>
+                <LocationMapContent></LocationMapContent>
             </PageContent>
         </>
     );
