@@ -6,28 +6,34 @@ import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/ge
 import OrderService from "../../../services/OrderService";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import HeaderComponent from "../../components/header/HeaderComponent";
-import { CurrentImage, ImagesContainer, ProductDetails } from "./ProductViewStyles";
+import {
+    CurrentImage,
+    ImageOption,
+    ImagesContainer,
+    ImagesOptionsList,
+    ProductDetails,
+} from "./ProductViewStyles";
 
 export default function ProductViewPageComponent() {
-    const { product: productUrlString } = useParams();
+    const { product: productNameOfUrlString } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
-    const [zoom, setZoom] = useState<object>({});
+    const [currentImageStyle, setCurrentImageStyle] = useState<object>({});
     const [currentUrlPage] = useState<string>(window.location.href);
     const [targetWppUrl, setTargetWppUrl] = useState<string | null>(null);
     const { data, fetch: fetchProducts } = useGetManyProductsHook(false);
 
     useEffect(() => {
-        if (!productUrlString) return;
-        const name = productUrlString.replace("-", " ");
+        if (!productNameOfUrlString) return;
+        const name = productNameOfUrlString.replace("-", " ");
         fetchProducts({ name });
-    }, [productUrlString]);
+    }, [productNameOfUrlString]);
 
     useEffect(() => {
         if (!data) return;
         setProduct(data.products[0]);
         const image =
             data.products[0].images.find(img => img.main === true) || data.products[0].images[0];
-        setZoom({ backgroundImage: `url(${image.url})` });
+        setCurrentImageStyle({ backgroundImage: `url(${image.url})` });
     }, [data]);
 
     useEffect(() => {
@@ -44,10 +50,14 @@ export default function ProductViewPageComponent() {
         const percentageX = (offsetX / offsetWidth) * 100;
         const percentageY = (offsetY / offsetHeight) * 100;
 
-        setZoom({
-            ...zoom,
+        setCurrentImageStyle({
+            ...currentImageStyle,
             backgroundPosition: `${percentageX}% ${percentageY}%`,
         });
+    };
+
+    const handleChangeCurrentImage = (imageUrl: string) => {
+        setCurrentImageStyle({ ...currentImageStyle, backgroundImage: `url(${imageUrl})` });
     };
 
     return (
@@ -56,7 +66,7 @@ export default function ProductViewPageComponent() {
             <Box className="app-page-container">
                 {product ? (
                     <>
-                        <Stack direction="row" gap={0.5}>
+                        <Stack direction="row" gap={0.5} marginBottom={2}>
                             <Typography fontWeight={500} variant="caption">
                                 Categorias:{" "}
                             </Typography>
@@ -71,12 +81,23 @@ export default function ProductViewPageComponent() {
                                 </Typography>
                             ))}
                         </Stack>
-                        <Stack direction="row" gap={5}>
+                        <Stack direction="row" gap={3} alignItems="start" height="100%">
                             <ImagesContainer>
-                                <CurrentImage onMouseMove={handleMouseMove} style={zoom} />
+                                <CurrentImage
+                                    onMouseMove={handleMouseMove}
+                                    style={currentImageStyle}
+                                />
+                                <ImagesOptionsList>
+                                    {product.images.map(img => (
+                                        <ImageOption
+                                            url={img.url}
+                                            onClick={() => handleChangeCurrentImage(img.url)}
+                                        />
+                                    ))}
+                                </ImagesOptionsList>
                             </ImagesContainer>
                             <ProductDetails>
-                                <Box>
+                                <Box marginBottom="20dvh">
                                     <Typography
                                         fontSize={18}
                                         variant="overline"
@@ -110,24 +131,29 @@ export default function ProductViewPageComponent() {
                                         </Typography>
                                     </Stack>
                                     <br />
-                                    <Stack direction="row" gap={1}>
+                                    <Stack direction="column" gap={1}>
                                         {targetWppUrl && (
-                                            <Button
-                                                startIcon={<WhatsApp />}
-                                                variant="contained"
-                                                color="primary"
-                                                sx={{ color: "#ffffff" }}
-                                                target="_blank"
-                                                href={targetWppUrl}
-                                            >
-                                                Falar com vendedor
-                                            </Button>
+                                            <>
+                                                <Button
+                                                    startIcon={<WhatsApp />}
+                                                    variant="contained"
+                                                    color="primary"
+                                                    sx={{
+                                                        color: "#ffffff",
+                                                        margin: "8px 0 1px",
+                                                        width: "fit-content",
+                                                    }}
+                                                    target="_blank"
+                                                    href={targetWppUrl}
+                                                >
+                                                    Falar com vendedor
+                                                </Button>
+                                                <Typography variant="caption">
+                                                    Finalize seu pedido no WhatsApp
+                                                </Typography>
+                                            </>
                                         )}
                                     </Stack>
-                                    <br />
-                                    <Typography variant="caption">
-                                        Finalize seu pedido no WhatsApp
-                                    </Typography>
                                 </Box>
                             </ProductDetails>
                         </Stack>

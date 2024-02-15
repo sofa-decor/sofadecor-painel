@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import styled from "styled-components";
+import appColors from "../../colors/appColors";
 
 export const ImagesContainer = styled.div`
     flex: 0.7;
@@ -7,22 +8,46 @@ export const ImagesContainer = styled.div`
     overflow: hidden;
     -webkit-transition: -webkit-transform 0.5s ease;
     transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `;
 
 export const CurrentImage = styled(Box)`
-    width: 100%;
-    height: 100%;
-    cursor: zoom-in;
-
+    height: 70%;
     background-repeat: no-repeat;
     background-size: cover;
-
+    background-position: center;
     -webkit-transition: -webkit-transform 0.5s ease;
     transition: transform 0.5s ease;
-
+    border: 1px solid ${appColors.red};
     &:hover {
+        cursor: zoom-in;
         background-size: 200%;
     }
+`;
+
+export const ImagesOptionsList = styled.div`
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 15px;
+    background-color: ${appColors.red};
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+`;
+
+export const ImageOption = styled.div<{ url: string }>`
+    height: 100%;
+    width: 65px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: ${({ url }) => `url(${url})`};
+    cursor: pointer;
 `;
 
 export const ImageZoomCircle = styled.div`
@@ -38,8 +63,10 @@ export const ImageZoomCircle = styled.div`
 `;
 
 export const ProductDetails = styled(Box)`
+    max-height: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 20px;
 `;
