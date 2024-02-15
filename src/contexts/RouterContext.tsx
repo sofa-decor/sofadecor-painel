@@ -83,7 +83,7 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             path: "/produtos/:product",
             component: ProductViewPageComponent,
             go: (name: string) => {
-                const formatted = name.replace(" ", "-").toLocaleLowerCase();
+                const formatted = name.replace(" ", "-");
                 navigate(`/produtos/${formatted}`);
             },
         },

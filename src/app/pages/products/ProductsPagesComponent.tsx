@@ -21,7 +21,6 @@ export default function ProductsPageComponent() {
     const location = useLocation();
     const category = location.state.category;
     const [tab, setTab] = useState<string>(category || ProductCategories.livingroom);
-
     const [isOpenFilters, setIsOpenFilters] = useState(false);
     const [filters, setFilters] = useState<Array<string>>([]);
     const [categories, setCategories] = useState<Array<string>>([]);

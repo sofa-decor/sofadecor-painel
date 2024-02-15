@@ -7,7 +7,8 @@ class ProductsService {
 
     async fetch(filters?: ProductsFilters) {
         let query = "?";
-        if (filters?.room) query += `room=${filters.room}`;
+        if (filters?.room) query += `&room=${filters.room}`;
+        if (filters?.name) query += `&name=${filters.name}`;
         return axiosClient.get(`/products${query}`);
     }
 
