@@ -6,7 +6,6 @@ import "../../../css/App.css";
 import { useGetCategoryByNameHook } from "../../../hooks/categories-hooks/getCategoryByNameHook";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import { ProductCategories } from "../../../types/product-categories.type";
-import appColors from "../../colors/appColors";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import { AlertError, AlertInfo } from "../../components/alert";
 import HeaderComponent from "../../components/header/HeaderComponent";
@@ -19,7 +18,7 @@ export type HomeRedirectState = {
 
 export default function ProductsPageComponent() {
     const location = useLocation();
-    const category = location.state.category;
+    const category = location.state?.category;
     const [tab, setTab] = useState<string>(category || ProductCategories.livingroom);
     const [isOpenFilters, setIsOpenFilters] = useState(false);
     const [filters, setFilters] = useState<Array<string>>([]);
@@ -56,7 +55,7 @@ export default function ProductsPageComponent() {
             <Box className="app-page-container">
                 <Stack
                     borderBottom={1}
-                    borderColor={appColors.dark}
+                    borderColor="lightGray"
                     width="fit-content"
                     alignSelf="center"
                     fontWeight={500}

@@ -34,6 +34,7 @@ export default function HeaderComponent() {
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
         if (value == "about") router.about.go();
+        if (value == "admin") router.admin_painel_login.go();
         else router.products.go();
         setTabValue(value);
     };
@@ -55,6 +56,7 @@ export default function HeaderComponent() {
                     <Tabs value={tabValue} onChange={handleChangeTab}>
                         <Tab label="Sobre" value="about" />
                         <Tab label="Loja" value="store" />
+                        <Tab label="Painel" value="admin" />
                     </Tabs>
                 </Stack>
 

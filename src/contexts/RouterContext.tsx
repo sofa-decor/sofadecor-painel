@@ -24,7 +24,7 @@ interface RouterContextData {
         products: {
             path: string;
             component: () => JSX.Element;
-            go: (data: ProductStates) => void;
+            go: (data?: ProductStates) => void;
         };
         product_view: {
             path: string;
@@ -93,9 +93,9 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             go: () => navigate("/painel/produtos"),
         },
         admin_painel_login: {
-            path: "/painel/login",
+            path: "/painel",
             component: AdminLoginPageComponent,
-            go: () => navigate("/painel/login"),
+            go: () => navigate("/painel"),
         },
         admin_painel_users: {
             path: "/painel/users",
