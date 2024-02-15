@@ -7,7 +7,7 @@ export type ImageParams = {
 
 export const Container = styled(Paper)`
     width: 23%;
-    height: 30dvw;
+    height: 26dvw;
     background-color: #ffffff !important;
     margin-bottom: 15px;
     text-align: center;
@@ -17,7 +17,7 @@ export const Container = styled(Paper)`
 `;
 
 export const Image = styled.div<ImageParams>`
-    height: 20dvw;
+    height: 14dvw;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

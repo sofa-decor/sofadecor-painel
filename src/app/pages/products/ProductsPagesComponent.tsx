@@ -20,13 +20,11 @@ export type HomeRedirectState = {
 export default function ProductsPageComponent() {
     const location = useLocation();
     const category = location.state.category;
-
-    console.log(category);
+    const [tab, setTab] = useState<string>(category || ProductCategories.livingroom);
 
     const [isOpenFilters, setIsOpenFilters] = useState(false);
     const [filters, setFilters] = useState<Array<string>>([]);
     const [categories, setCategories] = useState<Array<string>>([]);
-    const [tab, setTab] = useState<string>(category || ProductCategories.livingroom);
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
     const { fetch: fetchCategory, data: tagsCategories } = useGetCategoryByNameHook();
 

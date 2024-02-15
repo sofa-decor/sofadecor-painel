@@ -1,6 +1,6 @@
-import { SendRounded } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 // import { useState } from "react";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Image as ImageType, Product } from "../../../hooks/product-hooks/getManyProductsHook";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import { Container, Image } from "./ProductCardStyles";
@@ -29,21 +29,21 @@ export default function ProductCardComponent({ product }: params) {
                 <Typography variant="h1" fontWeight={700} fontSize={20} margin={1}>
                     {product.name}
                 </Typography>
-                <Typography variant="body2" sx={{ padding: "0 10px", wordWrap: "break-word" }}>
-                    {product.description}
+                <Typography variant="body2" sx={{ padding: "0 10px", wordBreak: "break-word" }}>
+                    {product.description.slice(0, 110) + " ..."}
                 </Typography>
             </Stack>
             <Button
                 size="small"
-                endIcon={<SendRounded />}
                 variant="contained"
                 sx={{
                     position: "absolute",
-                    top: "17dvw",
+                    top: "11dvw",
                     right: "10px",
                 }}
             >
                 Comprar
+                <ArrowOutwardIcon sx={{ fontSize: 16 }} />
             </Button>
         </Container>
     );
