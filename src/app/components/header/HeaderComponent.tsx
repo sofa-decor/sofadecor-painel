@@ -1,5 +1,5 @@
 import { WhatsApp } from "@mui/icons-material";
-import { Button, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { Button, Stack, Tab, Tabs } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SyntheticEvent, useEffect, useState } from "react";
 import Logo from "../../../assets/logo.png";
@@ -41,14 +41,17 @@ export default function HeaderComponent() {
     return (
         <ThemeProvider theme={headerTheme}>
             <HeaderContainer>
-                <Stack direction="row" alignItems="center" flex={1}>
-                    <Typography fontSize={20} fontWeight={700}>
-                        SOFÁ DECOR
-                    </Typography>
-                    <img width={35} height={35} src={Logo} alt="logo" />
+                <Stack direction="row" flex={1}>
+                    <img height={60} src={Logo} alt="logo" />
                 </Stack>
 
-                <Stack direction="row" flex={1} justifyContent="center">
+                <Stack
+                    height={60}
+                    direction="row"
+                    flex={1}
+                    justifyContent="center"
+                    alignItems="flex-end"
+                >
                     <Tabs value={tabValue} onChange={handleChangeTab}>
                         <Tab label="Sobre" value="about" />
                         <Tab label="Loja" value="store" />

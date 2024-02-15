@@ -29,13 +29,9 @@ interface GetManyProductsHook {
     data: { products: Array<Product> } | null;
 }
 
-type HookParams = {
-    immediate?: boolean;
-};
-
 const service = ProductsService;
 
-export const useGetManyProductsHook = ({ immediate = true }: HookParams): GetManyProductsHook => {
+export const useGetManyProductsHook = (immediate: boolean = true): GetManyProductsHook => {
     const {
         loading,
         error,

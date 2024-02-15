@@ -1,6 +1,10 @@
 body {
     margin: 0;
     max-width: 100dvw;
-    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #f3f6f9;
+}
+
+* {
+    box-sizing: border-box;
 }

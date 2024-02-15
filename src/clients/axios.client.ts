@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Environments } from "../types";
 
 export type APIError = {
     message: string;
@@ -8,7 +9,7 @@ export type APIError = {
 };
 
 export const axiosClient = axios.create({
-    baseURL: "http://localhost:5000/api/v1",
+    baseURL: Environments.API_BASE_URL,
     timeout: 10000,
     headers: {
         "Content-type": "application/json",

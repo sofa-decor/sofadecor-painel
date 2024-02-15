@@ -16,7 +16,7 @@ export default function ProductsPageComponent() {
     const [filters, setFilters] = useState<Array<string>>([]);
     const [categories, setCategories] = useState<Array<string>>([]);
     const [tab, setTab] = useState<string>("sala");
-    const { loading, data, error, fetch } = useGetManyProductsHook({ immediate: false });
+    const { loading, data, error, fetch } = useGetManyProductsHook(false);
     const { fetch: fetchCategory, data: tagsCategories } = useGetCategoryByNameHook();
 
     useEffect(() => {

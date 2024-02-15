@@ -1,29 +1,45 @@
 import styled from "styled-components";
+import appColors from "../../colors/appColors";
 
 type ItemParams = {
     imageUrl: string;
 };
 
-export const ItemSlider = styled.div<ItemParams>`
+export const ContainerSkeleton = styled.div`
     width: 100%;
     height: 300px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    background-image: ${props => `url(${props.imageUrl})`};
+    background-color: ${appColors.red};
 `;
 
-export const ItemContent = styled.div`
-    max-width: 100%;
-    color: #ffffff;
-    padding: 10px 20px;
+export const ContainerSlider = styled.div`
+    width: 100%;
+    height: 300px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
+    background-color: ${appColors.red};
+    color: #ffffff;
+`;
+
+export const ItemImage = styled.div<ItemParams>`
+    width: 40%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+`;
+
+export const ItemInfosContent = styled.div`
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    word-wrap: break-word;
     align-items: center;
-    gap: 5px;
-    position: absolute;
-    bottom: 10px;
-    left: 0px;
-    right: 0px;
+    text-align: start;
+    gap: 14px;
 `;
