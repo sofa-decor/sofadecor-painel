@@ -8,6 +8,7 @@ export type Product = {
     description: string;
     images: Image[];
     tags: string[];
+    rooms: string[];
     createdAt: Date;
     updatedAt?: Date;
 };

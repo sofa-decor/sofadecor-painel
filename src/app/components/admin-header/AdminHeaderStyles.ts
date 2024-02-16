@@ -9,4 +9,5 @@ export const HeaderContainer = styled(Paper)`
     justify-content: center;
     align-items: center;
     border-radius: 0 !important;
+    background-color: #000000 !important;
 `;

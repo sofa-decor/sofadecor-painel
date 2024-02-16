@@ -17,7 +17,7 @@ import AdminCreateUsersPageComponent from "./app/pages/admin-painel/children/adm
 import AdminProductsPageComponent from "./app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
 import AdminUpdateProductsPageComponent from "./app/pages/admin-painel/children/admin-update-products";
 import AdminUsersPageComponent from "./app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
-import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
+import ProductsPageComponent from "./app/pages/products/ProductsPageComponent";
 import "./css/App.css";
 
 const paletteMUI = {

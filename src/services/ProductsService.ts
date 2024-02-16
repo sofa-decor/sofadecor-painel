@@ -1,5 +1,5 @@
-import { axiosClient } from "../clients/axios.client";
-import { ProductsFilters } from "../hooks/product-hooks/getManyProductsHook";
+import { axiosClient, configAuthorization } from "../clients/axios.client";
+import { Product, ProductsFilters } from "../hooks/product-hooks/getManyProductsHook";
 import { NewProductRequest } from "../types/new-product-request.type";
 
 class ProductsService {
@@ -14,11 +14,17 @@ class ProductsService {
     }
 
     async post(data: NewProductRequest) {
-        return axiosClient.post("/products", data);
+        return axiosClient.post("/products", data, configAuthorization());
+    }
+
+    async update(data: Partial<Product>) {
+        const id = data.id;
+        delete data.id;
+        return axiosClient.put(`/products/${id}`, data, configAuthorization());
     }
 
     async delete(id: string) {
-        return axiosClient.delete(`/products/${id}`);
+        return axiosClient.delete(`/products/${id}`, configAuthorization());
     }
 }
 

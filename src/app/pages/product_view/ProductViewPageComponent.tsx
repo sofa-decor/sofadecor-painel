@@ -1,7 +1,7 @@
 import { Check, WhatsApp } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import OrderService from "../../../services/OrderService";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
@@ -15,7 +15,8 @@ import {
 } from "./ProductViewStyles";
 
 export default function ProductViewPageComponent() {
-    const { product: productNameOfUrlString } = useParams();
+    const location = useLocation();
+    const productName = location.state.name;
     const [product, setProduct] = useState<Product | null>(null);
     const [currentImageStyle, setCurrentImageStyle] = useState<object>({});
     const [currentUrlPage] = useState<string>(window.location.href);
@@ -23,10 +24,9 @@ export default function ProductViewPageComponent() {
     const { data, fetch: fetchProducts } = useGetManyProductsHook(false);
 
     useEffect(() => {
-        if (!productNameOfUrlString) return;
-        const name = productNameOfUrlString.replace("-", " ");
-        fetchProducts({ name });
-    }, [productNameOfUrlString]);
+        if (!productName) return;
+        fetchProducts({ name: productName });
+    }, [productName]);
 
     useEffect(() => {
         if (!data) return;

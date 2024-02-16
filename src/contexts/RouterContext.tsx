@@ -7,7 +7,7 @@ import AdminLoginPageComponent from "../app/pages/admin-painel/children/admin-lo
 import AdminProductsPageComponent from "../app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
 import AdminUsersPageComponent from "../app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductViewPageComponent from "../app/pages/product_view/ProductViewPageComponent";
-import ProductsPageComponent from "../app/pages/products/ProductsPagesComponent";
+import ProductsPageComponent from "../app/pages/products/ProductsPageComponent";
 import { ProductCategories } from "../types/product-categories.type";
 
 interface RouterContextParams {
@@ -85,11 +85,10 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             go: (states?: ProductStates) => navigate("/produtos", { state: states }),
         },
         product_view: {
-            path: "/produtos/:product",
+            path: "/produtos/view",
             component: ProductViewPageComponent,
             go: (name: string) => {
-                const formatted = name.replace(" ", "-");
-                navigate(`/produtos/${formatted}`);
+                navigate("/produtos/view", { state: { name } });
             },
         },
         admin_painel_products: {
@@ -118,9 +117,9 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             go: () => navigate("/painel/produtos/add"),
         },
         painel_products_update: {
-            path: "/painel/produtos/:product",
+            path: "/painel/produtos/edit",
             component: AdminCreateProductsPageComponent,
-            go: (name: string) => navigate(`/painel/produtos/${name}`),
+            go: (name: string) => navigate(`/painel/produtos/edit`, { state: { name } }),
         },
     };
 
