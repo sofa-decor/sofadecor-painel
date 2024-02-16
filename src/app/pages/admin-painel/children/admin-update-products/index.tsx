@@ -1,7 +1,7 @@
 import { Button, LinearProgress, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { convertBase64 } from "../../../../../helpers";
 import { useGetManyCategoriesHook } from "../../../../../hooks/categories-hooks/getManyCategoriesHook";
 import { usePostProductHook } from "../../../../../hooks/product-hooks/postProductHook";
@@ -22,7 +22,7 @@ const successAlert = <AlertSuccess>Produto salvo com sucesso</AlertSuccess>;
 const errorAlert = <AlertError>Erro ao tentar salvar o produto, tente novamente</AlertError>;
 
 export default function AdminUpdateProductsPageComponent() {
-    const { product: productNameOfUrlString } = useParams();
+    // const { product: productNameOfUrlString } = useParams();
     const { post, error, loading, data } = usePostProductHook();
     const { data: categories } = useGetManyCategoriesHook();
     const { register, handleSubmit, reset } = useForm();
