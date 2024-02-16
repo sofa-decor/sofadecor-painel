@@ -9,6 +9,7 @@ class ProductsService {
         let query = "?";
         if (filters?.room) query += `&room=${filters.room}`;
         if (filters?.name) query += `&name=${filters.name}`;
+        if (filters?.tags?.length) query += `&tags=${JSON.stringify(filters.tags)}`;
         return axiosClient.get(`/products${query}`);
     }
 

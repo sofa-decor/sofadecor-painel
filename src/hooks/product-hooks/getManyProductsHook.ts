@@ -20,6 +20,7 @@ export type Image = {
 export type ProductsFilters = {
     room?: string;
     name?: string;
+    tags?: string[];
 };
 
 interface GetManyProductsHook {

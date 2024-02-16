@@ -42,11 +42,15 @@ export default function ProductsPageComponent() {
         setTab(value);
     };
 
-    const onClickFilter = (tag: string) => {
+    const handleSelectCategoryTag = (tag: string) => {
+        let newList = [];
         if (filters.includes(tag)) {
-            const newList = filters.filter(item => item != tag);
-            setFilters(newList);
-        } else setFilters([...filters, tag]);
+            newList = filters.filter(item => item != tag);
+        } else {
+            newList = [...filters, tag];
+        }
+        fetch({ tags: newList });
+        setFilters(newList);
     };
 
     return (
@@ -82,13 +86,14 @@ export default function ProductsPageComponent() {
                         direction="row"
                         gap={1}
                         justifyContent="space-between"
-                        sx={{ alignSelf: "flex-end" }}
+                        alignItems="center"
+                        sx={{ alignSelf: "flex-end", marginTop: 2 }}
                     >
                         {isOpenFilters && (
                             <>
                                 {categories.map(category => (
                                     <Button
-                                        onClick={() => onClickFilter(category)}
+                                        onClick={() => handleSelectCategoryTag(category)}
                                         color={filters.includes(category) ? "primary" : "inherit"}
                                         size="medium"
                                     >
