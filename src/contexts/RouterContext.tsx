@@ -56,6 +56,11 @@ interface RouterContextData {
             component: () => JSX.Element;
             go: () => void;
         };
+        painel_products_update: {
+            path: string;
+            component: () => JSX.Element;
+            go: (name: string) => void;
+        };
     };
 }
 
@@ -111,6 +116,11 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             path: "/painel/produtos/add",
             component: AdminCreateProductsPageComponent,
             go: () => navigate("/painel/produtos/add"),
+        },
+        painel_products_update: {
+            path: "/painel/produtos/:product",
+            component: AdminCreateProductsPageComponent,
+            go: (name: string) => navigate(`/painel/produtos/${name}`),
         },
     };
 

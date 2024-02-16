@@ -15,6 +15,7 @@ import AdminPainelPageComponent from "./app/pages/admin-painel/AdminPainelPageCo
 import AdminCreateProductsPageComponent from "./app/pages/admin-painel/children/admin-add-products/AdminCreateProductsPageComnponent";
 import AdminCreateUsersPageComponent from "./app/pages/admin-painel/children/admin-add-users/AdminCreateUsersPageComnponent";
 import AdminProductsPageComponent from "./app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
+import AdminUpdateProductsPageComponent from "./app/pages/admin-painel/children/admin-update-products";
 import AdminUsersPageComponent from "./app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductsPageComponent from "./app/pages/products/ProductsPagesComponent";
 import "./css/App.css";
@@ -48,6 +49,10 @@ function App() {
                             <Route
                                 path="produtos/add"
                                 Component={AdminCreateProductsPageComponent}
+                            />
+                            <Route
+                                path="produtos/:product"
+                                Component={AdminUpdateProductsPageComponent}
                             />
                         </Route>
                     </Routes>

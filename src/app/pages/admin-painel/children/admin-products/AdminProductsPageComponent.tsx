@@ -1,4 +1,4 @@
-import { Delete, Search } from "@mui/icons-material";
+import { Delete, Edit, Search } from "@mui/icons-material";
 import { Alert, CircularProgress, Stack, TextField, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { EmptyObject } from "react-hook-form";
@@ -7,6 +7,7 @@ import {
     useGetManyProductsHook,
 } from "../../../../../hooks/product-hooks/getManyProductsHook";
 import { useDeleteProductHook } from "../../../../../hooks/product-hooks/useDeleteProductHook";
+import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 import appColors from "../../../../colors/appColors";
 import PageLoader from "../../../../components/Loaders/page-loader/PageLoader";
 
@@ -59,6 +60,7 @@ type ProductItemParams = {
 
 const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
     const { data, remove, loading } = useDeleteProductHook();
+    const { router } = useAppRouterHook();
 
     useEffect(() => {
         if (!data) return;
@@ -85,16 +87,24 @@ const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
             <Typography width="30%" textAlign="center" variant="body1">
                 {product.images.length}
             </Typography>
-            {loading ? (
-                <CircularProgress size={18} />
-            ) : (
-                <Delete
+            <Stack direction="row" gap={2}>
+                <Edit
                     fontSize="small"
-                    color="primary"
+                    color="info"
                     sx={{ cursor: "pointer" }}
-                    onClick={onDeleteProducts}
+                    onClick={() => router.painel_products_update.go(product.name)}
                 />
-            )}
+                {loading ? (
+                    <CircularProgress size={18} />
+                ) : (
+                    <Delete
+                        fontSize="small"
+                        color="primary"
+                        sx={{ cursor: "pointer" }}
+                        onClick={onDeleteProducts}
+                    />
+                )}
+            </Stack>
         </Stack>
     );
 };
@@ -113,8 +123,14 @@ const HeaderItem: FC<EmptyObject> = () => {
             <Typography fontWeight={500} width="30%" textAlign="center" variant="body1">
                 Categorias
             </Typography>
-            <Typography fontWeight={500} width="30%" textAlign="center" variant="body1">
-                Qtd. images
+            <Typography
+                fontWeight={500}
+                width="30%"
+                textAlign="center"
+                variant="body1"
+                marginRight={3}
+            >
+                Imagens
             </Typography>
             <Delete fontSize="small" sx={{ color: appColors.background }} />
         </Stack>
