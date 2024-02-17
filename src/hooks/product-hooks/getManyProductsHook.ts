@@ -25,7 +25,6 @@ export type PaginationState = {
 };
 
 export type ProductsFilters = {
-    room?: string;
     name?: string;
     tags?: string[];
 } & Partial<Omit<PaginationState, "totalPages">>;

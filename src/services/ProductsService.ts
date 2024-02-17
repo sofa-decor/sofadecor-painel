@@ -11,14 +11,12 @@ class ProductsService {
     }
 
     private formatFetchQueryParams({
-        room,
         name,
         currentPage,
         itemsAmount,
         tags,
     }: Partial<ProductsFilters>) {
         let query = "?";
-        if (room) query += `&room=${room}`;
         if (name) query += `&name=${name}`;
         if (currentPage) query += `&page=${currentPage}`;
         if (itemsAmount) query += `&amount=${itemsAmount}`;

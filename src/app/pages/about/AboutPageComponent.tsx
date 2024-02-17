@@ -7,7 +7,7 @@ import ImageMaps from "../../../assets/location-maps.png";
 import HomeOffice from "../../../assets/office.png";
 import "../../../css/App.css";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
-import { ProductCategories } from "../../../types/product-categories.type";
+import { ProductTags } from "../../../types/product-tags.type";
 import Carousel from "../../components/carousel/CarouselComponent";
 import HeaderComponent from "../../components/header/HeaderComponent";
 import {
@@ -21,10 +21,10 @@ import {
 export default function AboutPageComponent() {
     const { router } = useAppRouterHook();
     const categories = [
-        { image: Kitchen, name: ProductCategories.kitchen },
-        { image: BedRoom, name: ProductCategories.bedroom },
-        { image: LivingRoom, name: ProductCategories.livingroom },
-        { image: HomeOffice, name: ProductCategories.office },
+        { image: Kitchen, name: ProductTags.kitchen },
+        { image: BedRoom, name: ProductTags.bedroom },
+        { image: LivingRoom, name: ProductTags.livingroom },
+        { image: HomeOffice, name: ProductTags.office },
     ];
     return (
         <>

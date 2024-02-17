@@ -8,7 +8,7 @@ import AdminProductsPageComponent from "../app/pages/admin-painel/children/admin
 import AdminUsersPageComponent from "../app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductViewPageComponent from "../app/pages/product_view/ProductViewPageComponent";
 import ProductsPageComponent from "../app/pages/products/ProductsPageComponent";
-import { ProductCategories } from "../types/product-categories.type";
+import { ProductTags } from "../types/product-tags.type";
 
 interface RouterContextParams {
     children: React.ReactNode;
@@ -65,7 +65,7 @@ interface RouterContextData {
 }
 
 type ProductStates = {
-    category: ProductCategories;
+    category: ProductTags;
 };
 
 const RouterContext = createContext<RouterContextData>({} as RouterContextData);

@@ -1,23 +1,21 @@
-import { FilterAlt } from "@mui/icons-material";
-import { Box, Button, Fab, Pagination, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Pagination, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../../../css/App.css";
-import { useGetCategoryByNameHook } from "../../../hooks/categories-hooks/getCategoryByNameHook";
 import {
     PaginationState,
     Product,
     useGetManyProductsHook,
 } from "../../../hooks/product-hooks/getManyProductsHook";
-import { ProductCategories } from "../../../types/product-categories.type";
+import { ProductTags } from "../../../types/product-tags.type";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import { AlertError, AlertInfo } from "../../components/alert";
 import HeaderComponent from "../../components/header/HeaderComponent";
 import ProductCardComponent from "../../components/product-card/ProductCardComponent";
-import { IconFilterCount, ProductsList } from "./ProductsPageStyles";
+import { ProductsList } from "./ProductsPageStyles";
 
 export type HomeRedirectState = {
-    category: ProductCategories;
+    category: ProductTags;
 };
 
 const pagination: PaginationState = {
@@ -28,42 +26,25 @@ const pagination: PaginationState = {
 
 export default function ProductsPageComponent() {
     const location = useLocation();
-    const category = location.state?.category;
-    const [tab, setTab] = useState<string>(category || ProductCategories.livingroom);
-    const [isOpenFilters, setIsOpenFilters] = useState(false);
-    const [filters, setFilters] = useState<Array<string>>([]);
-    const [categories, setCategories] = useState<Array<string>>([]);
+    const initialTab = location.state?.category;
+    const tabsValues = Object.values(ProductTags);
+    const [currentTab, setCurrentTab] = useState<string>(initialTab || ProductTags.chairs);
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
-    const { fetch: fetchCategory, data: tagsCategories } = useGetCategoryByNameHook();
 
     useEffect(() => {
-        if (!data) fetch({ ...pagination, room: tab });
-        if (!tagsCategories) return;
-        setCategories(tagsCategories.tags);
-    }, [tagsCategories]);
+        if (!data) fetch({ ...pagination, tags: [currentTab] });
+    }, []);
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        fetchCategory(value);
-        fetch({ room: value, ...pagination });
-        setTab(value);
-    };
-
-    const handleSelectCategoryTag = (tag: string) => {
-        let newList = [];
-        if (filters.includes(tag)) {
-            newList = filters.filter(item => item != tag);
-        } else {
-            newList = [...filters, tag];
-        }
-        fetch({ tags: newList });
-        setFilters(newList);
+        fetch({ tags: [value], ...pagination });
+        setCurrentTab(value);
     };
 
     const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
         e.preventDefault();
         window.scrollTo(0, 0);
-        fetch({ room: tab, ...pagination, currentPage: page });
+        fetch({ tags: [currentTab], ...pagination, currentPage: page });
     };
 
     return (
@@ -77,54 +58,16 @@ export default function ProductsPageComponent() {
                     alignSelf="center"
                     fontWeight={500}
                 >
-                    <Tabs value={tab} onChange={handleChangeTab}>
-                        <Tab label="sala" value="sala" />
-                        <Tab label="quarto" value="quarto" />
-                        <Tab label="cozinha" value="cozinha" />
-                        <Tab label="Escritorio" value="escritorio" />
+                    <Tabs value={currentTab} onChange={handleChangeTab}>
+                        {tabsValues.map((value: string) => (
+                            <Tab label={value} value={value} key={value} />
+                        ))}
                     </Tabs>
                 </Stack>
-                <Stack
-                    direction="row"
-                    gap={1}
-                    justifyContent="space-between"
-                    alignItems="center"
-                    marginBottom={2}
-                >
+                <Stack direction="row" justifyContent="center" alignItems="center" marginBottom={2}>
                     <Typography variant="caption">
                         {data ? data.totalItems : 0} Resultados
                     </Typography>
-
-                    <Stack
-                        direction="row"
-                        gap={1}
-                        justifyContent="space-between"
-                        alignItems="center"
-                        sx={{ alignSelf: "flex-end", marginTop: 2 }}
-                    >
-                        {isOpenFilters && (
-                            <>
-                                {categories.map(category => (
-                                    <Button
-                                        onClick={() => handleSelectCategoryTag(category)}
-                                        color={filters.includes(category) ? "primary" : "inherit"}
-                                        size="medium"
-                                    >
-                                        {category}
-                                    </Button>
-                                ))}
-                            </>
-                        )}
-                        <Fab
-                            color="primary"
-                            aria-label="add"
-                            size="small"
-                            onClick={() => setIsOpenFilters(!isOpenFilters)}
-                        >
-                            <IconFilterCount>{filters.length}</IconFilterCount>
-                            <FilterAlt fontSize="small" />
-                        </Fab>
-                    </Stack>
                 </Stack>
 
                 {data && data.products.length > 0 && (
