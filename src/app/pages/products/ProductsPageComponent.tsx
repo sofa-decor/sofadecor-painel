@@ -1,10 +1,14 @@
 import { FilterAlt } from "@mui/icons-material";
 import { Box, Button, Fab, Pagination, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../../../css/App.css";
 import { useGetCategoryByNameHook } from "../../../hooks/categories-hooks/getCategoryByNameHook";
-import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
+import {
+    PaginationState,
+    Product,
+    useGetManyProductsHook,
+} from "../../../hooks/product-hooks/getManyProductsHook";
 import { ProductCategories } from "../../../types/product-categories.type";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import { AlertError, AlertInfo } from "../../components/alert";
@@ -14,6 +18,12 @@ import { IconFilterCount, ProductsList } from "./ProductsPageStyles";
 
 export type HomeRedirectState = {
     category: ProductCategories;
+};
+
+const pagination: PaginationState = {
+    itemsAmount: 12,
+    currentPage: 1,
+    totalPages: 1,
 };
 
 export default function ProductsPageComponent() {
@@ -27,18 +37,15 @@ export default function ProductsPageComponent() {
     const { fetch: fetchCategory, data: tagsCategories } = useGetCategoryByNameHook();
 
     useEffect(() => {
-        if (!tab) return;
-        fetchCategory(tab);
-        fetch({ room: tab });
-    }, [tab]);
-
-    useEffect(() => {
+        if (!data) fetch({ ...pagination, room: tab });
         if (!tagsCategories) return;
         setCategories(tagsCategories.tags);
     }, [tagsCategories]);
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
+        fetchCategory(value);
+        fetch({ room: value, ...pagination });
         setTab(value);
     };
 
@@ -51,6 +58,12 @@ export default function ProductsPageComponent() {
         }
         fetch({ tags: newList });
         setFilters(newList);
+    };
+
+    const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        fetch({ room: tab, ...pagination, currentPage: page });
     };
 
     return (
@@ -79,7 +92,7 @@ export default function ProductsPageComponent() {
                     marginBottom={2}
                 >
                     <Typography variant="caption">
-                        {data ? data.products.length : 0} Resultados
+                        {data ? data.totalItems : 0} Resultados
                     </Typography>
 
                     <Stack
@@ -122,9 +135,11 @@ export default function ProductsPageComponent() {
                             ))}
                         </ProductsList>
                         <Pagination
-                            showFirstButton
-                            showLastButton
-                            count={10}
+                            // showFirstButton
+                            // showLastButton
+                            onChange={handleChangePagination}
+                            defaultPage={data.page}
+                            count={data.totalPages}
                             variant="outlined"
                             size="small"
                             color="primary"

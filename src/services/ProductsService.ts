@@ -3,14 +3,27 @@ import { Product, ProductsFilters } from "../hooks/product-hooks/getManyProducts
 import { NewProductRequest } from "../types/new-product-request.type";
 
 class ProductsService {
-    constructor() {}
+    constructor(private fetchQueryParams: string = "") {}
 
-    async fetch(filters?: ProductsFilters) {
+    async fetch(filters: Partial<ProductsFilters>) {
+        this.formatFetchQueryParams(filters);
+        return axiosClient.get(`/products${this.fetchQueryParams}`);
+    }
+
+    private formatFetchQueryParams({
+        room,
+        name,
+        currentPage,
+        itemsAmount,
+        tags,
+    }: Partial<ProductsFilters>) {
         let query = "?";
-        if (filters?.room) query += `&room=${filters.room}`;
-        if (filters?.name) query += `&name=${filters.name}`;
-        if (filters?.tags?.length) query += `&tags=${JSON.stringify(filters.tags)}`;
-        return axiosClient.get(`/products${query}`);
+        if (room) query += `&room=${room}`;
+        if (name) query += `&name=${name}`;
+        if (currentPage) query += `&page=${currentPage}`;
+        if (itemsAmount) query += `&amount=${itemsAmount}`;
+        if (tags?.length) query += `&tags=${JSON.stringify(tags)}`;
+        this.fetchQueryParams = query;
     }
 
     async post(data: NewProductRequest) {

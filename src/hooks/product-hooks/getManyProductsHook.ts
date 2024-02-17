@@ -18,18 +18,29 @@ export type Image = {
     main: boolean;
 };
 
+export type PaginationState = {
+    itemsAmount: number;
+    currentPage: number;
+    totalPages: number;
+};
+
 export type ProductsFilters = {
     room?: string;
     name?: string;
     tags?: string[];
-};
+} & Partial<Omit<PaginationState, "totalPages">>;
 
 interface GetManyProductsHook {
     loading: boolean;
     error: APIError | null;
     fetch: (filters?: ProductsFilters) => Promise<void>;
     statusCode: number | null;
-    data: { products: Array<Product> } | null;
+    data: {
+        products: Array<Product>;
+        totalPages: number;
+        page: number;
+        totalItems: number;
+    } | null;
 }
 
 const service = ProductsService;
