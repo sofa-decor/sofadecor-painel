@@ -19,6 +19,7 @@ import AdminUpdateProductsPageComponent from "./app/pages/admin-painel/children/
 import AdminUsersPageComponent from "./app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
 import ProductsPageComponent from "./app/pages/products/ProductsPageComponent";
 import "./css/App.css";
+import FooterComponent from "./app/components/footer/FooterComponents";
 
 const paletteMUI = {
     primary: {
@@ -42,7 +43,6 @@ function App() {
                         <Route path={"/loja"} Component={ProductsPageComponent} />
                         <Route path="/loja/produto" Component={ProductViewPageComponent} />
                         <Route path="/painel" Component={AdminPainelPageComponent}>
-                            {/* <Route path="login" Component={AdminLoginPageComponent} /> */}
                             <Route path="produtos" Component={AdminProductsPageComponent} />
                             <Route path="usuarios" Component={AdminUsersPageComponent} />
                             <Route path="usuarios/add" Component={AdminCreateUsersPageComponent} />
@@ -58,7 +58,7 @@ function App() {
                     </Routes>
                 </ThemeProvider>
 
-                {/* <FooterComponent /> */}
+                <FooterComponent />
             </GlobalContextProvider>
         </BrowserRouter>
     );

@@ -42,7 +42,7 @@ export default function HeaderComponent() {
 
     return (
         <ThemeProvider theme={headerTheme}>
-            <HeaderContainer>
+            <HeaderContainer sx={{ background: "#000" }}>
                 <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
                 </LogoBox>
