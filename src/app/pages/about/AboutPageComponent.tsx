@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import BedRoom from "../../../assets/bed.png";
 import Kitchen from "../../../assets/kitchen.png";
 import LivingRoom from "../../../assets/living.png";
+import ImageMaps from "../../../assets/location-maps.png";
 import HomeOffice from "../../../assets/office.png";
 import "../../../css/App.css";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
@@ -74,7 +75,18 @@ export default function AboutPageComponent() {
                         </ButtomCategoriesCard>
                     ))}
                 </ButtomsCategoriesContainer>
-                <LocationMapContent></LocationMapContent>
+                <LocationMapContent>
+                    <div
+                        style={{
+                            width: "100%",
+                            height: "300px",
+                            backgroundImage: `url(${ImageMaps})`,
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center",
+                            backgroundSize: "contain",
+                        }}
+                    />
+                </LocationMapContent>
             </PageContent>
         </>
     );

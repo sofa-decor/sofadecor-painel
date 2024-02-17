@@ -58,5 +58,9 @@ export const ButtomCategoriesCard = styled(Card)`
 
 export const LocationMapContent = styled.div`
     width: 100%;
-    height: 400px;
+    padding: ${paddingComponents};
+
+    @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
+        padding: 60px 5dvw;
+    }
 `;
