@@ -77,18 +77,21 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
         about: {
             path: "/sobre",
             component: AboutPageComponent,
-            go: () => navigate("/sobre", {}),
+            go: () => {
+                console.log("passei aqui");
+                navigate("/sobre");
+            },
         },
         products: {
-            path: "/produtos",
+            path: "/loja",
             component: ProductsPageComponent,
-            go: (states?: ProductStates) => navigate("/produtos", { state: states }),
+            go: (states?: ProductStates) => navigate("/loja", { state: states }),
         },
         product_view: {
-            path: "/produtos/view",
+            path: "/loja/produto",
             component: ProductViewPageComponent,
             go: (name: string) => {
-                navigate("/produtos/view", { state: { name } });
+                navigate("/loja/produto", { state: { name } });
             },
         },
         admin_painel_products: {
@@ -117,9 +120,9 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             go: () => navigate("/painel/produtos/add"),
         },
         painel_products_update: {
-            path: "/painel/produtos/edit",
+            path: "/painel/produto/edit",
             component: AdminCreateProductsPageComponent,
-            go: (name: string) => navigate(`/painel/produtos/edit`, { state: { name } }),
+            go: (name: string) => navigate(`/painel/produto/edit`, { state: { name } }),
         },
     };
 

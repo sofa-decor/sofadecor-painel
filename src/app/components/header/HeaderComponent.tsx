@@ -6,7 +6,8 @@ import Logo from "../../../assets/logo.png";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import OrderService from "../../../services/OrderService";
 import appColors from "../../colors/appColors";
-import { HeaderContainer } from "./HeaderStyles";
+import { DesktopVisible } from "../smallers-helpers";
+import { HeaderContainer, LogoBox } from "./HeaderStyles";
 
 const paletteMUI = {
     primary: {
@@ -33,18 +34,18 @@ export default function HeaderComponent() {
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        if (value == "about") router.about.go();
-        if (value == "admin") router.admin_painel_login.go();
-        else router.products.go();
-        setTabValue(value);
+        console.log(value);
+        if (value === "about") router.about.go();
+        else if (value === "admin") router.admin_painel_login.go();
+        else if (value === "store") router.products.go();
     };
 
     return (
         <ThemeProvider theme={headerTheme}>
             <HeaderContainer>
-                <Stack direction="row" flex={1}>
+                <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
-                </Stack>
+                </LogoBox>
 
                 <Stack
                     height={60}
@@ -69,7 +70,7 @@ export default function HeaderComponent() {
                         target="_blank"
                         href={OrderService.getSenderWppLink()}
                     >
-                        Compre pelo WhatsApp
+                        <DesktopVisible>Compre pelo WhatsApp</DesktopVisible>
                     </Button>
                 </Stack>
             </HeaderContainer>

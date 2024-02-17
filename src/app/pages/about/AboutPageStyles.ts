@@ -1,8 +1,17 @@
 import { Card } from "@mui/material";
 import styled from "styled-components";
+import { Screen } from "../../../data";
 import appColors from "../../colors/appColors";
 
 export const paddingComponents = "60px 15dvw";
+
+export const PagePadding = styled.div`
+    padding: ${paddingComponents};
+
+    @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
+        padding: 60px 5dvw;
+    }
+`;
 
 export const PageContent = styled.div`
     max-width: 100dvw;
@@ -17,9 +26,13 @@ export const ButtomsCategoriesContainer = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     background-color: #1e1e1e;
-    padding: ${paddingComponents};
     color: ${appColors.background} !important;
     gap: 20px;
+    padding: ${paddingComponents};
+
+    @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
+        padding: 60px 5dvw;
+    }
 `;
 
 export const ButtomCategoriesCard = styled(Card)`

@@ -4,7 +4,7 @@ import { SyntheticEvent, useState } from "react";
 import Logo from "../../../assets/logo.png";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import appColors from "../../colors/appColors";
-import { HeaderContainer } from "./AdminHeaderStyles";
+import { HeaderContainer, LogoBox } from "./AdminHeaderStyles";
 
 const paletteMUI = {
     primary: {
@@ -35,15 +35,15 @@ export default function AdminHeaderComponent() {
     return (
         <ThemeProvider theme={headerTheme}>
             <HeaderContainer>
-                <Stack direction="row" flex={1}>
+                <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
-                </Stack>
+                </LogoBox>
                 <Stack direction="row" flex={1} justifyContent="center">
                     <Tabs value={tabValue} onChange={handleChangeTab}>
-                        <Tab label="Produtos" value="produtos" />
+                        <Tab label="items" value="produtos" />
+                        <Tab label="+item" value="+produtos" />
                         <Tab label="Usuários" value="usuários" />
-                        <Tab label="+ Usuários" value="+usuários" />
-                        <Tab label="+ produtos" value="+produtos" />
+                        <Tab label="+Usuários" value="+usuários" />
                     </Tabs>
                 </Stack>
             </HeaderContainer>

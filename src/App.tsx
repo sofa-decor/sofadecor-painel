@@ -10,7 +10,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import FooterComponent from "./app/components/footer/FooterComponents";
+import PageLoader from "./app/components/Loaders/page-loader/PageLoader";
 import AdminPainelPageComponent from "./app/pages/admin-painel/AdminPainelPageComponent";
 import AdminCreateProductsPageComponent from "./app/pages/admin-painel/children/admin-add-products/AdminCreateProductsPageComnponent";
 import AdminCreateUsersPageComponent from "./app/pages/admin-painel/children/admin-add-users/AdminCreateUsersPageComnponent";
@@ -39,8 +39,8 @@ function App() {
                     <Routes>
                         <Route path="/sobre" Component={AboutPageComponent} />
                         <Route path="/" Component={Redirect} />
-                        <Route path={"/produtos"} Component={ProductsPageComponent} />
-                        <Route path="/produtos/:product" Component={ProductViewPageComponent} />
+                        <Route path={"/loja"} Component={ProductsPageComponent} />
+                        <Route path="/loja/produto" Component={ProductViewPageComponent} />
                         <Route path="/painel" Component={AdminPainelPageComponent}>
                             {/* <Route path="login" Component={AdminLoginPageComponent} /> */}
                             <Route path="produtos" Component={AdminProductsPageComponent} />
@@ -51,14 +51,14 @@ function App() {
                                 Component={AdminCreateProductsPageComponent}
                             />
                             <Route
-                                path="produtos/:product"
+                                path="produto/edit"
                                 Component={AdminUpdateProductsPageComponent}
                             />
                         </Route>
                     </Routes>
                 </ThemeProvider>
 
-                <FooterComponent />
+                {/* <FooterComponent /> */}
             </GlobalContextProvider>
         </BrowserRouter>
     );
@@ -66,8 +66,8 @@ function App() {
 
 function Redirect() {
     const navigate = useNavigate();
-    useEffect(() => navigate("/produtos"), []);
-    return <></>;
+    useEffect(() => navigate("/loja"));
+    return <PageLoader />;
 }
 
 export default App;

@@ -12,6 +12,7 @@ import {
     ImagesContainer,
     ImagesOptionsList,
     ProductDetails,
+    ResponsivePageStack,
 } from "./ProductViewStyles";
 
 export default function ProductViewPageComponent() {
@@ -81,7 +82,7 @@ export default function ProductViewPageComponent() {
                                 </Typography>
                             ))}
                         </Stack>
-                        <Stack direction="row" gap={3} alignItems="start" height="100%">
+                        <ResponsivePageStack>
                             <ImagesContainer>
                                 <CurrentImage
                                     onMouseMove={handleMouseMove}
@@ -97,7 +98,7 @@ export default function ProductViewPageComponent() {
                                 </ImagesOptionsList>
                             </ImagesContainer>
                             <ProductDetails>
-                                <Box marginBottom="20dvh">
+                                <Box>
                                     <Typography
                                         fontSize={18}
                                         variant="overline"
@@ -156,7 +157,7 @@ export default function ProductViewPageComponent() {
                                     </Stack>
                                 </Box>
                             </ProductDetails>
-                        </Stack>
+                        </ResponsivePageStack>
                     </>
                 ) : (
                     <PageLoader />

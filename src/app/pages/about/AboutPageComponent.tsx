@@ -1,5 +1,5 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import BedRoom from "../../../assets/bed.png";
 import Kitchen from "../../../assets/kitchen.png";
 import LivingRoom from "../../../assets/living.png";
@@ -14,7 +14,7 @@ import {
     ButtomsCategoriesContainer,
     LocationMapContent,
     PageContent,
-    paddingComponents,
+    PagePadding,
 } from "./AboutPageStyles";
 
 export default function AboutPageComponent() {
@@ -30,7 +30,7 @@ export default function AboutPageComponent() {
             <HeaderComponent />
             <PageContent>
                 <Carousel />
-                <Box padding={paddingComponents}>
+                <PagePadding>
                     <Typography variant="h4" color="primary" fontWeight={500}>
                         Quem somos
                     </Typography>
@@ -54,16 +54,9 @@ export default function AboutPageComponent() {
                         Dedique-se ao que é realmente importante para você ou seu negócio. Deixe que
                         cuidamos do resto. Importante Não vendemos trabalhos acadêmicos prontos. Mas
                         te ajudamos do começo ao fim. Somos uma empresa de conteúdo que pode
-                        auxiliá-lo em todas as suas necessidades e entregar um trabalho superior e
-                        surpreendente para você. Caso você tenha uma grande ideia, um amplo
-                        conhecimento do seu assunto, já produziu parte ou todo o seu trabalho, mas
-                        não está certo se irá passar a mensagem adequada ou não consegue mais
-                        evoluir (famoso bloqueio criativo ou de escritor), você está no lugar certo.
-                        Você irá se surpreender com o que somos capazes. Entre em contato conosco e
-                        a gente resolve seu problema. Peça seu orçamento e se encante com o que
-                        podemos fazer pelo seu conteúdo.
+                        auxiliá-lo em todas as suas necessidades e entregar um trabalho superior.
                     </Typography>
-                </Box>
+                </PagePadding>
                 <ButtomsCategoriesContainer>
                     <Typography variant="h4" fontWeight={500} width="100%">
                         Qual ambiente deseja redecorar ?!
@@ -73,8 +66,8 @@ export default function AboutPageComponent() {
                             elevation={8}
                             onClick={() => router.products.go({ category: tag.name })}
                         >
-                            <img height={120} src={tag.image} alt="logo" />
-                            <Typography fontWeight={500} variant="h4">
+                            <img height={"90dvw"} src={tag.image} alt="logo" />
+                            <Typography fontWeight={500} variant="h5">
                                 {tag.name}
                                 <ArrowOutwardIcon fontSize="small" />
                             </Typography>
