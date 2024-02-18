@@ -29,6 +29,7 @@ export default function AdminHeaderComponent() {
         if (value == "usuários") router.admin_painel_users.go();
         if (value == "+usuários") router.admin_painel_users_add.go();
         if (value == "+produtos") router.admin_painel_products_add.go();
+        if (value == "store") router.products.go();
         setTabValue(value);
     };
 
@@ -40,6 +41,7 @@ export default function AdminHeaderComponent() {
                 </LogoBox>
                 <Stack direction="row" flex={1} justifyContent="center">
                     <Tabs value={tabValue} onChange={handleChangeTab}>
+                        <Tab label="Loja" value="store" />
                         <Tab label="items" value="produtos" />
                         <Tab label="+item" value="+produtos" />
                         <Tab label="Usuários" value="usuários" />

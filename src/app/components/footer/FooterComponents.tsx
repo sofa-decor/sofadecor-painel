@@ -30,7 +30,7 @@ export default function FooterComponent() {
 
             <Divider sx={{ backgroundColor: appColors.white, margin: "5px 0" }} />
 
-            <Stack direction="row" justifyContent="space-between" padding={2}>
+            <Stack direction="row" justifyContent="space-between">
                 <Typography variant="caption">
                     Reis Home Decor © 2023 Todos os direitos reservados
                 </Typography>

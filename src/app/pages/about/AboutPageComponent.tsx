@@ -21,10 +21,12 @@ import {
 export default function AboutPageComponent() {
     const { router } = useAppRouterHook();
     const categories = [
-        { image: Kitchen, name: ProductTags.kitchen },
-        { image: BedRoom, name: ProductTags.bedroom },
-        { image: LivingRoom, name: ProductTags.livingroom },
-        { image: HomeOffice, name: ProductTags.office },
+        { image: Kitchen, name: ProductTags.sofas },
+        { image: BedRoom, name: ProductTags.chairs },
+        { image: LivingRoom, name: ProductTags.armchairs },
+        { image: HomeOffice, name: ProductTags.tables },
+        { image: HomeOffice, name: ProductTags.stools },
+        { image: HomeOffice, name: ProductTags.complements },
     ];
     return (
         <>
