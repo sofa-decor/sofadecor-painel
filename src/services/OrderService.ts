@@ -1,7 +1,8 @@
 import { Product } from "../hooks/product-hooks/getManyProductsHook";
 
 class OrderService {
-    private phone = "5551995909864";
+    // private phone = "5551995909864";
+    private phone = "555197224452";
     private wpp_base_url = "https://wa.me/";
     private simple_message = "Olá! Visitei seu site e gostaria de mais informações.";
 
