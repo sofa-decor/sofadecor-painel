@@ -6,7 +6,7 @@ class ProductsService {
     constructor(private fetchQueryParams: string = "") {}
 
     async fetch(filters: Partial<ProductsFilters>) {
-        this.formatFetchQueryParams(filters);
+        if (filters) this.formatFetchQueryParams(filters);
         return axiosClient.get(`/products${this.fetchQueryParams}`);
     }
 

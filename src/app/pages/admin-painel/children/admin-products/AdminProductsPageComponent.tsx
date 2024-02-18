@@ -1,30 +1,29 @@
-import { Delete, Edit, Search } from "@mui/icons-material";
-import { Alert, CircularProgress, Stack, TextField, Typography } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { Alert, CircularProgress, Stack, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
-import { EmptyObject } from "react-hook-form";
 import {
     Product,
     useGetManyProductsHook,
 } from "../../../../../hooks/product-hooks/getManyProductsHook";
 import { useDeleteProductHook } from "../../../../../hooks/product-hooks/useDeleteProductHook";
 import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
-import appColors from "../../../../colors/appColors";
 import PageLoader from "../../../../components/Loaders/page-loader/PageLoader";
 
 export default function AdminProductsPageComponent() {
-    const { data, loading } = useGetManyProductsHook();
+    const { data, loading, fetch } = useGetManyProductsHook();
     const [products, setProducts] = useState<Array<Product> | null>(null);
+
+    useEffect(() => {
+        if (!data) return;
+        if (data.products.length == 1) fetch({ name: "" });
+        setProducts(data.products);
+    }, [data]);
 
     const deleteProductById = async (id: string) => {
         if (!products) return;
         const newList = products.filter(item => item.id != id);
         setProducts(newList);
     };
-
-    useEffect(() => {
-        if (!data) return;
-        setProducts(data.products);
-    }, [data]);
 
     const getListItems = () => {
         if (!products) return [];
@@ -34,14 +33,8 @@ export default function AdminProductsPageComponent() {
     };
 
     return (
-        <Stack direction="column" alignItems="center" gap="10px">
-            <Stack direction="row" gap="2px" alignItems="center">
-                <TextField variant="standard" />
-                <Search fontSize="small" />
-            </Stack>
-            <Typography variant="caption">{products?.length || 0} resultados</Typography>
-            <br />
-            <HeaderItem />
+        <Stack direction="column" alignItems="center">
+            <HeaderItem amount={products?.length || 0} />
             {products && getListItems()}
             {!products && loading && <PageLoader />}
             {products && products.length == 0 && (
@@ -77,6 +70,7 @@ const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
             justifyContent="space-between"
             borderBottom="1px solid gray"
             width="100%"
+            padding="5px 0"
         >
             <Typography width="30%" variant="body1">
                 {product.name}
@@ -92,7 +86,10 @@ const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
                     fontSize="small"
                     color="info"
                     sx={{ cursor: "pointer" }}
-                    onClick={() => router.painel_products_update.go(product.name)}
+                    onClick={() => {
+                        window.scrollTo(0, 0);
+                        router.painel_products_update.go(product.name);
+                    }}
                 />
                 {loading ? (
                     <CircularProgress size={18} />
@@ -109,11 +106,12 @@ const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
     );
 };
 
-const HeaderItem: FC<EmptyObject> = () => {
+const HeaderItem: FC<{ amount: number }> = ({ amount }) => {
     return (
         <Stack
             direction="row"
             justifyContent="space-between"
+            alignItems="flex-end"
             borderBottom="1px solid gray"
             width="100%"
         >
@@ -123,16 +121,15 @@ const HeaderItem: FC<EmptyObject> = () => {
             <Typography fontWeight={500} width="30%" textAlign="center" variant="body1">
                 Categorias
             </Typography>
-            <Typography
-                fontWeight={500}
-                width="30%"
-                textAlign="center"
-                variant="body1"
-                marginRight={3}
-            >
+            <Typography fontWeight={500} width="30%" textAlign="center" variant="body1">
                 Imagens
             </Typography>
-            <Delete fontSize="small" sx={{ color: appColors.background }} />
+            <Typography textAlign="center" variant="caption">
+                <Typography fontWeight={500} variant="body1">
+                    {amount || 0}
+                </Typography>
+                resultados
+            </Typography>
         </Stack>
     );
 };

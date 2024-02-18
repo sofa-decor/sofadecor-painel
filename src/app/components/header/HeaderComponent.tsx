@@ -34,7 +34,6 @@ export default function HeaderComponent() {
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        console.log(value);
         if (value === "about") router.about.go();
         else if (value === "admin") router.admin_painel_login.go();
         else if (value === "store") router.products.go();

@@ -2,9 +2,9 @@ import { Button, LinearProgress, MenuItem, Stack, TextField, Typography } from "
 import { ReactElement, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { convertBase64 } from "../../../../../helpers";
-import { useGetManyCategoriesHook } from "../../../../../hooks/categories-hooks/getManyCategoriesHook";
 import { usePostProductHook } from "../../../../../hooks/product-hooks/postProductHook";
 import { NewProductRequest, ProductImage } from "../../../../../types/new-product-request.type";
+import { ProductTags } from "../../../../../types/product-tags.type";
 import { AlertError, AlertSuccess } from "../../../../components/alert";
 
 type NewProductSubmited = {
@@ -21,15 +21,12 @@ const errorAlert = <AlertError>Erro ao tentar salvar o produto, tente novamente<
 
 export default function AdminCreateProductsPageComponent() {
     const { post, error, loading, data } = usePostProductHook();
-    const { data: categories } = useGetManyCategoriesHook();
     const { register, handleSubmit, reset } = useForm();
     const [alert, setAlert] = useState<null | ReactElement>(null);
-    const [tags, setTags] = useState<Array<string>>([]);
 
     useEffect(() => {
         if (data) {
             reset();
-            setTags([]);
             setAlert(successAlert);
         }
     }, [data, reset]);
@@ -53,16 +50,6 @@ export default function AdminCreateProductsPageComponent() {
             images: arrayImagesCovertedInBase64,
         };
         await post(sendData);
-    };
-
-    const onChangeRoom = (values: Array<string>) => {
-        const newTags: Array<string> = [];
-        if (!categories) return;
-        for (const item of values) {
-            const find = categories.find(category => category.name == item);
-            if (find) newTags.push(...find.tags);
-        }
-        setTags(newTags);
     };
 
     return (
@@ -92,29 +79,6 @@ export default function AdminCreateProductsPageComponent() {
                 />
                 <TextField
                     select
-                    id="rooms"
-                    fullWidth
-                    label="Ambientes"
-                    defaultValue={[]}
-                    required
-                    SelectProps={{
-                        multiple: true,
-                    }}
-                    {...register("rooms")}
-                    onChange={e => onChangeRoom(e.target.value as unknown as string[])}
-                >
-                    {categories ? (
-                        categories.map(({ name }, index) => (
-                            <MenuItem key={index} value={name}>
-                                {name}
-                            </MenuItem>
-                        ))
-                    ) : (
-                        <MenuItem value="selecione">Selecione</MenuItem>
-                    )}
-                </TextField>
-                <TextField
-                    select
                     id="tags"
                     fullWidth
                     label="Categorias"
@@ -125,8 +89,8 @@ export default function AdminCreateProductsPageComponent() {
                     }}
                     {...register("tags")}
                 >
-                    {tags.map((name, index) => (
-                        <MenuItem key={index} value={name}>
+                    {Object.values(ProductTags).map(name => (
+                        <MenuItem key={name} value={name}>
                             {name}
                         </MenuItem>
                     ))}

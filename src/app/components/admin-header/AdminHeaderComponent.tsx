@@ -34,7 +34,7 @@ export default function AdminHeaderComponent() {
 
     return (
         <ThemeProvider theme={headerTheme}>
-            <HeaderContainer>
+            <HeaderContainer sx={{ background: "#000 !important" }}>
                 <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
                 </LogoBox>

@@ -6,16 +6,13 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { convertBase64 } from "../../../../../helpers";
 import {
-    Category,
-    useGetManyCategoriesHook,
-} from "../../../../../hooks/categories-hooks/getManyCategoriesHook";
-import {
     Image,
     Product,
     useGetManyProductsHook,
 } from "../../../../../hooks/product-hooks/getManyProductsHook";
 import { useUpdateProductHook } from "../../../../../hooks/product-hooks/updateProductHook";
 import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
+import { ProductTags } from "../../../../../types/product-tags.type";
 import { AlertError, AlertSuccess } from "../../../../components/alert";
 import { ImageIcon, ImageIconsContainer, ImageView, ImagesContainer } from "./styles";
 
@@ -36,30 +33,15 @@ export default function AdminUpdateProductsPageComponent() {
     const location = useLocation();
     const productName = location.state.name;
     const { post, error, loading, data } = useUpdateProductHook();
-    const { data: categories } = useGetManyCategoriesHook();
+    const { data: products, fetch } = useGetManyProductsHook(false);
+    const { router } = useAppRouterHook();
     const { register, handleSubmit, setValue } = useForm();
     const [alert, setAlert] = useState<null | ReactElement>(null);
-    const [tags, setTags] = useState<Array<string>>([]);
-    const { data: products, fetch } = useGetManyProductsHook(false);
-    const [roomsOptions, setRoomsOptions] = useState<React.ReactNode | undefined>();
     const [product, setProduct] = useState<Product | null>(null);
-    const [categoriesState, setCategoriesState] = useState<Category[] | null>(null);
     const [imagesObject, setImagesObject] = useState<Image[] | null>(null);
-    const { router } = useAppRouterHook();
 
     useEffect(() => {
-        if (!categories) return;
-        setCategoriesState(categories);
-        setRoomsOptions(
-            categories.map(({ name }, index) => (
-                <MenuItem key={index} value={name}>
-                    {name}
-                </MenuItem>
-            ))
-        );
-    }, [categories]);
-
-    useEffect(() => {
+        // console.log(productName);
         if (!productName) return;
         fetch({ name: productName });
     }, [productName]);
@@ -69,7 +51,6 @@ export default function AdminUpdateProductsPageComponent() {
         const p: Product = products.products[0];
         setProduct(p);
         setImagesObject(p.images);
-        setTags(p.tags);
         setValue("name", p.name);
         setValue("description", p.description);
     }, [products?.products]);
@@ -111,16 +92,6 @@ export default function AdminUpdateProductsPageComponent() {
         setImagesObject(list);
     };
 
-    const onChangeRoom = (values: Array<string>) => {
-        const newTags: Array<string> = [];
-        if (!categoriesState) return;
-        for (const item of values) {
-            const find = categoriesState.find(category => category.name == item);
-            if (find) newTags.push(...find.tags);
-        }
-        setTags(newTags);
-    };
-
     const removeImageObject = (img: Image) => {
         if (!imagesObject) return;
         const list = [...imagesObject];
@@ -158,28 +129,9 @@ export default function AdminUpdateProductsPageComponent() {
                 />
                 <TextField
                     select
-                    id="rooms"
-                    fullWidth
-                    label="Ambientes"
-                    defaultValue={[]}
-                    required
-                    SelectProps={{
-                        multiple: true,
-                    }}
-                    {...register("rooms")}
-                    onChange={e => onChangeRoom(e.target.value as unknown as string[])}
-                >
-                    {categoriesState ? (
-                        roomsOptions
-                    ) : (
-                        <MenuItem value="selecione">Selecione</MenuItem>
-                    )}
-                </TextField>
-                <TextField
-                    select
                     id="tags"
                     fullWidth
-                    label="Categorias"
+                    label="Tags"
                     required
                     defaultValue={[]}
                     SelectProps={{
@@ -187,8 +139,8 @@ export default function AdminUpdateProductsPageComponent() {
                     }}
                     {...register("tags")}
                 >
-                    {tags.map((name, index) => (
-                        <MenuItem key={index} value={name}>
+                    {Object.values(ProductTags).map(name => (
+                        <MenuItem key={name} value={name}>
                             {name}
                         </MenuItem>
                     ))}
@@ -221,7 +173,7 @@ export default function AdminUpdateProductsPageComponent() {
                         </Typography>
                         <ImagesContainer>
                             {imagesObject.map((img, i) => (
-                                <ImageView url={img.url} key={i} main={img.main}>
+                                <ImageView url={img.url} key={i} main={!!img.main}>
                                     <ImageIconsContainer>
                                         {img.main && (
                                             <ImageIcon>

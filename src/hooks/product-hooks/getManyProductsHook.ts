@@ -52,10 +52,9 @@ export const useGetManyProductsHook = (immediate: boolean = true): GetManyProduc
         data,
         status: statusCode,
     } = useAsyncAxiosHook({
-        request: data => service.fetch(data),
+        request: d => service.fetch(d),
         immediate: immediate,
     });
-
     return {
         loading,
         error,

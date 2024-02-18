@@ -2,11 +2,7 @@ import { Box, Pagination, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../../../css/App.css";
-import {
-    PaginationState,
-    Product,
-    useGetManyProductsHook,
-} from "../../../hooks/product-hooks/getManyProductsHook";
+import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import { ProductTags } from "../../../types/product-tags.type";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import { AlertError, AlertInfo } from "../../components/alert";
@@ -18,12 +14,6 @@ export type HomeRedirectState = {
     category: ProductTags;
 };
 
-const pagination: PaginationState = {
-    itemsAmount: 12,
-    currentPage: 1,
-    totalPages: 1,
-};
-
 export default function ProductsPageComponent() {
     const location = useLocation();
     const initialTab = location.state?.category;
@@ -32,19 +22,21 @@ export default function ProductsPageComponent() {
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
 
     useEffect(() => {
-        if (!data) fetch({ ...pagination, tags: [currentTab] });
+        fetch({ currentPage: 1, tags: [currentTab] });
     }, []);
+
+    console.log(data);
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
-        fetch({ tags: [value], ...pagination });
+        fetch({ tags: [value], currentPage: 1 });
         setCurrentTab(value);
     };
 
     const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
         e.preventDefault();
         window.scrollTo(0, 0);
-        fetch({ tags: [currentTab], ...pagination, currentPage: page });
+        fetch({ tags: [currentTab], currentPage: page });
     };
 
     return (
@@ -81,7 +73,7 @@ export default function ProductsPageComponent() {
                             // showFirstButton
                             // showLastButton
                             onChange={handleChangePagination}
-                            defaultPage={data.page}
+                            page={data.page}
                             count={data.totalPages}
                             variant="outlined"
                             size="small"
