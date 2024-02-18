@@ -1,10 +1,12 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Typography } from "@mui/material";
-import BedRoom from "../../../assets/bed.png";
-import Kitchen from "../../../assets/kitchen.png";
-import LivingRoom from "../../../assets/living.png";
+import Armchair from "../../../assets/armchair-w.png";
+import Chair from "../../../assets/chair-w.png";
+import Furniture from "../../../assets/furniture-w.png";
 import ImageMaps from "../../../assets/location-maps.png";
-import HomeOffice from "../../../assets/office.png";
+import Sofa from "../../../assets/sofa-w.png";
+import Stool from "../../../assets/stool-w.png";
+import Table from "../../../assets/table-w.png";
 import "../../../css/App.css";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import { ProductTags } from "../../../types/product-tags.type";
@@ -21,12 +23,12 @@ import {
 export default function AboutPageComponent() {
     const { router } = useAppRouterHook();
     const categories = [
-        { image: Kitchen, name: ProductTags.sofas },
-        { image: BedRoom, name: ProductTags.chairs },
-        { image: LivingRoom, name: ProductTags.armchairs },
-        { image: HomeOffice, name: ProductTags.tables },
-        { image: HomeOffice, name: ProductTags.stools },
-        { image: HomeOffice, name: ProductTags.complements },
+        { image: Sofa, name: ProductTags.sofas },
+        { image: Chair, name: ProductTags.chairs },
+        { image: Armchair, name: ProductTags.armchairs },
+        { image: Table, name: ProductTags.tables },
+        { image: Stool, name: ProductTags.stools },
+        { image: Furniture, name: ProductTags.complements },
     ];
     return (
         <>

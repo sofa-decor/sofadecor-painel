@@ -1,12 +1,18 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Button, Typography } from "@mui/material";
+import { useEffect } from "react";
 import CarouselMUI from "react-material-ui-carousel";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import appColors from "../../colors/appColors";
 import { ContainerSkeleton, ContainerSlider, ItemImage, ItemInfosContent } from "./CarouselStyles";
 
 export default function Carousel() {
-    const { data, loading } = useGetManyProductsHook();
+    const { data, loading, fetch } = useGetManyProductsHook(false);
+
+    useEffect(() => {
+        fetch({ tags: [], currentPage: 1, itemsAmount: 10 });
+    }, []);
+
     return (
         <>
             {loading && <ContainerSkeleton />}
