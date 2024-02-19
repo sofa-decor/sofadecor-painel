@@ -23,9 +23,7 @@ export default function ProductsPageComponent() {
 
     useEffect(() => {
         fetch({ currentPage: 1, tags: [currentTab] });
-    }, []);
-
-    console.log(data);
+    }, [currentTab]);
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
@@ -62,10 +60,10 @@ export default function ProductsPageComponent() {
                     </Typography>
                 </Stack>
 
-                {data && data.products.length > 0 && (
+                {data && data?.products.length > 0 && (
                     <>
                         <ProductsList>
-                            {data.products.map((product: Product) => (
+                            {data?.products.map((product: Product) => (
                                 <ProductCardComponent key={product.id} product={product} />
                             ))}
                         </ProductsList>
@@ -73,8 +71,8 @@ export default function ProductsPageComponent() {
                             // showFirstButton
                             // showLastButton
                             onChange={handleChangePagination}
-                            page={data.page}
-                            count={data.totalPages}
+                            page={data?.page || 1}
+                            count={data?.totalPages || 1}
                             variant="outlined"
                             size="small"
                             color="primary"
