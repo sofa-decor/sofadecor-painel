@@ -22,7 +22,7 @@ export default function ProductsPageComponent() {
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
 
     useEffect(() => {
-        fetch({ currentPage: 1, tags: [currentTab] });
+        fetch({ currentPage: 1, tags: [currentTab], itemsAmount: 12 });
     }, [currentTab]);
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
