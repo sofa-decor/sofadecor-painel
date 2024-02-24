@@ -1,6 +1,6 @@
 import { Delete, Edit } from "@mui/icons-material";
-import { Alert, CircularProgress, Stack, Typography } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { Alert, CircularProgress, Pagination, Stack, Typography } from "@mui/material";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import {
     Product,
     useGetManyProductsHook,
@@ -10,13 +10,12 @@ import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 import PageLoader from "../../../../components/Loaders/page-loader/PageLoader";
 
 export default function AdminProductsPageComponent() {
-    const { data, loading, fetch } = useGetManyProductsHook();
+    const { data, loading, fetch } = useGetManyProductsHook(false);
     const [products, setProducts] = useState<Array<Product> | null>(null);
 
     useEffect(() => {
-        if (!data) return;
-        if (data.products.length == 1) fetch({ name: "" });
-        setProducts(data.products);
+        if (!data) fetch({ currentPage: 1, itemsAmount: 15, name: undefined });
+        if (data) setProducts(data.products);
     }, [data]);
 
     const deleteProductById = async (id: string) => {
@@ -32,15 +31,32 @@ export default function AdminProductsPageComponent() {
         ));
     };
 
+    const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        fetch({ currentPage: page, itemsAmount: 15, name: undefined });
+    };
+
     return (
         <Stack direction="column" alignItems="center">
-            <HeaderItem amount={products?.length || 0} />
+            <HeaderItem amount={data?.totalItems || 0} />
             {products && getListItems()}
-            {!products && loading && <PageLoader />}
+            {(!data?.products || loading) && <PageLoader />}
             {products && products.length == 0 && (
                 <Alert severity="info" variant="filled" sx={{ width: "100%" }}>
                     Nenhum produto encontrado
                 </Alert>
+            )}
+            {products && (
+                <Pagination
+                    onChange={handleChangePagination}
+                    page={data?.page || 1}
+                    count={data?.totalPages || 1}
+                    variant="outlined"
+                    size="small"
+                    color="primary"
+                    sx={{ margin: "7px 0", alignSelf: "center" }}
+                />
             )}
         </Stack>
     );
