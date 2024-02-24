@@ -14,7 +14,7 @@ export const HeaderContainer = styled(Paper)`
     @media screen and (max-width: 700px) {
         padding: none !important;
         justify-content: center !important;
-        gap: 15px !important;
+        gap: 5px !important;
     }
 `;
 

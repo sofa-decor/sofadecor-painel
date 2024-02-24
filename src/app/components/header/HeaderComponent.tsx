@@ -8,6 +8,8 @@ import OrderService from "../../../services/OrderService";
 import appColors from "../../colors/appColors";
 import { DesktopVisible } from "../smallers-helpers";
 import { HeaderContainer, LogoBox } from "./HeaderStyles";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 const paletteMUI = {
     primary: {
@@ -24,6 +26,7 @@ const headerTheme = createTheme({
 
 export default function HeaderComponent() {
     const { router } = useAppRouterHook();
+    const navigate = useNavigate();
     const [tabValue, setTabValue] = useState<string>("store");
 
     useEffect(() => {
@@ -42,6 +45,7 @@ export default function HeaderComponent() {
     return (
         <ThemeProvider theme={headerTheme}>
             <HeaderContainer sx={{ background: "#000" }}>
+                <ArrowBackIcon sx={{ cursor: "pointer" }} onClick={() => navigate(-1)} />
                 <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
                 </LogoBox>

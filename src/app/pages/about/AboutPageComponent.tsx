@@ -79,6 +79,12 @@ export default function AboutPageComponent() {
                             backgroundSize: "contain",
                         }}
                     />
+                    <a
+                        href="https://www.google.com.br/maps/place/Av.+Dorival+C%C3%A2ndido+Luz+de+Oliveira,+977+-+Jansen,+Gravata%C3%AD+-+RS,+94035-080/@-29.9374306,-51.0065452,17z/data=!3m1!4b1!4m6!3m5!1s0x95190b4f3aaa2911:0xc923d5db199f41a0!8m2!3d-29.9374353!4d-51.0039703!16s%2Fg%2F11hbgpxjdy?entry=ttu"
+                        target="_blank"
+                    >
+                        Acesse o maps
+                    </a>
                 </LocationMapContent>
             </PageContent>
         </>

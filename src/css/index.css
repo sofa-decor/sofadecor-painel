@@ -5,6 +5,7 @@ body {
     background-color: #f3f6f9;
 }
 
-* {
+*,
+a {
     box-sizing: border-box;
 }
