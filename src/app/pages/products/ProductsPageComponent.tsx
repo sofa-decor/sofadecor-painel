@@ -1,5 +1,6 @@
-import { Box, Pagination, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../../../css/App.css";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
@@ -8,7 +9,13 @@ import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import { AlertError, AlertInfo } from "../../components/alert";
 import HeaderComponent from "../../components/header/HeaderComponent";
 import ProductCardComponent from "../../components/product-card/ProductCardComponent";
-import { ProductsList } from "./ProductsPageStyles";
+import {
+    ActiveButtonTab,
+    ButtonTab,
+    FilterButton,
+    FilterCounter,
+    ProductsList,
+} from "./ProductsPageStyles";
 
 export type HomeRedirectState = {
     category: ProductTags;
@@ -17,19 +24,14 @@ export type HomeRedirectState = {
 export default function ProductsPageComponent() {
     const location = useLocation();
     const initialTab = location.state?.category;
-    const tabsValues = Object.values(ProductTags);
+    const [tabsValues] = useState(Object.values(ProductTags));
     const [currentTab, setCurrentTab] = useState<string>(initialTab || ProductTags.chairs);
+    const [isOpenFilterBar, setIsOpenFilterBar] = useState<boolean>(false);
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
 
     useEffect(() => {
         fetch({ currentPage: 1, tags: [currentTab], itemsAmount: 12 });
     }, [currentTab]);
-
-    const handleChangeTab = (e: SyntheticEvent, value: string) => {
-        e.preventDefault();
-        fetch({ tags: [value], currentPage: 1 });
-        setCurrentTab(value);
-    };
 
     const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
         e.preventDefault();
@@ -37,22 +39,38 @@ export default function ProductsPageComponent() {
         fetch({ tags: [currentTab], currentPage: page });
     };
 
+    const handleOpenFilterButton = () => {
+        setIsOpenFilterBar(!isOpenFilterBar);
+    };
+
     return (
         <>
             <HeaderComponent />
             <Box className="app-page-container">
-                <Stack
-                    borderBottom={1}
-                    borderColor="lightGray"
-                    width="fit-content"
-                    alignSelf="center"
-                    fontWeight={500}
-                >
-                    <Tabs value={currentTab} onChange={handleChangeTab}>
-                        {tabsValues.map((value: string) => (
-                            <Tab label={value} value={value} key={value} />
-                        ))}
-                    </Tabs>
+                {/* Tab menu */}
+                <Stack direction="row" gap={1} flexWrap="wrap" justifyContent="center">
+                    <FilterButton variant="elevation" onClick={handleOpenFilterButton}>
+                        <FilterCounter>1</FilterCounter>
+                        <FilterAltIcon scale={6} />
+                    </FilterButton>
+                    {isOpenFilterBar &&
+                        tabsValues.map((value: string) =>
+                            currentTab === value ? (
+                                <ActiveButtonTab size="small" variant="outlined" key={value}>
+                                    {value}
+                                </ActiveButtonTab>
+                            ) : (
+                                <ButtonTab
+                                    size="small"
+                                    onClick={() => setCurrentTab(value)}
+                                    variant="outlined"
+                                    color="primary"
+                                    key={value}
+                                >
+                                    {value}
+                                </ButtonTab>
+                            )
+                        )}
                 </Stack>
                 <Stack direction="row" justifyContent="center" alignItems="center" marginBottom={2}>
                     <Typography variant="caption">
@@ -68,8 +86,6 @@ export default function ProductsPageComponent() {
                             ))}
                         </ProductsList>
                         <Pagination
-                            // showFirstButton
-                            // showLastButton
                             onChange={handleChangePagination}
                             page={data?.page || 1}
                             count={data?.totalPages || 1}
@@ -81,7 +97,7 @@ export default function ProductsPageComponent() {
                     </>
                 )}
 
-                {loading && <PageLoader />}
+                {(loading || !data) && <PageLoader />}
 
                 {data?.products.length == 0 && !loading && (
                     <AlertInfo>Não encontramos produtos no momento, volte mais tarde</AlertInfo>
