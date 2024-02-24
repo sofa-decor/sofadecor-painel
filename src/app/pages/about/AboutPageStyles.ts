@@ -14,7 +14,7 @@ export const PagePadding = styled.div`
 `;
 
 export const PageContent = styled.div`
-    max-width: 100dvw;
+    max-width: 100dvw !important;
     display: flex;
     flex-direction: column;
 `;
@@ -27,7 +27,7 @@ export const ButtomsCategoriesContainer = styled.div`
     justify-content: center;
     background-color: #1e1e1e;
     color: ${appColors.background} !important;
-    gap: 20px;
+    gap: 10px;
     padding: ${paddingComponents};
 
     @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
@@ -36,7 +36,7 @@ export const ButtomsCategoriesContainer = styled.div`
 `;
 
 export const ButtomCategoriesCard = styled(Card)`
-    width: 45%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 15px;

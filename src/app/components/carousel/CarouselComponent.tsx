@@ -1,10 +1,16 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { useEffect } from "react";
 import CarouselMUI from "react-material-ui-carousel";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import appColors from "../../colors/appColors";
-import { ContainerSkeleton, ContainerSlider, ItemImage, ItemInfosContent } from "./CarouselStyles";
+import {
+    ContainerSkeleton,
+    ContainerSlider,
+    ItemInfoMobileHide,
+    ItemImage,
+    ItemInfosContent,
+} from "./CarouselStyles";
 
 export default function Carousel() {
     const { data, loading, fetch } = useGetManyProductsHook(false);
@@ -36,12 +42,12 @@ export default function Carousel() {
                             <ContainerSlider key={item.id}>
                                 <ItemImage imageUrl={url} />
                                 <ItemInfosContent>
-                                    <Typography variant="h1" fontWeight={900} fontSize={24}>
+                                    <ItemInfoMobileHide variant="h1" fontWeight={900} fontSize={24}>
                                         {item.name}
-                                    </Typography>
-                                    <Typography variant="body2" fontSize={16}>
+                                    </ItemInfoMobileHide>
+                                    <ItemInfoMobileHide variant="body2" fontSize={16}>
                                         {getDescription()}
-                                    </Typography>
+                                    </ItemInfoMobileHide>
                                     <Button
                                         variant="contained"
                                         sx={{

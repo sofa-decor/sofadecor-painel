@@ -1,4 +1,3 @@
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Typography } from "@mui/material";
 import Armchair from "../../../assets/armchair-w.png";
 import Chair from "../../../assets/chair-w.png";
@@ -36,10 +35,10 @@ export default function AboutPageComponent() {
             <PageContent>
                 <Carousel />
                 <PagePadding>
-                    <Typography variant="h4" color="primary" fontWeight={500}>
+                    <Typography variant="h5" color="primary" fontWeight={500}>
                         Quem somos
                     </Typography>
-                    <Typography variant="body2" fontSize={16}>
+                    <Typography variant="body2" fontSize={15}>
                         Nossa empresa surgiu para atender um mercado cada vez maior de pessoas e
                         empresas que demandam conteúdo textual de qualidade para alcançarem seus
                         objetivos e se diferenciarem no mercado moderno cada vez mais competitivo.
@@ -50,20 +49,11 @@ export default function AboutPageComponent() {
                         a produção de conteúdo textual de qualidade, em linha com as mais modernas
                         técnicas, filosofias e metodologias, em todas áreas do conhecimento,
                         trazendo para os textos a vanguarda existente no mundo acadêmico e
-                        corporativo, no Brasil e no exterior. Seja uma monografia, um trabalho de
-                        conclusão de curso, uma dissertação, uma tese, um artigo científico, uma
-                        apresentação, uma palestra ou uma aula. Seja um manual, uma campanha, uma
-                        comunicação interna, com seus colaboradores, ou externa, com o mercado ou
-                        seus acionistas. Não importa onde você esteja, no Brasil ou no exterior. Não
-                        importa se precisa de uma tradução em português ou para outro idioma.
-                        Dedique-se ao que é realmente importante para você ou seu negócio. Deixe que
-                        cuidamos do resto. Importante Não vendemos trabalhos acadêmicos prontos. Mas
-                        te ajudamos do começo ao fim. Somos uma empresa de conteúdo que pode
-                        auxiliá-lo em todas as suas necessidades e entregar um trabalho superior.
+                        corporativo, no Brasil e no exterior.
                     </Typography>
                 </PagePadding>
                 <ButtomsCategoriesContainer>
-                    <Typography variant="h4" fontWeight={500} width="100%">
+                    <Typography variant="h5" fontWeight={500} width="100%">
                         Qual ambiente deseja redecorar ?!
                     </Typography>
                     {categories.map(tag => (
@@ -71,10 +61,9 @@ export default function AboutPageComponent() {
                             elevation={8}
                             onClick={() => router.products.go({ category: tag.name })}
                         >
-                            <img height={"90dvw"} src={tag.image} alt="logo" />
-                            <Typography fontWeight={500} variant="h5">
-                                {tag.name}
-                                <ArrowOutwardIcon fontSize="small" />
+                            <img height="50px" src={tag.image} alt="logo" />
+                            <Typography fontWeight={500} fontSize={12} variant="body2">
+                                {tag.name.toUpperCase()}
                             </Typography>
                         </ButtomCategoriesCard>
                     ))}
