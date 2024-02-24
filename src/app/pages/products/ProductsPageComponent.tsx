@@ -1,5 +1,5 @@
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Box, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Button, Pagination, Stack, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../../../css/App.css";
@@ -25,22 +25,31 @@ export default function ProductsPageComponent() {
     const location = useLocation();
     const initialTab = location.state?.category;
     const [tabsValues] = useState(Object.values(ProductTags));
-    const [currentTab, setCurrentTab] = useState<string>(initialTab || ProductTags.chairs);
+    const [selectedTags, setSelectedTags] = useState<Array<string>>([
+        initialTab || ProductTags.armchairs,
+    ]);
     const [isOpenFilterBar, setIsOpenFilterBar] = useState<boolean>(false);
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
 
     useEffect(() => {
-        fetch({ currentPage: 1, tags: [currentTab], itemsAmount: 12 });
-    }, [currentTab]);
+        fetch({ currentPage: 1, tags: selectedTags, itemsAmount: 12 });
+    }, [selectedTags]);
 
     const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
         e.preventDefault();
         window.scrollTo(0, 0);
-        fetch({ tags: [currentTab], currentPage: page });
+        fetch({ tags: selectedTags, currentPage: page });
     };
 
     const handleOpenFilterButton = () => {
         setIsOpenFilterBar(!isOpenFilterBar);
+    };
+
+    const handleSelectedFilters = (value: string) => {
+        const tags = [...selectedTags];
+        if (tags.includes(value)) {
+            tags.splice(tags.indexOf(value), 1);
+        } else setSelectedTags([...tags, value]);
     };
 
     return (
@@ -48,21 +57,31 @@ export default function ProductsPageComponent() {
             <HeaderComponent />
             <Box className="app-page-container">
                 {/* Tab menu */}
-                <Stack direction="row" gap={1} flexWrap="wrap" justifyContent="center">
+                <Stack
+                    direction="row"
+                    gap={1}
+                    flexWrap="wrap"
+                    justifyContent={isOpenFilterBar ? "center" : "start"}
+                >
                     <FilterButton variant="elevation" onClick={handleOpenFilterButton}>
-                        <FilterCounter>1</FilterCounter>
+                        <FilterCounter>{selectedTags.length}</FilterCounter>
                         <FilterAltIcon scale={6} />
                     </FilterButton>
+                    {!isOpenFilterBar && (
+                        <Button variant="text" disabled>
+                            {"Filtros"}
+                        </Button>
+                    )}
                     {isOpenFilterBar &&
                         tabsValues.map((value: string) =>
-                            currentTab === value ? (
+                            selectedTags.includes(value) ? (
                                 <ActiveButtonTab size="small" variant="outlined" key={value}>
                                     {value}
                                 </ActiveButtonTab>
                             ) : (
                                 <ButtonTab
                                     size="small"
-                                    onClick={() => setCurrentTab(value)}
+                                    onClick={() => handleSelectedFilters(value)}
                                     variant="outlined"
                                     color="primary"
                                     key={value}

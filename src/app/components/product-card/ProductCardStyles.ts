@@ -10,6 +10,7 @@ export const Container = styled(Paper)`
     width: 23%;
     background-color: #ffffff !important;
     margin-bottom: 15px;
+    justify-content: space-between !important;
     text-align: left;
     align-items: center;
     position: relative;
@@ -37,7 +38,7 @@ export const Image = styled.div<ImageParams>`
 
 export const TitleItemName = styled(Typography)`
     font-weight: 700 !important;
-    font-size: 1.2rem !important;
+    font-size: 1.05rem !important;
     margin-top: 5px !important;
     margin-bottom: 8px !important;
 
