@@ -47,9 +47,12 @@ export default function ProductsPageComponent() {
 
     const handleSelectedFilters = (value: string) => {
         const tags = [...selectedTags];
+        console.log(value);
+        console.log(tags);
         if (tags.includes(value)) {
             tags.splice(tags.indexOf(value), 1);
-        } else setSelectedTags([...tags, value]);
+        } else tags.push(value);
+        setSelectedTags([...tags]);
     };
 
     return (
@@ -75,7 +78,12 @@ export default function ProductsPageComponent() {
                     {isOpenFilterBar &&
                         tabsValues.map((value: string) =>
                             selectedTags.includes(value) ? (
-                                <ActiveButtonTab size="small" variant="outlined" key={value}>
+                                <ActiveButtonTab
+                                    size="small"
+                                    variant="outlined"
+                                    onClick={() => handleSelectedFilters(value)}
+                                    key={value}
+                                >
                                     {value}
                                 </ActiveButtonTab>
                             ) : (
