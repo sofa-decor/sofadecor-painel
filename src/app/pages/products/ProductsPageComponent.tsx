@@ -26,7 +26,7 @@ export default function ProductsPageComponent() {
     const initialTab = location.state?.category;
     const [tabsValues] = useState(Object.values(ProductTags));
     const [selectedTags, setSelectedTags] = useState<Array<string>>([
-        initialTab || ProductTags.armchairs,
+        initialTab || ProductTags.chairs,
     ]);
     const [isOpenFilterBar, setIsOpenFilterBar] = useState<boolean>(false);
     const { loading, data, error, fetch } = useGetManyProductsHook(false);
@@ -35,7 +35,7 @@ export default function ProductsPageComponent() {
         fetch({ currentPage: 1, tags: selectedTags, itemsAmount: 12 });
     }, [selectedTags]);
 
-    const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
+    const handleChangePagination = (_e: ChangeEvent<unknown>, page: number) => {
         // e.preventDefault();
         // window.scrollTo(0, 0);
         console.log(page);

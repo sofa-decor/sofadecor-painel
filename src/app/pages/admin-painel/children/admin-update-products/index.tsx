@@ -40,7 +40,7 @@ export default function AdminUpdateProductsPageComponent() {
     const [imagesObject, setImagesObject] = useState<Image[] | null>(null);
 
     // UPDATE
-    const [tagsValue, setTagsValue] = useState(["cadeiras"]);
+    const [tagsValue, setTagsValue] = useState<Array<string>>([]);
 
     useEffect(() => {
         // console.log(productName);
