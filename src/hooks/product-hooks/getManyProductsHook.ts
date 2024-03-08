@@ -3,10 +3,11 @@ import ProductsService from "../../services/ProductsService";
 import useAsyncAxiosHook from "../useAsyncAxiosHook";
 
 export type Product = {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     images: Image[];
+    mainImage: string;
     tags: string[];
     rooms: string[];
     createdAt: Date;

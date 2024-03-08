@@ -7,8 +7,8 @@ import appColors from "../../colors/appColors";
 import {
     ContainerSkeleton,
     ContainerSlider,
-    ItemInfoMobileHide,
     ItemImage,
+    ItemInfoMobileHide,
     ItemInfosContent,
 } from "./CarouselStyles";
 
@@ -39,7 +39,7 @@ export default function Carousel() {
                         };
 
                         return (
-                            <ContainerSlider key={item.id}>
+                            <ContainerSlider key={item._id}>
                                 <ItemImage imageUrl={url} />
                                 <ItemInfosContent>
                                     <ItemInfoMobileHide variant="h1" fontWeight={900} fontSize={24}>

@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 // import { useState } from "react";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import { Image as ImageType, Product } from "../../../hooks/product-hooks/getManyProductsHook";
+import { Product } from "../../../hooks/product-hooks/getManyProductsHook";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import { BuyButton, Container, DescriptionItem, Image, TitleItemName } from "./ProductCardStyles";
 
@@ -14,7 +14,7 @@ export default function ProductCardComponent({ product }: params) {
     const click = () => router.product_view.go(product.name);
     // const [cardHover, setCardHover] = useState<boolean>(false);
 
-    const mainImage = product.images.find(image => image.main == true) as ImageType;
+    // const mainImage = product.images.find(image => image.main == true) as ImageType;
 
     return (
         <Container
@@ -24,7 +24,7 @@ export default function ProductCardComponent({ product }: params) {
             onClick={click}
             sx={{ alignItems: "center" }}
         >
-            <Image imgurl={mainImage.url}></Image>
+            <Image imgurl={product.mainImage}></Image>
             <Stack sx={{ padding: "0 10px 15px" }}>
                 <TitleItemName variant="h1">{product.name}</TitleItemName>
                 <DescriptionItem variant="body2">

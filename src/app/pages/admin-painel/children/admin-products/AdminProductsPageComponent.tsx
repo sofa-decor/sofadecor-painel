@@ -14,27 +14,27 @@ export default function AdminProductsPageComponent() {
     const [products, setProducts] = useState<Array<Product> | null>(null);
 
     useEffect(() => {
-        if (!data) fetch({ currentPage: 1, itemsAmount: 15, name: undefined });
+        if (!data) fetch({ currentPage: 1, itemsAmount: 20, name: undefined });
         if (data) setProducts(data.products);
     }, [data]);
 
     const deleteProductById = async (id: string) => {
         if (!products) return;
-        const newList = products.filter(item => item.id != id);
+        const newList = products.filter(item => item._id != id);
         setProducts(newList);
     };
 
     const getListItems = () => {
         if (!products) return [];
         return products.map(item => (
-            <ProductItem key={item.id} product={item} deleteProductById={deleteProductById} />
+            <ProductItem key={item._id} product={item} deleteProductById={deleteProductById} />
         ));
     };
 
     const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
-        e.preventDefault();
-        window.scrollTo(0, 0);
-        fetch({ currentPage: page, itemsAmount: 15, name: undefined });
+        // e.preventDefault();
+        // window.scrollTo(0, 0);
+        fetch({ currentPage: page, itemsAmount: 20, name: undefined });
     };
 
     return (
@@ -43,7 +43,7 @@ export default function AdminProductsPageComponent() {
             {products && getListItems()}
             {(!data?.products || loading) && <PageLoader />}
             {products && products.length == 0 && (
-                <Alert severity="info" variant="filled" sx={{ width: "100%" }}>
+                <Alert severity="info" variant="filled" sx={{ width: "200%" }}>
                     Nenhum produto encontrado
                 </Alert>
             )}
@@ -73,11 +73,11 @@ const ProductItem: FC<ProductItemParams> = ({ product, deleteProductById }) => {
 
     useEffect(() => {
         if (!data) return;
-        deleteProductById(product.id);
+        deleteProductById(product._id);
     }, [data]);
 
     const onDeleteProducts = () => {
-        remove(product.id);
+        remove(product._id);
     };
 
     return (

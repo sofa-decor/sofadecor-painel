@@ -36,9 +36,10 @@ export default function ProductsPageComponent() {
     }, [selectedTags]);
 
     const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
-        e.preventDefault();
-        window.scrollTo(0, 0);
-        fetch({ tags: selectedTags, currentPage: page });
+        // e.preventDefault();
+        // window.scrollTo(0, 0);
+        console.log(page);
+        fetch({ tags: selectedTags, currentPage: page, itemsAmount: 12, name: undefined });
     };
 
     const handleOpenFilterButton = () => {
@@ -47,13 +48,14 @@ export default function ProductsPageComponent() {
 
     const handleSelectedFilters = (value: string) => {
         const tags = [...selectedTags];
-        console.log(value);
-        console.log(tags);
         if (tags.includes(value)) {
             tags.splice(tags.indexOf(value), 1);
         } else tags.push(value);
         setSelectedTags([...tags]);
     };
+
+    console.log(data);
+    console.log(error);
 
     return (
         <>
@@ -109,7 +111,7 @@ export default function ProductsPageComponent() {
                     <>
                         <ProductsList>
                             {data?.products.map((product: Product) => (
-                                <ProductCardComponent key={product.id} product={product} />
+                                <ProductCardComponent key={product._id} product={product} />
                             ))}
                         </ProductsList>
                         <Pagination

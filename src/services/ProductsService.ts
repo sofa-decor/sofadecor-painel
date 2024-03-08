@@ -29,8 +29,9 @@ class ProductsService {
     }
 
     async update(data: Partial<Product>) {
-        const id = data.id;
-        delete data.id;
+        console.log("update product id", data);
+        const id = data._id;
+        delete data._id;
         return axiosClient.put(`/products/${id}`, data, configAuthorization());
     }
 
