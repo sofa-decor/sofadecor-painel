@@ -23,3 +23,15 @@ export const LogoBox = styled(Stack)`
         display: none !important;
     }
 `;
+
+export const AbsolutLogoutCountainer = styled(Paper)`
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    position: absolute;
+    top: 80px;
+    right: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+`;

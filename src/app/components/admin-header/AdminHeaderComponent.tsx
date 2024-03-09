@@ -1,10 +1,12 @@
-import { Stack, Tab, Tabs } from "@mui/material";
+import { Logout } from "@mui/icons-material";
+import { Stack, Tab, Tabs, Typography } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SyntheticEvent, useState } from "react";
 import Logo from "../../../assets/logo.png";
+import useAuthUserHook from "../../../hooks/auth-hooks/useAuthUserHook";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import appColors from "../../colors/appColors";
-import { HeaderContainer, LogoBox } from "./AdminHeaderStyles";
+import { AbsolutLogoutCountainer, HeaderContainer, LogoBox } from "./AdminHeaderStyles";
 
 const paletteMUI = {
     primary: {
@@ -22,6 +24,7 @@ const headerTheme = createTheme({
 export default function AdminHeaderComponent() {
     const [tabValue, setTabValue] = useState("produtos");
     const { router } = useAppRouterHook();
+    const { user, setUser } = useAuthUserHook();
 
     const handleChangeTab = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
@@ -33,8 +36,19 @@ export default function AdminHeaderComponent() {
         setTabValue(value);
     };
 
+    const logout = () => {
+        localStorage.clear();
+        setUser(null);
+    };
+
     return (
         <ThemeProvider theme={headerTheme}>
+            {user && (
+                <AbsolutLogoutCountainer onClick={logout}>
+                    <Typography variant="caption">Sair</Typography>
+                    <Logout color="primary" fontSize="small" />
+                </AbsolutLogoutCountainer>
+            )}
             <HeaderContainer sx={{ background: "#000 !important" }}>
                 <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
