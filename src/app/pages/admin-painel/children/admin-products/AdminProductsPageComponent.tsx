@@ -1,5 +1,5 @@
-import { Delete, Edit } from "@mui/icons-material";
-import { Alert, CircularProgress, Pagination, Stack, Typography } from "@mui/material";
+import { Delete, Edit, Search } from "@mui/icons-material";
+import { Alert, CircularProgress, Pagination, Stack, TextField, Typography } from "@mui/material";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import {
     Product,
@@ -37,13 +37,28 @@ export default function AdminProductsPageComponent() {
         fetch({ currentPage: page, itemsAmount: 20, name: undefined });
     };
 
+    const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        const value = e.target.value;
+        if (value.length > 2 || !value)
+            fetch({
+                currentPage: 1,
+                itemsAmount: 20,
+                name: value,
+            });
+    };
+
     return (
         <Stack direction="column" alignItems="center">
+            <Stack direction="row" gap="2px" alignItems="center">
+                <TextField variant="standard" onChange={handleChangeSearch} />
+                <Search fontSize="small" color="primary" />
+            </Stack>
             <HeaderItem amount={data?.totalItems || 0} />
             {products && getListItems()}
             {(!data?.products || loading) && <PageLoader />}
             {products && products.length == 0 && (
-                <Alert severity="info" variant="filled" sx={{ width: "200%" }}>
+                <Alert severity="info" variant="filled" sx={{ width: "100%" }}>
                     Nenhum produto encontrado
                 </Alert>
             )}
