@@ -97,3 +97,38 @@ export const ProductDetails = styled(Box)`
         flex: none;
     }
 `;
+
+export const ImageShowingContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 60px;
+    background-color: #fff;
+    /* opacity: 0.4; */
+`;
+
+export const ShowwingImageClicked = styled(Box)`
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+`;
+
+export const ShowwingImageCloseIcon = styled(Box)`
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    place-items: center;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+`;

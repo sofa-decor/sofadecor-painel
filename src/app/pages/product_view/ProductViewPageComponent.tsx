@@ -1,4 +1,4 @@
-import { Check, WhatsApp } from "@mui/icons-material";
+import { Check, Close, WhatsApp } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -9,20 +9,29 @@ import HeaderComponent from "../../components/header/HeaderComponent";
 import {
     CurrentImage,
     ImageOption,
+    ImageShowingContainer,
     ImagesContainer,
     ImagesOptionsList,
     ProductDetails,
     ResponsivePageStack,
+    ShowwingImageClicked,
+    ShowwingImageCloseIcon,
 } from "./ProductViewStyles";
+
+type stylesObj = {
+    backgroundImage?: string;
+    backgroundPosition?: string;
+};
 
 export default function ProductViewPageComponent() {
     const location = useLocation();
     const productName = location.state.name;
     const [product, setProduct] = useState<Product | null>(null);
-    const [currentImageStyle, setCurrentImageStyle] = useState<object>({});
+    const [currentImageStyle, setCurrentImageStyle] = useState<stylesObj>({});
     const [currentUrlPage] = useState<string>(window.location.href);
     const [targetWppUrl, setTargetWppUrl] = useState<string | null>(null);
     const { data, fetch: fetchProducts } = useGetManyProductsHook(false);
+    const [upperImage, setUpperImage] = useState<boolean>(false);
 
     useEffect(() => {
         if (!productName) return;
@@ -61,6 +70,10 @@ export default function ProductViewPageComponent() {
         setCurrentImageStyle({ ...currentImageStyle, backgroundImage: `url(${imageUrl})` });
     };
 
+    const handleShowingImage = () => {
+        setUpperImage(!upperImage);
+    };
+
     return (
         <>
             <HeaderComponent />
@@ -87,6 +100,7 @@ export default function ProductViewPageComponent() {
                                 <CurrentImage
                                     onMouseMove={handleMouseMove}
                                     style={currentImageStyle}
+                                    onClick={handleShowingImage}
                                 />
                                 <ImagesOptionsList>
                                     {product.images.map(img => (
@@ -138,7 +152,7 @@ export default function ProductViewPageComponent() {
                                                 <Button
                                                     startIcon={<WhatsApp />}
                                                     variant="contained"
-                                                    color="primary"
+                                                    color="secondary"
                                                     sx={{
                                                         color: "#ffffff",
                                                         margin: "8px 0 1px",
@@ -163,6 +177,24 @@ export default function ProductViewPageComponent() {
                     <PageLoader />
                 )}
             </Box>
+
+            {/* Image cleked and showing big slide */}
+            {upperImage && (
+                <ImageShowingContainer>
+                    <ShowwingImageClicked
+                        style={{ backgroundImage: currentImageStyle.backgroundImage }}
+                    />
+                    <ShowwingImageCloseIcon>
+                        <Close
+                            color="primary"
+                            fontSize="large"
+                            sx={{ cursor: "pointer" }}
+                            onClick={handleShowingImage}
+                        />
+                        <Typography variant="overline">Close</Typography>
+                    </ShowwingImageCloseIcon>
+                </ImageShowingContainer>
+            )}
         </>
     );
 }
