@@ -1,6 +1,6 @@
 import { Delete, Search } from "@mui/icons-material";
 import { Alert, CircularProgress, Stack, TextField, Typography } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import { useDeleteUserHook } from "../../../../../hooks/user-hooks/useDeleteUserHook";
 import { useGetAllUsersHook } from "../../../../../hooks/user-hooks/useGetAllUsersHook";
 import { User } from "../../../../../hooks/user-hooks/useGetUserHook";
@@ -16,11 +16,21 @@ export default function AdminUsersPageComponent() {
         return data.map(item => <UserItem key={item.id} user={item} reloadUsers={fetch} />);
     };
 
+    const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        const value = e.target.value;
+        if (value.length > 2 || !value) fetch({ name: value });
+    };
+
     return (
         <Stack direction="column" alignItems="center" gap="10px">
             <Stack direction="row" gap="2px" alignItems="center">
-                <TextField variant="standard" />
-                <Search fontSize="small" />
+                <TextField
+                    variant="standard"
+                    onChange={handleChangeSearch}
+                    placeholder="Buscar pelo nome"
+                />
+                <Search fontSize="small" color="primary" />
             </Stack>
             <Typography variant="caption">{data?.length || 0} resultados</Typography>
             <br />

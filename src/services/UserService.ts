@@ -1,4 +1,5 @@
 import { axiosClient, configAuthorization } from "../clients/axios.client";
+import { fetchUsersParams } from "../hooks/user-hooks/useGetAllUsersHook";
 import { UserRequest } from "../hooks/user-hooks/usePostUserHook";
 
 export class UserService {
@@ -8,8 +9,10 @@ export class UserService {
         return axiosClient.get(`/users/user`, configAuthorization());
     }
 
-    fetch() {
-        return axiosClient.get(`/users`, configAuthorization());
+    fetch(data?: fetchUsersParams) {
+        let query = `/users?`;
+        if (data && data.name) query += `&name=${data.name}`;
+        return axiosClient.get(query, configAuthorization());
     }
 
     delete(userId: string) {

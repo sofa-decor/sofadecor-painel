@@ -3,10 +3,14 @@ import { UserService } from "../../services/UserService";
 import useAsyncAxiosHook from "../useAsyncAxiosHook";
 import { User } from "./useGetUserHook";
 
+export type fetchUsersParams = {
+    name: string;
+};
+
 interface GetAllUsersHook {
     loading: boolean;
     error: APIError | null;
-    fetch: () => Promise<void>;
+    fetch: (data?: fetchUsersParams) => Promise<void>;
     statusCode: number | null;
     data: Array<User> | null;
 }
@@ -21,7 +25,7 @@ export const useGetAllUsersHook = (): GetAllUsersHook => {
         data,
         status: statusCode,
     } = useAsyncAxiosHook({
-        request: () => service.fetch(),
+        request: data => service.fetch(data),
         immediate: true,
     });
 

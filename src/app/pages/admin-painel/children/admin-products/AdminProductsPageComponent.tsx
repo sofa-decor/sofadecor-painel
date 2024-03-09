@@ -51,7 +51,11 @@ export default function AdminProductsPageComponent() {
     return (
         <Stack direction="column" alignItems="center">
             <Stack direction="row" gap="2px" alignItems="center">
-                <TextField variant="standard" onChange={handleChangeSearch} />
+                <TextField
+                    variant="standard"
+                    onChange={handleChangeSearch}
+                    placeholder="Buscar pelo nome"
+                />
                 <Search fontSize="small" color="primary" />
             </Stack>
             <HeaderItem amount={data?.totalItems || 0} />
