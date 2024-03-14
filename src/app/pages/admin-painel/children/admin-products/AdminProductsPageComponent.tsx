@@ -31,7 +31,7 @@ export default function AdminProductsPageComponent() {
         ));
     };
 
-    const handleChangePagination = (e: ChangeEvent<unknown>, page: number) => {
+    const handleChangePagination = (_e: ChangeEvent<unknown>, page: number) => {
         // e.preventDefault();
         // window.scrollTo(0, 0);
         fetch({ currentPage: page, itemsAmount: 20, name: undefined });
