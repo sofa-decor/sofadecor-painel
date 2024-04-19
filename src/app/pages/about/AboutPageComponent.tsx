@@ -46,11 +46,13 @@ export default function AboutPageComponent() {
                         decoração, garantindo que nossos clientes encontrem exatamente o que
                         precisam para seus espaços.
                         <br />
+                        <br />
                         Nossa equipe está comprometida em proporcionar uma experiência de compra
                         excepcional, oferecendo atendimento personalizado e orientação especializada
                         para ajudar os clientes a escolherem os móveis perfeitos. Priorizamos a
                         qualidade em cada peça, garantindo durabilidade e resistência ao teste do
                         tempo.
+                        <br />
                         <br />
                         Acreditamos que os móveis são elementos essenciais que contribuem para o
                         conforto e a estética de um ambiente. Por isso, estamos sempre em busca de

@@ -32,7 +32,7 @@ export default function FooterComponent() {
 
             <Stack direction="row" justifyContent="space-between">
                 <Typography variant="caption">
-                    Reis Home Decor © 2023 Todos os direitos reservados
+                    Sofa Decor House © 2023 Todos os direitos reservados
                 </Typography>
                 <Typography variant="caption">Desenvolvido por Mateus Rossetto</Typography>
             </Stack>
