@@ -20,7 +20,7 @@ export default function FooterComponent() {
                     >
                         CONTATE-NOS
                     </Typography>
-                    <Typography variant="body1">+55 (51) 9722 4452</Typography>
+                    <Typography variant="body1">(fixo) 3042 1212</Typography>
                     <Typography variant="body1">@sofadecorhouse</Typography>
                     <Typography variant="body1">
                         Av. Dorival Cândido Luz de Oliveira, 977 - Gravataí{" "}

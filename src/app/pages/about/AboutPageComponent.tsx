@@ -39,17 +39,25 @@ export default function AboutPageComponent() {
                         Quem somos
                     </Typography>
                     <Typography variant="body2" fontSize={15}>
-                        Nossa empresa surgiu para atender um mercado cada vez maior de pessoas e
-                        empresas que demandam conteúdo textual de qualidade para alcançarem seus
-                        objetivos e se diferenciarem no mercado moderno cada vez mais competitivo.
-                        Nossa equipe operacional é formada por editores, revisores, escritores,
-                        ghost writers e copywriters, pós-graduados, mestres e doutores, com formação
-                        em humanas, exatas e biológicas e amplo e profundo conhecimento teórico e
-                        prático em suas áreas de atuação. A expertise de nossos consultores garante
-                        a produção de conteúdo textual de qualidade, em linha com as mais modernas
-                        técnicas, filosofias e metodologias, em todas áreas do conhecimento,
-                        trazendo para os textos a vanguarda existente no mundo acadêmico e
-                        corporativo, no Brasil e no exterior.
+                        Sofá Decor é uma loja de móveis renomada em Gravataí, oferecendo uma vasta
+                        seleção de móveis de alta qualidade para transformar qualquer casa em um
+                        verdadeiro lar. Com opções que vão desde sofás elegantes a mesas de jantar
+                        funcionais e beliches confortáveis, atendemos a todos os gostos e estilos de
+                        decoração, garantindo que nossos clientes encontrem exatamente o que
+                        precisam para seus espaços.
+                        <br />
+                        Nossa equipe está comprometida em proporcionar uma experiência de compra
+                        excepcional, oferecendo atendimento personalizado e orientação especializada
+                        para ajudar os clientes a escolherem os móveis perfeitos. Priorizamos a
+                        qualidade em cada peça, garantindo durabilidade e resistência ao teste do
+                        tempo.
+                        <br />
+                        Acreditamos que os móveis são elementos essenciais que contribuem para o
+                        conforto e a estética de um ambiente. Por isso, estamos sempre em busca de
+                        tendências e inovações no design de interiores, garantindo uma coleção
+                        inspiradora e atualizada. Seja para pequenas atualizações ou grandes
+                        reformas, a Sofá Decor é o destino ideal para encontrar móveis de alta
+                        qualidade que transformam casas em lares acolhedores.
                     </Typography>
                 </PagePadding>
                 <ButtomsCategoriesContainer>
