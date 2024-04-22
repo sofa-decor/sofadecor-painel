@@ -56,10 +56,10 @@ export default function AdminHeaderComponent() {
                 <Stack direction="row" flex={1} justifyContent="center">
                     <Tabs value={tabValue} onChange={handleChangeTab}>
                         <Tab label="Loja" value="store" />
-                        <Tab label="items" value="produtos" />
-                        <Tab label="+item" value="+produtos" />
+                        <Tab label="Produtos" value="produtos" />
+                        <Tab label="+ Produtos" value="+produtos" />
                         <Tab label="Usuários" value="usuários" />
-                        <Tab label="+Usuários" value="+usuários" />
+                        <Tab label="+ Usuários" value="+usuários" />
                     </Tabs>
                 </Stack>
             </HeaderContainer>

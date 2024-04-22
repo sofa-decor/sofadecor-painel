@@ -115,7 +115,7 @@ export default function AdminCreateProductsPageComponent() {
         <form onSubmit={handleSubmit(onSubmitForm as SubmitHandler<FieldValues>)}>
             <Stack direction="column" gap="10px">
                 <Typography color="primary" variant="h6">
-                    Adicione um novo item
+                    Adicionar um novo produto
                 </Typography>
                 <TextField
                     id="name"
@@ -167,36 +167,40 @@ export default function AdminCreateProductsPageComponent() {
                         <Typography variant="body2">
                             OBS: Foto de capa contem uma estrela, para mudar clique em outra
                         </Typography>
-                        <ImagesContainer>
-                            {imagesObject.map((img, i) => (
-                                <ImageView
-                                    url={img.url}
-                                    key={i}
-                                    main={!!img.main}
-                                    onClick={() => handleClickImage(img)}
-                                >
-                                    <ImageIconsContainer>
-                                        {img.main && (
+                        {imagesObject?.length > 0 ? (
+                            <ImagesContainer>
+                                {imagesObject.map((img, i) => (
+                                    <ImageView
+                                        url={img.url}
+                                        key={i}
+                                        main={!!img.main}
+                                        onClick={() => handleClickImage(img)}
+                                    >
+                                        <ImageIconsContainer>
+                                            {img.main && (
+                                                <ImageIcon>
+                                                    <GradeIcon
+                                                        sx={{ color: "#fff", fontSize: "16px" }}
+                                                    />
+                                                </ImageIcon>
+                                            )}
                                             <ImageIcon>
-                                                <GradeIcon
-                                                    sx={{ color: "#fff", fontSize: "16px" }}
+                                                <DeleteIcon
+                                                    sx={{
+                                                        color: "#fff",
+                                                        fontSize: "16px",
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onClick={() => removeImageObject(img)}
                                                 />
                                             </ImageIcon>
-                                        )}
-                                        <ImageIcon>
-                                            <DeleteIcon
-                                                sx={{
-                                                    color: "#fff",
-                                                    fontSize: "16px",
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() => removeImageObject(img)}
-                                            />
-                                        </ImageIcon>
-                                    </ImageIconsContainer>
-                                </ImageView>
-                            ))}
-                        </ImagesContainer>
+                                        </ImageIconsContainer>
+                                    </ImageView>
+                                ))}
+                            </ImagesContainer>
+                        ) : (
+                            <Typography variant="body2">Nenhuma imagem adicionada!</Typography>
+                        )}
                     </>
                 )}
                 {alert != null && alert}

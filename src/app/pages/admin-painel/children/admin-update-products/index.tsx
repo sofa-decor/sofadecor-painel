@@ -143,7 +143,7 @@ export default function AdminUpdateProductsPageComponent() {
         <form onSubmit={handleSubmit(onSubmitForm as SubmitHandler<FieldValues>)}>
             <Stack direction="column" gap="10px">
                 <Typography color="primary" variant="h6">
-                    Cadstre um novo produto
+                    Editar produto
                 </Typography>
                 <TextField
                     id="name"
@@ -188,7 +188,7 @@ export default function AdminUpdateProductsPageComponent() {
                 </TextField>
 
                 <Typography color="primary" variant="body2">
-                    Upload de Images *
+                    Adicionar imagens *
                 </Typography>
                 <TextField
                     id="images"
@@ -202,10 +202,10 @@ export default function AdminUpdateProductsPageComponent() {
                 {imagesObject && (
                     <>
                         <Typography color="primary" variant="body2" marginTop={3}>
-                            Imagens
+                            Imagens adicionadas
                         </Typography>
                         <Typography variant="body2">
-                            OBS: Foto de capa contem uma estrela, para mudar clique em outra
+                            OBS: Foto de capa contém uma estrela, para mudar clique em outra.
                         </Typography>
                         <ImagesContainer>
                             {imagesObject.map((img, i) => (
