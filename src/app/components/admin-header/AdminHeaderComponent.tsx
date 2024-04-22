@@ -53,7 +53,7 @@ export default function AdminHeaderComponent() {
                 <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
                 </LogoBox>
-                <Stack direction="row" flex={1} justifyContent="center">
+                <Stack marginTop={1} direction="row" flex={1} justifyContent="center">
                     <Tabs value={tabValue} onChange={handleChangeTab}>
                         <Tab label="Loja" value="store" />
                         <Tab label="Produtos" value="produtos" />
