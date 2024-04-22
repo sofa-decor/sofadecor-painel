@@ -121,10 +121,7 @@ export default function ProductViewPageComponent() {
                                     >
                                         {product.name}
                                     </Typography>
-                                    <Typography variant="body1">
-                                        A poltrona tangara tem revestimento em couro-veludo com os
-                                        pes e pegador para maos em madeira de carvalho.
-                                    </Typography>
+                                    <Typography variant="body1">{product.description}</Typography>
                                 </Box>
                                 <Box>
                                     <Stack direction="row" gap={1}>
