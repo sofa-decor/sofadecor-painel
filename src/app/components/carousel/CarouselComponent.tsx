@@ -22,7 +22,14 @@ export default function Carousel() {
     return (
         <>
             {loading && <ContainerSkeleton />}
-            <CarouselMUI animation="slide" autoPlay indicators={false}>
+            <CarouselMUI
+                animation="slide"
+                autoPlay
+                indicators={false}
+                duration={3000}
+                IndicatorIcon
+                interval={6000}
+            >
                 {data?.products &&
                     data.products.map((item: Product) => {
                         const url = item.images.find(img => img.main === true)?.url as string;
@@ -42,7 +49,12 @@ export default function Carousel() {
                             <ContainerSlider key={item._id}>
                                 <ItemImage imageUrl={url} />
                                 <ItemInfosContent>
-                                    <ItemInfoMobileHide variant="h1" fontWeight={900} fontSize={24}>
+                                    <ItemInfoMobileHide
+                                        variant="h1"
+                                        fontWeight={500}
+                                        fontSize={24}
+                                        color={appColors.red}
+                                    >
                                         {item.name}
                                     </ItemInfoMobileHide>
                                     <ItemInfoMobileHide variant="body2" fontSize={16}>

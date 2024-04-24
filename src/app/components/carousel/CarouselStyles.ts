@@ -10,7 +10,7 @@ type ItemParams = {
 export const ContainerSkeleton = styled.div`
     width: 100%;
     height: 300px;
-    background-color: ${appColors.red};
+    background-color: ${appColors.background};
 `;
 
 export const ContainerSlider = styled.div`
@@ -20,9 +20,8 @@ export const ContainerSlider = styled.div`
     flex-direction: row;
     place-items: center !important;
     gap: 10px;
-    background-color: ${appColors.red};
+    background-color: ${appColors.background};
     padding: 10px;
-    color: #ffffff;
 
     @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
         align-items: center;
