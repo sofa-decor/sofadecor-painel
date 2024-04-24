@@ -1,7 +1,16 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import GradeIcon from "@mui/icons-material/Grade";
-import { Button, LinearProgress, MenuItem, Stack, TextField, Typography } from "@mui/material";
-import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import {
+    Button,
+    LinearProgress,
+    MenuItem,
+    Stack,
+    Tab,
+    Tabs,
+    TextField,
+    Typography,
+} from "@mui/material";
+import { ChangeEvent, ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { convertBase64 } from "../../../../../helpers";
 import { Image } from "../../../../../hooks/product-hooks/getManyProductsHook";
@@ -15,6 +24,7 @@ import {
     ImageView,
     ImagesContainer,
 } from "../admin-update-products/styles";
+import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 
 type NewProductSubmited = {
     name: string;
@@ -35,6 +45,8 @@ export default function AdminCreateProductsPageComponent() {
     const [alert, setAlert] = useState<null | ReactElement>(null);
     const [imagesObject, setImagesObject] = useState<Image[]>([]);
     const [tagsValue, setTagsValue] = useState<Array<string>>([]);
+    const { router } = useAppRouterHook();
+    const [tabValue, setTabValue] = useState("Adicionar");
 
     useEffect(() => {
         if (data) {
@@ -110,10 +122,30 @@ export default function AdminCreateProductsPageComponent() {
         const { value } = e.target as unknown as { value: Array<string> };
         setTagsValue(value);
     };
+    const handleChangeTab = (e: SyntheticEvent, value: string) => {
+        e.preventDefault();
+        if (value == "Visualizar") router.admin_painel_products.go();
+        if (value == "Adicionar") router.admin_painel_products_add.go();
+        setTabValue(value);
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmitForm as SubmitHandler<FieldValues>)}>
             <Stack direction="column" gap="10px">
+                <Stack
+                    marginTop={1}
+                    direction="row"
+                    flex={1}
+                    justifyContent="space-between"
+                    width="100%"
+                >
+                    <Tabs value={tabValue} onChange={handleChangeTab}>
+                        <Tab label="Visualizar" value="Visualizar" />
+                        <Tab label="Adicionar" value="Adicionar" />
+                    </Tabs>
+                    <br />
+                    <Stack direction="row" gap="2px" alignItems="center"></Stack>
+                </Stack>
                 <Typography color="primary" variant="h6">
                     Adicionar um novo produto
                 </Typography>

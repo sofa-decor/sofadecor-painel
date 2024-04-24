@@ -4,13 +4,16 @@ import {
     LinearProgress,
     MenuItem,
     Stack,
+    Tab,
+    Tabs,
     TextField,
     Typography,
 } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, SyntheticEvent, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { usersRoles } from "../../../../../data/users-roles.data";
 import { UserRequest, usePostUserHook } from "../../../../../hooks/user-hooks/usePostUserHook";
+import useAppRouterHook from "../../../../../hooks/useAppRouterHook";
 
 const successAlert = (
     <Alert severity="success" variant="filled">
@@ -31,7 +34,9 @@ const conflictErrorAlert = (
 export default function AdminCreateUsersPageComponent() {
     const { register, handleSubmit, reset } = useForm();
     const { post, error, loading, data } = usePostUserHook();
+    const { router } = useAppRouterHook();
     const [alert, setAlert] = useState<null | ReactElement>(null);
+    const [tabValue, setTabValue] = useState("Adicionar");
 
     useEffect(() => {
         if (data) {
@@ -51,11 +56,32 @@ export default function AdminCreateUsersPageComponent() {
         await post(data);
     };
 
+    const handleChangeTab = (e: SyntheticEvent, value: string) => {
+        e.preventDefault();
+        if (value == "Visualizar") router.admin_painel_users.go();
+        if (value == "Adicionar") router.admin_painel_users_add.go();
+        setTabValue(value);
+    };
+
     return (
         <form onSubmit={handleSubmit(onSubmitForm as SubmitHandler<FieldValues>)}>
-            <Stack direction="column" gap="10px" padding={10}>
+            <Stack direction="column" gap="10px">
+                <Stack
+                    marginTop={1}
+                    direction="row"
+                    flex={1}
+                    justifyContent="space-between"
+                    width="100%"
+                >
+                    <Tabs value={tabValue} onChange={handleChangeTab}>
+                        <Tab label="Visualizar" value="Visualizar" />
+                        <Tab label="Adicionar" value="Adicionar" />
+                    </Tabs>
+                    <br />
+                    <Stack direction="row" gap="2px" alignItems="center"></Stack>
+                </Stack>
                 <Typography color="primary" variant="h6">
-                    Adicione um novo usuário
+                    Adicionar um novo usuário
                 </Typography>
                 <TextField
                     id="username"

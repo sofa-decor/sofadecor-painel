@@ -1,6 +1,15 @@
 import { Delete, Edit, Search } from "@mui/icons-material";
-import { Alert, CircularProgress, Pagination, Stack, TextField, Typography } from "@mui/material";
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import {
+    Alert,
+    CircularProgress,
+    Pagination,
+    Stack,
+    Tab,
+    Tabs,
+    TextField,
+    Typography,
+} from "@mui/material";
+import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
 import {
     Product,
     useGetManyProductsHook,
@@ -11,7 +20,9 @@ import PageLoader from "../../../../components/Loaders/page-loader/PageLoader";
 
 export default function AdminProductsPageComponent() {
     const { data, loading, fetch } = useGetManyProductsHook(false);
+    const { router } = useAppRouterHook();
     const [products, setProducts] = useState<Array<Product> | null>(null);
+    const [tabValue, setTabValue] = useState("Visualizar");
 
     useEffect(() => {
         if (!data) fetch({ currentPage: 1, itemsAmount: 20, name: undefined });
@@ -48,15 +59,35 @@ export default function AdminProductsPageComponent() {
             });
     };
 
+    const handleChangeTab = (e: SyntheticEvent, value: string) => {
+        e.preventDefault();
+        if (value == "Visualizar") router.admin_painel_products.go();
+        if (value == "Adicionar") router.admin_painel_products_add.go();
+        setTabValue(value);
+    };
+
     return (
         <Stack direction="column" alignItems="center">
-            <Stack direction="row" gap="2px" alignItems="center">
-                <TextField
-                    variant="standard"
-                    onChange={handleChangeSearch}
-                    placeholder="Buscar pelo nome"
-                />
-                <Search fontSize="small" color="primary" />
+            <Stack
+                marginTop={1}
+                direction="row"
+                flex={1}
+                justifyContent="space-between"
+                width="100%"
+            >
+                <Tabs value={tabValue} onChange={handleChangeTab}>
+                    <Tab label="Visualizar" value="Visualizar" />
+                    <Tab label="Adicionar" value="Adicionar" />
+                </Tabs>
+                <br />
+                <Stack direction="row" gap="2px" alignItems="center">
+                    <TextField
+                        variant="standard"
+                        onChange={handleChangeSearch}
+                        placeholder="Buscar pelo nome"
+                    />
+                    <Search fontSize="small" color="primary" />
+                </Stack>
             </Stack>
             <HeaderItem amount={data?.totalItems || 0} />
             {products && getListItems()}
