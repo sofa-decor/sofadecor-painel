@@ -1,15 +1,14 @@
 import { WhatsApp } from "@mui/icons-material";
-import { Button, Stack, Tab, Tabs } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Button, Stack } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SyntheticEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import OrderService from "../../../services/OrderService";
 import appColors from "../../colors/appColors";
-import { DesktopVisible } from "../smallers-helpers";
 import { HeaderContainer, LogoBox } from "./HeaderStyles";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
 
 const paletteMUI = {
     primary: {
@@ -44,13 +43,13 @@ export default function HeaderComponent() {
 
     return (
         <ThemeProvider theme={headerTheme}>
-            <HeaderContainer sx={{ background: "#000" }}>
+            <HeaderContainer>
                 <ArrowBackIcon sx={{ cursor: "pointer" }} onClick={() => navigate(-1)} />
                 <LogoBox direction="row" flex={1}>
                     <img height={60} src={Logo} alt="logo" />
                 </LogoBox>
 
-                <Stack
+                {/* <Stack
                     height={60}
                     direction="row"
                     flex={1}
@@ -62,18 +61,18 @@ export default function HeaderComponent() {
                         <Tab label="Loja" value="store" />
                         <Tab label="Painel" value="admin" />
                     </Tabs>
-                </Stack>
+                </Stack> */}
 
                 <Stack direction="row" flex={1} justifyContent="flex-end">
                     <Button
                         color="secondary"
-                        size="small"
+                        size="large"
                         variant="text"
                         startIcon={<WhatsApp />}
                         target="_blank"
                         href={OrderService.getSenderWppLink()}
                     >
-                        <DesktopVisible>Compre pelo WhatsApp</DesktopVisible>
+                        {/* <DesktopVisible>Compre pelo WhatsApp</DesktopVisible> */}
                     </Button>
                 </Stack>
             </HeaderContainer>

@@ -1,27 +1,17 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Button } from "@mui/material";
-import { useEffect } from "react";
+import { useState } from "react";
 import CarouselMUI from "react-material-ui-carousel";
-import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
+import Image2 from "../../../assets/chair-w.png";
+import Image from "../../../assets/decoracao.jpg";
 import appColors from "../../colors/appColors";
-import {
-    ContainerSkeleton,
-    ContainerSlider,
-    ItemImage,
-    ItemInfoMobileHide,
-    ItemInfosContent,
-} from "./CarouselStyles";
+import { ContainerSlider, ItemImage, ItemInfoMobileHide, ItemInfosContent } from "./CarouselStyles";
 
 export default function Carousel() {
-    const { data, loading, fetch } = useGetManyProductsHook(false);
-
-    useEffect(() => {
-        fetch({ tags: [], currentPage: 1, itemsAmount: 10 });
-    }, []);
+    const [images] = useState([Image, Image2]);
 
     return (
         <>
-            {loading && <ContainerSkeleton />}
             <CarouselMUI
                 animation="slide"
                 autoPlay
@@ -30,24 +20,11 @@ export default function Carousel() {
                 IndicatorIcon
                 interval={6000}
             >
-                {data?.products &&
-                    data.products.map((item: Product) => {
-                        const url = item.images.find(img => img.main === true)?.url as string;
-
-                        const getDescription = () => {
-                            let description = "";
-                            if (item.description.length < 5) {
-                                description = "Venha conhecer mais sobre esse produto";
-                            } else {
-                                description = item.description.slice(0, 200);
-                            }
-                            description += "...";
-                            return description;
-                        };
-
+                {images.length &&
+                    images.map((item: string, index: number) => {
                         return (
-                            <ContainerSlider key={item._id}>
-                                <ItemImage imageUrl={url} />
+                            <ContainerSlider key={index}>
+                                <ItemImage imageUrl={item} />
                                 <ItemInfosContent>
                                     <ItemInfoMobileHide
                                         variant="h1"
@@ -55,10 +32,10 @@ export default function Carousel() {
                                         fontSize={24}
                                         color={appColors.red}
                                     >
-                                        {item.name}
+                                        Item Name
                                     </ItemInfoMobileHide>
                                     <ItemInfoMobileHide variant="body2" fontSize={16}>
-                                        {getDescription()}
+                                        "Description"
                                     </ItemInfoMobileHide>
                                     <Button
                                         variant="contained"

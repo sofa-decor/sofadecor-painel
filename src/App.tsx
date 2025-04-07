@@ -10,6 +10,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import FooterComponent from "./app/components/footer/FooterComponents";
 import PageLoader from "./app/components/Loaders/page-loader/PageLoader";
 import AdminPainelPageComponent from "./app/pages/admin-painel/AdminPainelPageComponent";
 import AdminCreateProductsPageComponent from "./app/pages/admin-painel/children/admin-add-products/AdminCreateProductsPageComnponent";
@@ -17,9 +18,9 @@ import AdminCreateUsersPageComponent from "./app/pages/admin-painel/children/adm
 import AdminProductsPageComponent from "./app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
 import AdminUpdateProductsPageComponent from "./app/pages/admin-painel/children/admin-update-products";
 import AdminUsersPageComponent from "./app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
+import MainPageComponent from "./app/pages/main";
 import ProductsPageComponent from "./app/pages/products/ProductsPageComponent";
 import "./css/App.css";
-import FooterComponent from "./app/components/footer/FooterComponents";
 
 const paletteMUI = {
     primary: {
@@ -39,7 +40,8 @@ function App() {
                 <ThemeProvider theme={appTheme}>
                     <Routes>
                         <Route path="/sobre" Component={AboutPageComponent} />
-                        <Route path="/" Component={Redirect} />
+                        {/* <Route path="/" Component={Redirect} /> */}
+                        <Route path="/" Component={MainPageComponent} />
                         <Route path={"/loja"} Component={ProductsPageComponent} />
                         <Route path="/loja/produto" Component={ProductViewPageComponent} />
                         <Route path="/painel" Component={AdminPainelPageComponent}>

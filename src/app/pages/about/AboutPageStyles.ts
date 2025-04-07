@@ -59,6 +59,10 @@ export const ButtomCategoriesCard = styled(Card)`
 export const LocationMapContent = styled.div`
     width: 100%;
     padding: ${paddingComponents};
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 10;
 
     @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
         padding: 60px 5dvw;
