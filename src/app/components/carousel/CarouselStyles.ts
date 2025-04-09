@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import appColors from "../../colors/appColors";
 import { Typography } from "@mui/material";
+import styled from "styled-components";
 import { Screen } from "../../../data";
+import appColors from "../../colors/appColors";
 
 type ItemParams = {
     imageUrl: string;
@@ -15,7 +15,7 @@ export const ContainerSkeleton = styled.div`
 
 export const ContainerSlider = styled.div`
     max-width: 100dvw;
-    height: 300px;
+    height: 400px;
     display: flex;
     flex-direction: row;
     place-items: center !important;

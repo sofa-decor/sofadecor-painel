@@ -1,18 +1,20 @@
-import { Paper, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import styled from "styled-components";
 
-export const HeaderContainer = styled(Paper)`
+export const HeaderContainer = styled.div`
     width: 100%;
-    padding: 0px 30px 0px;
+    padding: 10px 30px 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     border-radius: 0 !important;
-    background-color: #000 !important;
+    background-color: transparent !important;
     /* position: absolute; */
     top: 0;
     left: 0;
+    position: absolute;
+    z-index: 1000;
 
     @media screen and (max-width: 700px) {
         padding: none !important;

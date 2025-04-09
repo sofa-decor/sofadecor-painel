@@ -16,9 +16,9 @@ export default function Carousel() {
                 animation="slide"
                 autoPlay
                 indicators={false}
-                duration={3000}
+                duration={2000}
                 IndicatorIcon
-                interval={6000}
+                interval={4000}
             >
                 {images.length &&
                     images.map((item: string, index: number) => {

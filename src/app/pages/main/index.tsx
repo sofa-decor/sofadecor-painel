@@ -1,18 +1,26 @@
-import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, TextField, Typography } from "@mui/material";
 import Image from "../../../assets/decoracao.jpg";
 import ImageMaps from "../../../assets/location-maps.png";
+import LogoGottams from "../../../assets/logo-gottems.png";
+import LogoJMarcon from "../../../assets/logo-jmarcon.png";
+import TeamImage from "../../../assets/team.png";
+import WallpaperImage from "../../../assets/wallpaper.png";
+import appColors from "../../colors/appColors";
 import Carousel from "../../components/carousel/CarouselComponent";
 import HeaderComponent from "../../components/header/HeaderComponent";
 import { LocationMapContent, PageContent, PagePadding } from "../about/AboutPageStyles";
 import {
-    Categories,
+    LogoImage,
     SectionImage,
     SectionImageBox,
     SectionImageBoxColored,
-    TopContainer,
-    TopImage,
-    TopImageBox,
-    TopImageBoxText,
+    Wallpaper,
+    WallpaperCategoriesContainer,
+    WallpaperImageBackground,
+    WallpaperImageContainer,
+    WallpaperSubtitle,
+    WallpaperTextsContainer,
+    WallpaperTitle,
 } from "./styles";
 
 export default function MainPageComponent() {
@@ -20,44 +28,37 @@ export default function MainPageComponent() {
         <>
             <HeaderComponent />
 
-            <TopContainer>
-                <TopImage image={Image} />
-
-                <TopImageBoxText>
-                    <Typography variant="caption" color="#fff" fontSize={60} fontWeight={600}>
-                        SEU CONFORTO,
-                        <br />
-                        NOSSO COMPROMISSO!
-                    </Typography>
-                </TopImageBoxText>
-
-                <TopImageBox />
-
-                <Categories>
-                    <Typography
-                        variant="body1"
-                        color="primary"
-                        fontStyle="oblique"
-                        fontWeight={800}
-                    >
-                        Cadeiras - Mesas - Poltronas - Sofas - Muito Mais
-                    </Typography>
-                </Categories>
-            </TopContainer>
-
             <PageContent>
-                <PagePadding>
-                    <Carousel />
-                </PagePadding>
+                <Wallpaper>
+                    <WallpaperImageContainer image={WallpaperImage} />
+
+                    <WallpaperTextsContainer>
+                        <WallpaperTitle>Design que transforma espaços</WallpaperTitle>
+                        <WallpaperSubtitle>elegância que transforma vidas</WallpaperSubtitle>
+                    </WallpaperTextsContainer>
+
+                    <WallpaperImageBackground />
+
+                    <WallpaperCategoriesContainer>
+                        <Typography
+                            variant="body1"
+                            color={appColors.background}
+                            fontStyle="oblique"
+                            fontWeight={700}
+                            letterSpacing={1}
+                        >
+                            Cadeiras - Mesas - Poltronas - Sofas - Muito Mais
+                        </Typography>
+                    </WallpaperCategoriesContainer>
+                </Wallpaper>
 
                 <PagePadding>
                     <Typography variant="h5" color="primary" fontWeight={500} marginTop={10}>
                         Quem somos
                     </Typography>
                     <Divider />
-                    <Stack direction="row" gap={6} paddingInlineEnd={4} marginTop={3}>
-                        <Typography variant="body2" fontSize={20}>
-                            <br />
+                    <Stack direction="row" marginTop={3} alignItems={"center"}>
+                        <Typography variant="body2" fontSize={20} letterSpacing={0.5}>
                             Desde o nosso início em 2015, temos nos dedicado a proporcionar uma
                             experiência de compra excepcional, baseada em valores como proximidade,
                             personalização e compromisso com a excelência. Nosso objetivo é oferecer
@@ -65,13 +66,12 @@ export default function MainPageComponent() {
                             acolhedores e inspiradores.
                             <br />
                             <br />
-                            Com uma equipe dedicada e apaixonada pelo que faz, estamos sempre em
-                            busca das últimas tendências e inovações em design de interiores,
-                            garantindo que nossos clientes tenham acesso aos produtos mais
-                            atualizados e de alta qualidade.
+                            Trabalhamos com marcas renomadas no mercado nacional, como JMarcon,
+                            Gottems, reconhecidas pela qualidade e inovação em mobiliário de alto
+                            padrão.
                         </Typography>
                         <SectionImageBox>
-                            <SectionImageBoxColored />
+                            <SectionImageBoxColored color={appColors.dark} />
                             <SectionImage image={Image} />
                         </SectionImageBox>
                     </Stack>
@@ -81,55 +81,84 @@ export default function MainPageComponent() {
                     <Stack direction="row" gap={10} marginTop={3}>
                         <SectionImageBox>
                             <SectionImageBoxColored />
-                            <SectionImage image={Image} />
+                            <SectionImage image={TeamImage} />
                         </SectionImageBox>
 
-                        <Typography variant="body2" fontSize={20}>
+                        <Typography
+                            variant="body2"
+                            fontSize={20}
+                            letterSpacing={0.5}
+                            alignItems={"center"}
+                        >
                             <br />
-                            Desde o nosso início em 2015, temos nos dedicado a proporcionar uma
-                            experiência de compra excepcional, baseada em valores como proximidade,
-                            personalização e compromisso com a excelência. Nosso objetivo é oferecer
-                            não apenas móveis, mas sim soluções que tornem os ambientes mais
-                            acolhedores e inspiradores.
+                            Aqui, cada detalhe é pensado para valorizar seu ambiente e proporcionar
+                            uma experiência de compra única, com atendimento personalizado e um
+                            portfólio que une bom gosto e funcionalidade.
                             <br />
                             <br />
-                            Com uma equipe dedicada e apaixonada pelo que faz, estamos sempre em
-                            busca das últimas tendências e inovações em design de interiores,
-                            garantindo que nossos clientes tenham acesso aos produtos mais
-                            atualizados e de alta qualidade.
+                            Na Sofá Decor House, você não encontra apenas móveis — encontra o toque
+                            final que transforma sua casa em um verdadeiro lar.
                         </Typography>
                     </Stack>
                 </PagePadding>
 
-                <PagePadding>
-                    <Typography variant="h5" color="primary" fontWeight={500} marginTop={10}>
-                        Entre em contato e faca seu orcamento!
+                <PagePadding
+                // style={{ backgroundColor: appColors.dark, color: appColors.background }}
+                >
+                    <Typography variant="h5" fontWeight={500} marginTop={10} textAlign={"center"}>
+                        Entre em contato e descubra como transformar seu espaço com a gente!
                     </Typography>
-                    <Divider />
+                    <Divider
+                    // style={{ backgroundColor: appColors.background }}
+                    />
                     <Stack
                         direction="row"
-                        gap={6}
+                        gap={12}
                         paddingInlineEnd={4}
                         marginTop={3}
                         justifyContent={"center"}
+                        alignItems={"center"}
+                        padding={10}
                     >
                         <Stack gap={2}>
-                            <TextField label="Nome" placeholder="Fulano da Silva" />
-                            <TextField label="Email" placeholder="meuemail@gmail.com" />
+                            <LogoImage image={LogoGottams} />
+                            <LogoImage image={LogoJMarcon} />
+                        </Stack>
+
+                        <Stack gap={15}>
+                            <Stack gap={2}>
+                                <TextField label="Nome" placeholder="Fulano da Silva" />
+                                <TextField label="Email" placeholder="meuemail@gmail.com" />
+                            </Stack>
                             <Button variant="outlined">Chame nossa equipe</Button>
                         </Stack>
                     </Stack>
                 </PagePadding>
 
-                <LocationMapContent>
-                    <div
+                <PagePadding>
+                    <Carousel />
+                </PagePadding>
+
+                <LocationMapContent
+                    style={{ backgroundColor: appColors.dark, color: appColors.background }}
+                >
+                    <Typography variant="h5" fontWeight={500} marginTop={10} textAlign={"center"}>
+                        Gotou? Vamos tomar um cafe!
+                        <br />
+                        Onde? No centro de Gravataí/RS
+                    </Typography>
+                    {/* <Divider style={{ backgroundColor: appColors.background }} /> */}
+
+                    <Box
                         style={{
                             width: "100%",
-                            height: "300px",
+                            height: "400px",
+                            scale: 1 / 0.5,
                             backgroundImage: `url(${ImageMaps})`,
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center",
                             backgroundSize: "contain",
+                            margin: "60px 0",
                         }}
                     />
                     <a
@@ -138,6 +167,8 @@ export default function MainPageComponent() {
                         style={{
                             color: "#fff",
                             margin: "10px",
+                            textAlign: "center",
+                            fontFamily: "Quicksand, sans-serif",
                         }}
                     >
                         Acesse o Google Maps aqui

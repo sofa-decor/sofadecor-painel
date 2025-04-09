@@ -8,7 +8,7 @@ export default function FooterComponent() {
         <Box bgcolor={appColors.dark} color={appColors.white} padding={4}>
             <ResponsiveRow>
                 <Stack direction="column" alignItems="center">
-                    <img src={LOGO} alt="logo" style={{ height: "110px" }} />
+                    <img src={LOGO} alt="logo" style={{ height: "100px" }} />
                 </Stack>
 
                 <Stack direction="column">
@@ -20,7 +20,7 @@ export default function FooterComponent() {
                     >
                         CONTATE-NOS
                     </Typography>
-                    <Typography variant="body1">(fixo) 3042 1212</Typography>
+                    <Typography variant="body1">(fixo) 3042-1212</Typography>
                     <Typography variant="body1">@sofadecorhouse</Typography>
                     <Typography variant="body1">
                         Av. Dorival Cândido Luz de Oliveira, 977 - Gravataí{" "}

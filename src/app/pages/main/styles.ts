@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import appColors from "../../colors/appColors";
 
-export const TopContainer = styled.div`
+export const Wallpaper = styled.div`
     width: 100%;
-    min-height: 40dvw;
+    max-width: 100%;
+    height: 90dvh;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: start;
 `;
 
-export const TopImage = styled.div<{ image: string }>`
+export const WallpaperImageContainer = styled.div<{ image: string }>`
     width: 100%;
-    min-height: 40dvw;
+    height: 100%;
     background-image: url(${({ image }) => image});
     background-repeat: no-repeat;
     background-position: center;
@@ -21,7 +22,7 @@ export const TopImage = styled.div<{ image: string }>`
     z-index: 1;
 `;
 
-export const TopImageBox = styled.div`
+export const WallpaperImageBackground = styled.div`
     width: 50%;
     height: 300px;
     /* background-color: #fff; */
@@ -35,18 +36,28 @@ export const TopImageBox = styled.div`
     z-index: 2;
 `;
 
-export const TopImageBoxText = styled.div`
-    width: 50%;
-    height: 300px;
-    border-radius: 1em;
+export const WallpaperTextsContainer = styled.div`
+    width: 100%;
     position: absolute;
     text-align: start;
-    padding: 2em;
-    margin: 20px;
+    padding: 3em;
     z-index: 3;
 `;
 
-export const Categories = styled.div`
+export const WallpaperTitle = styled.h1`
+    font-family: "Cormorant Garamond", serif;
+    font-size: 6rem;
+    /* color: #3e3e3e; */
+    margin-bottom: 0.3rem;
+`;
+
+export const WallpaperSubtitle = styled.p`
+    font-family: "Quicksand", sans-serif;
+    font-size: 3rem;
+    color: ${appColors.background};
+`;
+
+export const WallpaperCategoriesContainer = styled.div`
     position: absolute;
     text-align: start;
     padding: 1em;
@@ -56,16 +67,15 @@ export const Categories = styled.div`
 `;
 
 export const SectionImageBox = styled.div`
-    width: 70%;
-    /* height: 300px; */
+    min-width: 15dvw;
     aspect-ratio: 1 / 1;
     position: relative;
 `;
 
-export const SectionImageBoxColored = styled.div`
+export const SectionImageBoxColored = styled.div<{ color?: string }>`
     width: 100%;
     height: 100%;
-    background-color: ${appColors.red};
+    background-color: ${({ color }) => color || appColors.red};
     padding: 10px;
 `;
 
@@ -82,4 +92,13 @@ export const SectionImage = styled.div<{ image: string }>`
     z-index: 1;
     top: -30px;
     right: -30px;
+`;
+
+export const LogoImage = styled.div<{ image: string }>`
+    width: 15dvw;
+    aspect-ratio: 1 / 0.5;
+    background-image: url(${({ image }) => image});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 `;
