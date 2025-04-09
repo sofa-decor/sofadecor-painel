@@ -40,20 +40,20 @@ export const WallpaperTextsContainer = styled.div`
     width: 100%;
     position: absolute;
     text-align: start;
-    padding: 3em;
+    padding: 2em;
     z-index: 3;
 `;
 
 export const WallpaperTitle = styled.h1`
     font-family: "Cormorant Garamond", serif;
-    font-size: 6rem;
-    /* color: #3e3e3e; */
+    font-size: clamp(2rem, 8vw, 6rem);
     margin-bottom: 0.3rem;
 `;
 
 export const WallpaperSubtitle = styled.p`
     font-family: "Quicksand", sans-serif;
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 7vw, 3rem);
+
     color: ${appColors.background};
 `;
 
@@ -67,21 +67,22 @@ export const WallpaperCategoriesContainer = styled.div`
 `;
 
 export const SectionImageBox = styled.div`
-    min-width: 15dvw;
-    aspect-ratio: 1 / 1;
+    min-width: 20vw;
+    max-width: 30vw;
+    aspect-ratio: 1 / 1 !important;
     position: relative;
 `;
 
 export const SectionImageBoxColored = styled.div<{ color?: string }>`
     width: 100%;
-    height: 100%;
+    max-height: 100%;
     background-color: ${({ color }) => color || appColors.red};
-    padding: 10px;
+    aspect-ratio: 1 / 1 !important;
 `;
 
 export const SectionImage = styled.div<{ image: string }>`
     width: 100%;
-    height: 100%;
+    max-height: 100%;
     /* min-height: 40dvw; */
     aspect-ratio: 1 / 1;
     background-image: url(${({ image }) => image});
@@ -90,8 +91,9 @@ export const SectionImage = styled.div<{ image: string }>`
     background-size: cover;
     position: absolute;
     z-index: 1;
-    top: -30px;
-    right: -30px;
+    top: -2vw;
+    right: -2vw;
+    aspect-ratio: 1 / 1 !important;
 `;
 
 export const LogoImage = styled.div<{ image: string }>`

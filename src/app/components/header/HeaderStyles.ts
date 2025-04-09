@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-    width: 100%;
+    width: 100vw;
     padding: 10px 30px 0px;
     display: flex;
     flex-direction: row;
@@ -24,6 +24,13 @@ export const HeaderContainer = styled.div`
 `;
 
 export const LogoBox = styled(Stack)`
+    @media screen and (max-width: 700px) {
+        /* display: none !important; */
+        width: 80px;
+    }
+`;
+
+export const TextButtonBox = styled(Stack)`
     @media screen and (max-width: 700px) {
         display: none !important;
     }

@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Logo from "../../../assets/logo.png";
 import OrderService from "../../../services/OrderService";
 import appColors from "../../colors/appColors";
-import { HeaderContainer, LogoBox } from "./HeaderStyles";
+import { HeaderContainer, LogoBox, TextButtonBox } from "./HeaderStyles";
 
 const paletteMUI = {
     primary: {
@@ -36,7 +36,7 @@ export default function HeaderComponent() {
                         target="_blank"
                         href={OrderService.getSenderWppLink()}
                     >
-                        Entre em contato
+                        <TextButtonBox>Entre em contato</TextButtonBox>
                     </Button>
                 </Stack>
             </HeaderContainer>

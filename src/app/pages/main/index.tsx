@@ -53,12 +53,38 @@ export default function MainPageComponent() {
                 </Wallpaper>
 
                 <PagePadding>
-                    <Typography variant="h5" color="primary" fontWeight={500} marginTop={10}>
+                    <Typography
+                        variant="h5"
+                        color="primary"
+                        fontWeight={500}
+                        marginTop={10}
+                        fontSize={{
+                            xs: "1.2rem", // mobile
+                            sm: "1.4rem", // tablet
+                            md: "1.8rem", // desktop
+                            lg: "2rem", // large screens
+                        }}
+                    >
                         Quem somos
                     </Typography>
                     <Divider />
-                    <Stack direction="row" marginTop={3} alignItems={"center"}>
-                        <Typography variant="body2" fontSize={20} letterSpacing={0.5}>
+                    <Stack
+                        direction="row"
+                        gap={10}
+                        marginTop={3}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                    >
+                        <Typography
+                            variant="body2"
+                            fontSize={{
+                                xs: "0.8rem", // mobile
+                                sm: "1rem", // tablet
+                                md: "1.2rem", // desktop
+                                lg: "1.2rem", // large screens
+                            }}
+                            letterSpacing={0.5}
+                        >
                             Desde o nosso início em 2015, temos nos dedicado a proporcionar uma
                             experiência de compra excepcional, baseada em valores como proximidade,
                             personalização e compromisso com a excelência. Nosso objetivo é oferecer
@@ -78,7 +104,13 @@ export default function MainPageComponent() {
                 </PagePadding>
 
                 <PagePadding>
-                    <Stack direction="row" gap={10} marginTop={3}>
+                    <Stack
+                        direction="row"
+                        gap={8}
+                        marginTop={3}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                    >
                         <SectionImageBox>
                             <SectionImageBoxColored />
                             <SectionImage image={TeamImage} />
@@ -86,7 +118,12 @@ export default function MainPageComponent() {
 
                         <Typography
                             variant="body2"
-                            fontSize={20}
+                            fontSize={{
+                                xs: "0.8rem", // mobile
+                                sm: "1rem", // tablet
+                                md: "1.2rem", // desktop
+                                lg: "1.2rem", // large screens
+                            }}
                             letterSpacing={0.5}
                             alignItems={"center"}
                         >
@@ -105,7 +142,18 @@ export default function MainPageComponent() {
                 <PagePadding
                 // style={{ backgroundColor: appColors.dark, color: appColors.background }}
                 >
-                    <Typography variant="h5" fontWeight={500} marginTop={10} textAlign={"center"}>
+                    <Typography
+                        variant="h5"
+                        fontWeight={500}
+                        marginTop={10}
+                        textAlign={"center"}
+                        fontSize={{
+                            xs: "1.2rem", // mobile
+                            sm: "1.4rem", // tablet
+                            md: "1.8rem", // desktop
+                            lg: "2rem", // large screens
+                        }}
+                    >
                         Entre em contato e descubra como transformar seu espaço com a gente!
                     </Typography>
                     <Divider
@@ -142,7 +190,18 @@ export default function MainPageComponent() {
                 <LocationMapContent
                     style={{ backgroundColor: appColors.dark, color: appColors.background }}
                 >
-                    <Typography variant="h5" fontWeight={500} marginTop={10} textAlign={"center"}>
+                    <Typography
+                        variant="h5"
+                        fontWeight={500}
+                        marginTop={8}
+                        textAlign={"center"}
+                        fontSize={{
+                            xs: "1.2rem", // mobile
+                            sm: "1.4rem", // tablet
+                            md: "1.8rem", // desktop
+                            lg: "2rem", // large screens
+                        }}
+                    >
                         Gotou? Vamos tomar um cafe!
                         <br />
                         Onde? No centro de Gravataí/RS
