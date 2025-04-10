@@ -219,7 +219,7 @@ export default function MainPageComponent() {
                             lg: "2rem", // large screens
                         }}
                     >
-                        Gotou? Vamos tomar um cafe!
+                        Gostou? Vamos tomar um cafe!
                         <br />
                         Onde? No centro de Gravataí/RS
                     </Typography>
