@@ -8,6 +8,7 @@ import BanquetaJade from "../../../assets/banqueta-jade.png";
 import BiancaRoom from "../../../assets/bianca-room.jpg";
 import CoraRoom from "../../../assets/cora-room.jpg";
 import DrinkRoom from "../../../assets/drink-room.jpg";
+import OrderService from "../../../services/OrderService";
 import { ContainerSlider, ItemImage, ItemInfoMobileHide, ItemInfosContent } from "./CarouselStyles";
 
 export default function Carousel() {
@@ -52,7 +53,11 @@ export default function Carousel() {
                                         </Typography>
                                     </ItemInfoMobileHide>
 
-                                    <Button variant="outlined">
+                                    <Button
+                                        variant="outlined"
+                                        target="_blank"
+                                        href={OrderService.getSenderWppLink()}
+                                    >
                                         <Typography
                                             color="primary"
                                             variant="body2"

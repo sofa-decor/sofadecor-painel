@@ -1,5 +1,6 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Box, Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import BedroomImage from "../../../assets/bedroom.png";
 import LivingroomImage from "../../../assets/livingroom.jpg";
 import ImageMaps from "../../../assets/location-maps.png";
@@ -7,6 +8,7 @@ import LogoGottams from "../../../assets/logo-gottems.png";
 import LogoJMarcon from "../../../assets/logo-jmarcon.png";
 import LogoRivatti from "../../../assets/logo-rivatti.png";
 import WallpaperImage from "../../../assets/wallpaper.png";
+import OrderService from "../../../services/OrderService";
 import appColors from "../../colors/appColors";
 import Carousel from "../../components/carousel/CarouselComponent";
 import HeaderComponent from "../../components/header/HeaderComponent";
@@ -26,6 +28,8 @@ import {
 } from "./styles";
 
 export default function MainPageComponent() {
+    const [email, setEmail] = useState<string>("");
+    const [name, setName] = useState<string>("");
     return (
         <>
             <HeaderComponent />
@@ -162,11 +166,23 @@ export default function MainPageComponent() {
                     >
                         <Stack gap={8}>
                             <Stack gap={2}>
-                                <TextField label="Nome" placeholder="Fulano da Silva" />
-                                <TextField label="Email" placeholder="meuemail@gmail.com" />
+                                <TextField
+                                    label="Nome"
+                                    placeholder="Fulano da Silva"
+                                    onChange={e => setName(e.target.value)}
+                                />
+                                <TextField
+                                    label="Email"
+                                    placeholder="meuemail@gmail.com"
+                                    onChange={e => setEmail(e.target.value)}
+                                />
                             </Stack>
 
-                            <Button variant="outlined">
+                            <Button
+                                variant="outlined"
+                                target="_blank"
+                                href={OrderService.getSenderWppLink(name, email)}
+                            >
                                 <Typography
                                     color="primary"
                                     variant="body2"

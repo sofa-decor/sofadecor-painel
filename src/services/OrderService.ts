@@ -1,27 +1,25 @@
-import { Product } from "../hooks/product-hooks/getManyProductsHook";
 
 class OrderService {
     // private phone = "5551995909864";
     private phone = "555197224452";
     private wpp_base_url = "https://wa.me/";
-    private simple_message = "Olá! Visitei seu site e gostaria de mais informações.";
+    private simple_message = "Olá! Visitei o site e gostaria de mais informações.";
 
-    getSenderWppLink(product?: Product, link?: string) {
+    getSenderWppLink(name?: string, email?: string) {
         let message: string | null = null;
-        if (product && link) message = this.orderProductMessage(product, link);
+        if (name && email) message = this.customMessage(name, email);
         else message = encodeURIComponent(this.simple_message);
         const wppUrl = `${this.wpp_base_url}${this.phone}?text=${message}`;
         return wppUrl;
     }
 
-    private orderProductMessage(product: Product, link: string) {
+    private customMessage(name: string, email: string) {
         return encodeURIComponent(`
 Olá!
-Visitei o site e gostaria de adquirir o produto
+Visitei o site da SofaDecor e gostaria de transformar meu ambiente!
             
-*${product.name}*.
-
-*Link site*: ${link}
+*Name: ${name}*.
+*E-mail: ${email}*.
         `);
     }
 }

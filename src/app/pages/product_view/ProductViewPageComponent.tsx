@@ -48,7 +48,7 @@ export default function ProductViewPageComponent() {
 
     useEffect(() => {
         if (product && currentUrlPage) {
-            const wppUrl = OrderService.getSenderWppLink(product, currentUrlPage);
+            const wppUrl = OrderService.getSenderWppLink();
             setTargetWppUrl(wppUrl);
         }
     }, [currentUrlPage, product]);
