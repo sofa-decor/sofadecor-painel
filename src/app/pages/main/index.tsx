@@ -1,9 +1,11 @@
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Box, Button, Divider, Stack, TextField, Typography } from "@mui/material";
-import Image from "../../../assets/decoracao.jpg";
+import BedroomImage from "../../../assets/bedroom.png";
+import LivingroomImage from "../../../assets/livingroom.jpg";
 import ImageMaps from "../../../assets/location-maps.png";
 import LogoGottams from "../../../assets/logo-gottems.png";
 import LogoJMarcon from "../../../assets/logo-jmarcon.png";
-import TeamImage from "../../../assets/team.png";
+import LogoRivatti from "../../../assets/logo-rivatti.png";
 import WallpaperImage from "../../../assets/wallpaper.png";
 import appColors from "../../colors/appColors";
 import Carousel from "../../components/carousel/CarouselComponent";
@@ -40,15 +42,7 @@ export default function MainPageComponent() {
                     <WallpaperImageBackground />
 
                     <WallpaperCategoriesContainer>
-                        <Typography
-                            variant="body1"
-                            color={appColors.background}
-                            fontStyle="oblique"
-                            fontWeight={700}
-                            letterSpacing={1}
-                        >
-                            Cadeiras - Mesas - Poltronas - Sofas - Muito Mais
-                        </Typography>
+                        Cadeiras - Mesas - Poltronas - Sofas - Muito Mais
                     </WallpaperCategoriesContainer>
                 </Wallpaper>
 
@@ -56,8 +50,7 @@ export default function MainPageComponent() {
                     <Typography
                         variant="h5"
                         color="primary"
-                        fontWeight={500}
-                        marginTop={10}
+                        fontFamily={"Quicksand, sans-serif"}
                         fontSize={{
                             xs: "1.2rem", // mobile
                             sm: "1.4rem", // tablet
@@ -98,7 +91,7 @@ export default function MainPageComponent() {
                         </Typography>
                         <SectionImageBox>
                             <SectionImageBoxColored color={appColors.dark} />
-                            <SectionImage image={Image} />
+                            <SectionImage image={BedroomImage} />
                         </SectionImageBox>
                     </Stack>
                 </PagePadding>
@@ -113,7 +106,7 @@ export default function MainPageComponent() {
                     >
                         <SectionImageBox>
                             <SectionImageBoxColored />
-                            <SectionImage image={TeamImage} />
+                            <SectionImage image={LivingroomImage} />
                         </SectionImageBox>
 
                         <Typography
@@ -143,9 +136,10 @@ export default function MainPageComponent() {
                 // style={{ backgroundColor: appColors.dark, color: appColors.background }}
                 >
                     <Typography
+                        marginTop={6}
                         variant="h5"
-                        fontWeight={500}
-                        marginTop={10}
+                        color="primary"
+                        fontFamily={"Quicksand, sans-serif"}
                         textAlign={"center"}
                         fontSize={{
                             xs: "1.2rem", // mobile
@@ -154,32 +148,55 @@ export default function MainPageComponent() {
                             lg: "2rem", // large screens
                         }}
                     >
-                        Entre em contato e descubra como transformar seu espaço com a gente!
+                        Entre em contato e transforme seu espaço!
                     </Typography>
                     <Divider
                     // style={{ backgroundColor: appColors.background }}
                     />
                     <Stack
                         direction="row"
-                        gap={12}
-                        paddingInlineEnd={4}
-                        marginTop={3}
                         justifyContent={"center"}
                         alignItems={"center"}
-                        padding={10}
+                        padding={"30px 0"}
+                        margin={"2em 0"}
                     >
-                        <Stack gap={2}>
-                            <LogoImage image={LogoGottams} />
-                            <LogoImage image={LogoJMarcon} />
-                        </Stack>
-
-                        <Stack gap={15}>
+                        <Stack gap={8}>
                             <Stack gap={2}>
                                 <TextField label="Nome" placeholder="Fulano da Silva" />
                                 <TextField label="Email" placeholder="meuemail@gmail.com" />
                             </Stack>
-                            <Button variant="outlined">Chame nossa equipe</Button>
+
+                            <Button variant="outlined">
+                                <Typography
+                                    color="primary"
+                                    variant="body2"
+                                    fontSize={{
+                                        xs: "0.8rem", // mobile
+                                        sm: "1rem", // tablet
+                                        md: "1.2rem", // desktop
+                                        lg: "1.2rem", // large screens
+                                    }}
+                                    alignItems={"center"}
+                                    justifyContent={"center"}
+                                    display={"flex"}
+                                    gap={1}
+                                >
+                                    Chame nossa equipe
+                                    <ArrowOutwardIcon fontSize="small" />
+                                </Typography>
+                            </Button>
                         </Stack>
+                    </Stack>
+
+                    <Stack
+                        direction={"row"}
+                        gap={2}
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                    >
+                        <LogoImage image={LogoGottams} />
+                        <LogoImage image={LogoRivatti} />
+                        <LogoImage image={LogoJMarcon} />
                     </Stack>
                 </PagePadding>
 

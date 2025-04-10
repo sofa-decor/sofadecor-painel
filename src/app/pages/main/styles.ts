@@ -45,7 +45,8 @@ export const WallpaperTextsContainer = styled.div`
 `;
 
 export const WallpaperTitle = styled.h1`
-    font-family: "Cormorant Garamond", serif;
+    /* font-family: "Cormorant Garamond", serif; */
+    font-family: "Lora", serif;
     font-size: clamp(2rem, 8vw, 6rem);
     margin-bottom: 0.3rem;
 `;
@@ -57,13 +58,18 @@ export const WallpaperSubtitle = styled.p`
     color: ${appColors.background};
 `;
 
-export const WallpaperCategoriesContainer = styled.div`
+export const WallpaperCategoriesContainer = styled.span`
     position: absolute;
     text-align: start;
+    /* font-family: "Montserrat", sans-serif; */
+    font-family: "Quicksand", sans-serif;
+    font-size: clamp(0.8rem, 4vw, 2rem) !important;
     padding: 1em;
     bottom: 0;
     left: 0;
     z-index: 4;
+    color: ${appColors.background};
+    letter-spacing: 1;
 `;
 
 export const SectionImageBox = styled.div`
@@ -97,7 +103,7 @@ export const SectionImage = styled.div<{ image: string }>`
 `;
 
 export const LogoImage = styled.div<{ image: string }>`
-    width: 15dvw;
+    width: 35dvw;
     aspect-ratio: 1 / 0.5;
     background-image: url(${({ image }) => image});
     background-repeat: no-repeat;

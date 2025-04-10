@@ -1,14 +1,24 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useState } from "react";
 import CarouselMUI from "react-material-ui-carousel";
-import Image2 from "../../../assets/chair-w.png";
-import Image from "../../../assets/decoracao.jpg";
-import appColors from "../../colors/appColors";
+import AuroraRoom from "../../../assets/aurora-room.jpg";
+import BanquetaJadeMesa from "../../../assets/banqueta-jade-mesa.jpg";
+import BanquetaJade from "../../../assets/banqueta-jade.png";
+import BiancaRoom from "../../../assets/bianca-room.jpg";
+import CoraRoom from "../../../assets/cora-room.jpg";
+import DrinkRoom from "../../../assets/drink-room.jpg";
 import { ContainerSlider, ItemImage, ItemInfoMobileHide, ItemInfosContent } from "./CarouselStyles";
 
 export default function Carousel() {
-    const [images] = useState([Image, Image2]);
+    const [images] = useState([
+        BanquetaJade,
+        BanquetaJadeMesa,
+        AuroraRoom,
+        CoraRoom,
+        DrinkRoom,
+        BiancaRoom,
+    ]);
 
     return (
         <>
@@ -26,26 +36,40 @@ export default function Carousel() {
                             <ContainerSlider key={index}>
                                 <ItemImage imageUrl={item} />
                                 <ItemInfosContent>
-                                    <ItemInfoMobileHide
-                                        variant="h1"
-                                        fontWeight={500}
-                                        fontSize={24}
-                                        color={appColors.red}
-                                    >
-                                        Item Name
-                                    </ItemInfoMobileHide>
                                     <ItemInfoMobileHide variant="body2" fontSize={16}>
-                                        "Description"
+                                        <Typography
+                                            variant="h5"
+                                            fontFamily={"Quicksand, sans-serif"}
+                                            textAlign={"center"}
+                                            fontSize={{
+                                                xs: "1.2rem", // mobile
+                                                sm: "1.4rem", // tablet
+                                                md: "1.8rem", // desktop
+                                                lg: "2rem", // large screens
+                                            }}
+                                        >
+                                            O design certo muda tudo!
+                                        </Typography>
                                     </ItemInfoMobileHide>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            backgroundColor: "#ffffff",
-                                            color: appColors.red,
-                                        }}
-                                    >
-                                        Conhecer
-                                        <ArrowOutwardIcon fontSize="small" />
+
+                                    <Button variant="outlined">
+                                        <Typography
+                                            color="primary"
+                                            variant="body2"
+                                            fontSize={{
+                                                xs: "0.8rem", // mobile
+                                                sm: "1rem", // tablet
+                                                md: "1.2rem", // desktop
+                                                lg: "1.2rem", // large screens
+                                            }}
+                                            alignItems={"center"}
+                                            justifyContent={"center"}
+                                            display={"flex"}
+                                            gap={1}
+                                        >
+                                            Explore
+                                            <ArrowOutwardIcon fontSize="small" />
+                                        </Typography>
                                     </Button>
                                 </ItemInfosContent>
                             </ContainerSlider>

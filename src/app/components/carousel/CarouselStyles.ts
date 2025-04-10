@@ -31,7 +31,7 @@ export const ContainerSlider = styled.div`
 `;
 
 export const ItemImage = styled.div<ItemParams>`
-    width: 40%;
+    width: 100%;
     height: 100%;
     background-size: contain;
     background-position: center;
@@ -39,8 +39,8 @@ export const ItemImage = styled.div<ItemParams>`
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 
     @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
-        width: 80%;
-        height: 300px;
+        width: 100%;
+        height: 100%;
     }
 `;
 
@@ -54,7 +54,7 @@ export const ItemInfosContent = styled.div`
     word-wrap: break-word;
     align-items: center;
     text-align: start;
-    gap: 14px;
+    gap: 15px;
 `;
 
 export const ItemInfoMobileHide = styled(Typography)`
