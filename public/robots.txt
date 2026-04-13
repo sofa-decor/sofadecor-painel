@@ -1,0 +1,6 @@
+# Ajuste a URL do Sitemap para o domínio de produção (deve coincidir com VITE_SITE_URL).
+User-agent: *
+Allow: /
+Disallow: /painel
+
+Sitemap: https://www.sofadecorhouse.com.br/sitemap.xml

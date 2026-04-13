@@ -7,6 +7,9 @@ export const paddingComponents = "60px 15dvw";
 
 export const PagePadding = styled.div`
     padding: ${paddingComponents};
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 
     @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
         padding: 60px 5dvw;
@@ -14,7 +17,9 @@ export const PagePadding = styled.div`
 `;
 
 export const PageContent = styled.div`
-    max-width: 100dvw !important;
+    max-width: 100% !important;
+    width: 100%;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 `;

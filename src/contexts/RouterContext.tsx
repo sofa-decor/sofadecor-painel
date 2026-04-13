@@ -6,6 +6,7 @@ import AdminCreateUsersPageComponent from "../app/pages/admin-painel/children/ad
 import AdminLoginPageComponent from "../app/pages/admin-painel/children/admin-login/AdminLoginPageComponent";
 import AdminProductsPageComponent from "../app/pages/admin-painel/children/admin-products/AdminProductsPageComponent";
 import AdminUsersPageComponent from "../app/pages/admin-painel/children/admin-users/AdminUsersPageComponent";
+import AdminUpdateProductsPageComponent from "../app/pages/admin-painel/children/admin-update-products/index";
 import ProductViewPageComponent from "../app/pages/product_view/ProductViewPageComponent";
 import ProductsPageComponent from "../app/pages/products/ProductsPageComponent";
 import { ProductTags } from "../types/product-tags.type";
@@ -77,10 +78,7 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
         about: {
             path: "/sobre",
             component: AboutPageComponent,
-            go: () => {
-                console.log("passei aqui");
-                navigate("/sobre");
-            },
+            go: () => navigate("/sobre"),
         },
         products: {
             path: "/loja",
@@ -88,10 +86,10 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             go: (states?: ProductStates) => navigate("/loja", { state: states }),
         },
         product_view: {
-            path: "/loja/produto",
+            path: "/loja/produto/:productName",
             component: ProductViewPageComponent,
             go: (name: string) => {
-                navigate("/loja/produto", { state: { name } });
+                navigate(`/loja/produto/${encodeURIComponent(name)}`);
             },
         },
         admin_painel_products: {
@@ -105,7 +103,7 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
             go: () => navigate("/painel"),
         },
         admin_painel_users: {
-            path: "/painel/users",
+            path: "/painel/usuarios",
             component: AdminUsersPageComponent,
             go: () => navigate("/painel/usuarios"),
         },
@@ -121,8 +119,8 @@ const RouterContextProvider = ({ children }: RouterContextParams) => {
         },
         painel_products_update: {
             path: "/painel/produto/edit",
-            component: AdminCreateProductsPageComponent,
-            go: (name: string) => navigate(`/painel/produto/edit`, { state: { name } }),
+            component: AdminUpdateProductsPageComponent,
+            go: (name: string) => navigate("/painel/produto/edit", { state: { name } }),
         },
     };
 

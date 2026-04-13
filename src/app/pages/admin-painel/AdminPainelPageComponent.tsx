@@ -1,22 +1,19 @@
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
 import useAuthUserHook from "../../../hooks/auth-hooks/useAuthUserHook";
-import useAppRouterHook from "../../../hooks/useAppRouterHook";
 import AdminHeaderComponent from "../../components/admin-header/AdminHeaderComponent";
 import AdminLoginPageComponent from "./children/admin-login/AdminLoginPageComponent";
 
 export default function AdminPainelPageComponent(): React.ReactElement {
     const { user } = useAuthUserHook();
-    const { router } = useAppRouterHook();
-
-    useEffect(() => {
-        if (!user) return;
-        router.admin_painel_products.go();
-    }, [user]);
 
     return (
         <>
+            <Helmet>
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
             <AdminHeaderComponent />
             <Box className="app-page-container">
                 {user ? <Outlet /> : <AdminLoginPageComponent />}

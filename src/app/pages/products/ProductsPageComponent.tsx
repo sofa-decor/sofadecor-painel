@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import "../../../css/App.css";
 import { Product, useGetManyProductsHook } from "../../../hooks/product-hooks/getManyProductsHook";
 import { ProductTags } from "../../../types/product-tags.type";
+import Seo from "../../../seo/Seo";
 import PageLoader from "../../components/Loaders/page-loader/PageLoader";
 import { AlertError, AlertInfo } from "../../components/alert";
 import HeaderComponent from "../../components/header/HeaderComponent";
@@ -59,6 +60,11 @@ export default function ProductsPageComponent() {
 
     return (
         <>
+            <Seo
+                title="Loja | Sofa Decor House"
+                description="Catálogo de móveis, sofás, mesas e decoração na Sofa Decor House. Filtre por categoria e encontre peças para sua sala, quarto e mais."
+                canonicalPath="/loja"
+            />
             <HeaderComponent />
             <Box className="app-page-container">
                 {/* Tab menu */}

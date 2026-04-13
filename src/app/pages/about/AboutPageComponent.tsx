@@ -8,6 +8,7 @@ import Stool from "../../../assets/stool-w.png";
 import Table from "../../../assets/table-w.png";
 import "../../../css/App.css";
 import useAppRouterHook from "../../../hooks/useAppRouterHook";
+import Seo from "../../../seo/Seo";
 import { ProductTags } from "../../../types/product-tags.type";
 import Carousel from "../../components/carousel/CarouselComponent";
 import HeaderComponent from "../../components/header/HeaderComponent";
@@ -31,6 +32,11 @@ export default function AboutPageComponent() {
     ];
     return (
         <>
+            <Seo
+                title="Quem somos | Sofa Decor House"
+                description="Conheça a Sofa Decor House: móveis, sofás e decoração em Gravataí. Atendimento próximo, marcas selecionadas e ambientes que inspiram."
+                canonicalPath="/sobre"
+            />
             <HeaderComponent />
             <PageContent>
                 <Carousel />

@@ -1,5 +1,5 @@
 .app-page-container {
-    max-width: 100dvw;
+    max-width: 100%;
     min-height: calc(100dvh - 80px);
     padding: 20px 15%;
     display: flex;

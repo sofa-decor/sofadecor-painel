@@ -26,7 +26,9 @@ export default function ProductCardComponent({ product }: params) {
         >
             <Image imgurl={product.mainImage}></Image>
             <Stack sx={{ padding: "0 10px 15px" }}>
-                <TitleItemName variant="h1">{product.name}</TitleItemName>
+                <TitleItemName component="h2" variant="subtitle1">
+                    {product.name}
+                </TitleItemName>
                 <DescriptionItem variant="body2">
                     {product.description.slice(0, 90) + " ..."}
                 </DescriptionItem>
