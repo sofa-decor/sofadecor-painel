@@ -6,7 +6,7 @@ Site institucional e vitrine de produtos, com área administrativa para gestão 
 
 ## Requisitos
 
-- Node.js 18+ (recomendado LTS)
+- Node.js 24.x (exigido pela Vercel; use `.nvmrc` ou `nvm use`)
 - npm
 
 ## Configuração
