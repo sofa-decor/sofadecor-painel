@@ -123,8 +123,8 @@ export default function MainPageComponent() {
                             direction={{ xs: "column", md: "row" }}
                             gap={{ xs: 4, md: 8 }}
                             sx={{ mt: 4 }}
-                            justifyContent="center"
-                            alignItems="center"
+                            justifyContent="space-between"
+                            alignItems={{ xs: "flex-start", md: "center" }}
                         >
                             <Typography
                                 variant="body2"
@@ -157,10 +157,10 @@ export default function MainPageComponent() {
                 >
                     <PagePadding>
                         <Stack
-                            direction={{ xs: "column", md: "row" }}
+                            direction={{ xs: "column-reverse", md: "row" }}
                             gap={{ xs: 4, md: 8 }}
-                            justifyContent="center"
-                            alignItems="center"
+                            justifyContent="space-between"
+                            alignItems={{ xs: "flex-start", md: "center" }}
                         >
                             <SectionImageBox>
                                 <SectionImage image={LivingroomImage} />
@@ -257,14 +257,14 @@ export default function MainPageComponent() {
                         <Typography
                             variant="overline"
                             display="block"
-                            textAlign="left"
+                            textAlign="center"
                             color="text.secondary"
                             sx={{
                                 mt: 5,
                                 mb: 2,
                                 letterSpacing: "0.2em",
                                 fontWeight: 600,
-                                maxWidth: "min(1100px, 100%)",
+                                width: "100%",
                             }}
                         >
                             Marcas parceiras
@@ -275,7 +275,7 @@ export default function MainPageComponent() {
                             gap={{ xs: 4, md: 6 }}
                             alignItems="center"
                             justifyContent="center"
-                            sx={{ py: 1 }}
+                            sx={{ py: 1, width: "100%" }}
                         >
                             <LogoImage image={LogoGottams} />
                             <LogoImage image={LogoRivatti} />
@@ -302,14 +302,16 @@ export default function MainPageComponent() {
                 <Box
                     sx={{
                         width: "100%",
-                        padding: { xs: "60px 5dvw", md: "60px 15dvw" },
+                        px: { xs: "clamp(16px, 5vw, 24px)", md: "clamp(16px, 5vw, 64px)" },
+                        py: { xs: 15, md: 20 },
                         background: `linear-gradient(165deg, #141414 0%, ${appColors.dark} 45%, #0d0d0d 100%)`,
                         color: appColors.background,
                         position: "relative",
                         overflow: "hidden",
                         display: "flex",
                         flexDirection: "column",
-                        gap: 1.25,
+                        alignItems: "center",
+                        gap: { xs: 1, md: 1.25 },
                         "&::before": {
                             content: '""',
                             position: "absolute",
@@ -326,7 +328,8 @@ export default function MainPageComponent() {
                         component="h2"
                         variant="h5"
                         fontWeight={700}
-                        marginTop={3}
+                        marginTop={0}
+                        width="100%"
                         textAlign="center"
                         fontFamily='"Quicksand", sans-serif'
                         letterSpacing="-0.03em"
@@ -338,35 +341,36 @@ export default function MainPageComponent() {
                         variant="body2"
                         textAlign="center"
                         sx={{
-                            mt: 1.5,
+                            mt: 1,
                             mb: 0,
                             opacity: 0.85,
                             maxWidth: "42ch",
                             mx: "auto",
                             lineHeight: 1.7,
+                            width: "100%",
                         }}
                     >
                         Gostou? Vamos tomar um café no centro de Gravataí/RS.
                     </Typography>
 
                     <Box
+                        component="img"
+                        src={ImageMaps}
+                        alt="Mapa da localização da Sofá Decor House em Gravataí"
                         sx={{
                             width: "100%",
-                            maxWidth: "min(920px, 100%)",
-                            mx: "auto",
-                            height: { xs: 260, sm: 320, md: 380 },
-                            boxSizing: "border-box",
-                            backgroundImage: `url(${ImageMaps})`,
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            backgroundSize: "contain",
-                            margin: { xs: "36px 0 20px", md: "44px 0 24px" },
+                            maxWidth: "min(1100px, 100%)",
+                            height: "auto",
+                            display: "block",
+                            mt: { xs: 1.5, md: 2 },
+                            mb: { xs: 1, md: 1.25 },
+                            flexShrink: 0,
                             borderRadius: 3,
                             border: "1px solid rgba(255,255,255,0.08)",
                             boxShadow: "0 24px 48px rgba(0,0,0,0.35)",
                         }}
                     />
-                    <Box textAlign="center" pb={2}>
+                    <Box textAlign="center" pb={{ xs: 0.5, md: 1 }} width="100%">
                         <Link
                             href="https://www.google.com.br/maps/place/Av.+Dorival+C%C3%A2ndido+Luz+de+Oliveira,+977+-+Jansen,+Gravata%C3%AD+-+RS,+94035-080/@-29.9374306,-51.0065452,17z/data=!3m1!4b1!4m6!3m5!1s0x95190b4f3aaa2911:0xc923d5db199f41a0!8m2!3d-29.9374353!4d-51.0039703!16s%2Fg%2F11hbgpxjdy?entry=ttu"
                             target="_blank"

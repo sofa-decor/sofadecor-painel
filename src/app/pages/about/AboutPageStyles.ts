@@ -3,16 +3,18 @@ import styled from "styled-components";
 import { Screen } from "../../../data";
 import appColors from "../../colors/appColors";
 
-export const paddingComponents = "60px 15dvw";
+export const paddingComponents = "60px clamp(16px, 5vw, 64px)";
 
 export const PagePadding = styled.div`
     padding: ${paddingComponents};
-    max-width: 100%;
+    width: 100%;
+    max-width: 1228px; /* 1100px de conteúdo + 64px de padding cada lado */
+    margin: 0 auto;
     box-sizing: border-box;
     overflow-x: hidden;
 
     @media screen and (max-width: ${Screen.MAX_WIDTH_SMALL_DEVICE}) {
-        padding: 60px 5dvw;
+        padding: 40px clamp(16px, 5vw, 24px);
     }
 `;
 

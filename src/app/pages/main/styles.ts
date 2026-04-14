@@ -136,6 +136,17 @@ export const SectionImageBox = styled.div`
         z-index: 2;
         border-radius: 0 0 2px 0;
     }
+
+    @media screen and (max-width: 700px) {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
+        &::before {
+            height: 100%;
+            width: 4px;
+        }
+    }
 `;
 
 export const SectionImage = styled.div<{ image: string }>`

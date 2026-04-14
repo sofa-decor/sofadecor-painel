@@ -19,13 +19,10 @@ export const HeaderBar = styled.div`
     box-sizing: border-box;
 `;
 
-/** Conteúdo alinhado ao restante do site (~1100px). */
+/** Conteúdo da barra de navegação (header). */
 export const HeaderInner = styled.div`
-    max-width: min(1100px, 100%);
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 clamp(16px, 4vw, 32px);
     width: 100%;
+    padding: 0 clamp(16px, 5vw, 64px);
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
